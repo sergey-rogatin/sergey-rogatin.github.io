@@ -1,0 +1,27 @@
+.link {
+    display: flex;
+    align-items: center;
+    background: #2f3649;
+    padding: 0 0.5em;
+    min-width: 2em;
+    justify-content: center;
+}
+
+.link_dot {
+    margin-left: 1em;
+    position: relative;
+}
+
+.link_dot::before {
+    position: absolute;
+    content: "";
+    background: #181e2c;
+    border-radius: 50%;
+    padding: 0.3em;
+    left: -0.8em;
+}
+
+.link_highlighted {
+    color: white;
+    background-color: #15a4fa;
+}

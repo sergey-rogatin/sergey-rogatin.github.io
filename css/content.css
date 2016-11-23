@@ -1,0 +1,13 @@
+.content {
+    display: flex;
+    flex-flow: column;
+    flex: 1;
+    overflow-y: scroll;
+}
+
+.content__title {
+    padding: 0.25em;
+    font-size: 2em;
+    background: #eef1f8;
+    color: #788097;
+}

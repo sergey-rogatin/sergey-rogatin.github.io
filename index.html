@@ -1,368 +1,272 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html>
     <head>
-        <meta charset="UTF-8">
         <title>Library</title>
-	    <link rel="stylesheet" type="text/css" href="css/main.css"/>
 
-        <script src="https://use.fontawesome.com/a8e89d6e9d.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/wrapper.css">
+        <link rel="stylesheet" type="text/css" href="css/header_footer.css">
+        <link rel="stylesheet" type="text/css" href="css/link.css">
+        <link rel="stylesheet" type="text/css" href="css/user.css">
+
+         <link rel="stylesheet" type="text/css" href="css/main.css">
+         <link rel="stylesheet" type="text/css" href="css/content.css">
+         <link rel="stylesheet" type="text/css" href="css/browsing.css">
+         <link rel="stylesheet" type="text/css" href="css/filters.css">
+         <link rel="stylesheet" type="text/css" href="css/search.css">
+         <link rel="stylesheet" type="text/css" href="css/side-bar.css">
+         <link rel="stylesheet" type="text/css" href="css/menu-block.css">
+         <link rel="stylesheet" type="text/css" href="css/book-list.css">
+         <link rel="stylesheet" type="text/css" href="css/book.css">
+         <link rel="stylesheet" type="text/css" href="css/rating.css">
+
+         <script src="https://use.fontawesome.com/a8e89d6e9d.js"></script>
+
     </head>
 
     <body>
+        
+        <div class="wrapper">
 
-        <header class="header">
+            <header class="header">
+                <ul class="header__menu">
+                    <li class="link">
+                        <span class="link__text">Help Center</span>
+                    </li>
 
-            <div class="link">
-                <div class="link__name">
-                    Help Center
-                </div>
-            </div>
+                    <li class="link link_dot">
+                        <span class="link__text">Our Support</span>
+                    </li>
 
-            <div class="link">
-                <div class="link__name">
-                    Our Support
-                </div>
-            </div>
+                    <li class="link user link_highlighted">
+                        <img src="images/user.jpg" alt="username" class="user__photo">
+                        <span class="user__name">Alyona</span>
+                        <i class="user__pic fa fa-caret-down"></i>
+                    </li>
+                </ul>
+            </header>
 
-            <div class="link">
+            <main class="main">
 
-                <img class="link__photo" src="images/user.jpg" />
-                <div class="link__name">Alyona</div>
-                <div class="link__pict fa fa-arrow-circle-down fa-lg"></div>
+                <aside class="side-bar">
 
-            </div>
-
-        </header>
-
-        <main class="main">
-
-            <aside class="vertical-menu">
-
-                <div class="vertical-menu-span add-a-book">
-                    <button class="vertical-menu-item">
-                        <div class="vertical-menu-item__pict fa fa-plus"></div>
-                        <div class="vertical-menu-item__text">ADD A BOOK</div>
-                    </button>
-                </div>
-
-                <div class="vertical-menu-span">
-
-                    <div class="vertical-menu-item">
-                        <div class="vertical-menu-item__pict fa fa-book"></div>
-                        <div class="vertical-menu-item__text">Now Reading</div>
+                    <div class="menu-block menu-block__add-a-book">
+                        <button class="menu-block__button">
+                            <i class="menu-block__pic fa fa-plus menu-block__pic_button"></i>
+                            <span class="menu-block__text">ADD A BOOK</span>
+                        </button>
                     </div>
 
-                    <div class="vertical-menu-item">
-                        <div class="vertical-menu-item__pict fa fa-globe"></div>
-                        <div class="vertical-menu-item__text">Browse</div>
+                    <ul class="menu-block menu-block__navigation">
+                        <li class="menu-block__item">
+                            <i class="menu-block__pic fa fa-book"></i>
+                            <span class="menu-block__text">Now Reading</span>
+                        </li>
+                        <li class="menu-block__item menu-block__item_highlighted">
+                            <i class="menu-block__pic fa fa-globe"></i>
+                            <span class="menu-block__text">Browse</span>
+                        </li>
+                        <li class="menu-block__item">
+                            <i class="menu-block__pic fa fa-shopping-cart"></i>
+                            <span class="menu-block__text">Buy Books</span>
+                        </li>
+                        <li class="menu-block__item">
+                            <i class="menu-block__pic fa fa-star"></i>
+                            <span class="menu-block__text">Favourite Books</span>
+                        </li>
+                        <li class="menu-block__item">
+                            <i class="menu-block__pic fa fa-list"></i>
+                            <span class="menu-block__text">Wishlist</span>
+                        </li>
+                        <li class="menu-block__item">
+                            <i class="menu-block__pic fa fa-history"></i>
+                            <span class="menu-block__text">History</span>
+                        </li>
+                    </ul>
+
+                    <ul class="menu-block menu-block__categories">
+                        <li class="menu-block__item">
+                            <i class="menu-block__pic menu-block__pic_orange fa fa-circle"></i>
+                            <span class="menu-block__text">Must Read Titles</span>
+                        </li>
+                        <li class="menu-block__item">
+                            <i class="menu-block__pic menu-block__pic_yellow fa fa-circle"></i>
+                            <span class="menu-block__text">Best Of List</span>
+                        </li>
+                        <li class="menu-block__item">
+                            <i class="menu-block__pic menu-block__pic_cyan fa fa-circle"></i>
+                            <span class="menu-block__text">Classic Novels</span>
+                        </li>
+                        <li class="menu-block__item">
+                            <i class="menu-block__pic menu-block__pic_violet fa fa-circle"></i>
+                            <span class="menu-block__text">Non Fiction</span>
+                        </li>
+                    </ul>
+
+                    <ul class="menu-block menu-block__activity">
+                        <li class="menu-block__item">
+                            <i class="menu-block__pic menu-block__pic_top fa fa-clock-o"></i>
+                            <div class="menu-block__body">
+                                <span class="menu-block__text">War and Peace</span>
+                                <span class="menu-block__text menu-block__text_pale">recently added to</span>
+                                <span class="menu-block__timestamp">20 hours 15 minutes ago</span>
+                            </div>
+                        </li>
+                        <li class="menu-block__item">
+                            <i class="menu-block__pic menu-block__pic_top fa fa-clock-o"></i>
+                            <div class="menu-block__body">
+                                <span class="menu-block__text">War and Peace</span>
+                                <span class="menu-block__text menu-block__text_pale">recently added to</span>
+                                <span class="menu-block__timestamp">20 hours 15 minutes ago</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                </aside>
+
+                <div class="content">
+
+                    <div class="content__title">Browse Avaliable Books</div>
+
+                    <div class="browsing">
+                        <ul class="filters">
+                            <li class="filters__item filters__item_highlighted">All Books</li>
+                            <li class="filters__item">Most Recent</li>
+                            <li class="filters__item">Most Popular</li>
+                            <li class="filters__item">Free Books</li>
+                        </ul>
+
+                        <div class="search">
+                            <input type="text" class="search__input">
+                            <i class="search__pic fa fa-search"></i>
+                        </div>
                     </div>
 
-                    <div class="vertical-menu-item">
-                        <div class="vertical-menu-item__pict fa fa-shopping-cart"></div>
-                        <div class="vertical-menu-item__text">Buy Books</div>
-                    </div>
+                    <div class="book-list">
+                        <div class="book">
+                            <img src="images/jewels.jpg" alt="pic" class="book__image">
+                            <span class="book__name">Jewels of Nizam</span>
+                            <span class="book__author">Geeta Devi</span>
+                            <span class="book__rating">5</span>
+                            <ul class="rating">
 
-                    <div class="vertical-menu-item">
-                        <div class="vertical-menu-item__pict fa fa-star"></div>
-                        <div class="vertical-menu-item__text">Favourite Books</div>
-                    </div>
+                            </ul>
+                        </div>
 
-                    <div class="vertical-menu-item">
-                        <div class="vertical-menu-item__pict fa fa-list"></div>
-                        <div class="vertical-menu-item__text">Wishlist</div>
-                    </div>
+                        <div class="book">
+                            <img src="images/cakes and bakes.jpg" alt="cakesbakes" class="book__image">
+                            <span class="book__name">Cakes and Bakes</span>
+                            <span class="book__author">Sanjeev Kapoor</span>
+                            <span class="book__rating">5</span>
+                            <ul class="rating">
+       
+                            </ul>
+                        </div>
 
-                    <div class="vertical-menu-item">
-                        <div class="vertical-menu-item__pict fa fa-history"></div>
-                        <div class="vertical-menu-item__text">History</div>
-                    </div>
+                        <div class="book">
+                            <img src="images/jamie.jpg" alt="cakesbakes" class="book__image">
+                            <span class="book__name">Jamie's Kitchen</span>
+                            <span class="book__author">Jamie Oliver</span>
+                            <span class="book__rating">4.5</span>
+                            <ul class="rating">
+       
+                            </ul>
+                        </div>
+
+                        <div class="book">
+                            <img src="images/family.jpg" alt="cakesbakes" class="book__image">
+                            <span class="book__name">Inexpensive Family Meals</span>
+                            <span class="book__author">Simon Holst</span>
+                            <span class="book__rating">4</span>
+                            <ul class="rating">
+              
+                            </ul>
+                        </div>
+
+                        <div class="book">
+                            <img src="images/paleo.jpg" alt="cakesbakes" class="book__image">
+                            <span class="book__name">Paleo Slow Cooking</span>
+                            <span class="book__author">Chrissy Goer</span>
+                            <span class="book__rating">4.5</span>
+                            <ul class="rating">
+    
+                            </ul>
+                        </div>
+
+                        <div class="book">
+                            <img src="images/italian.jpg" alt="cakesbakes" class="book__image">
+                            <span class="book__name">Cook Like an Italian</span>
+                            <span class="book__author">Toby Puttock</span>
+                            <span class="book__rating">4</span>
+                            <ul class="rating">
+              
+                            </ul>
+                        </div>
+
+                        <div class="book">
+                            <img src="images/indian.jpg" alt="cakesbakes" class="book__image">
+                            <span class="book__name">Suneeta Vasvani</span>
+                            <span class="book__author">Geeta Devi</span>
+                            <span class="book__rating">5</span>
+                            <ul class="rating">
                     
-                </div>
-
-                <div class="vertical-menu-span">
-
-                    <div class="vertical-menu-item">
-                        <div class="vertical-menu-item__pict fa fa-circle red"></div>
-                        <div class="vertical-menu-item__text">Must Read Titles</div>
-                    </div>
-
-                    <div class="vertical-menu-item">
-                        <div class="vertical-menu-item__pict fa fa-circle orange"></div>
-                        <div class="vertical-menu-item__text">Best Of List</div>
-                    </div>
-
-                    <div class="vertical-menu-item">
-                        <div class="vertical-menu-item__pict fa fa-circle cyan"></div>
-                        <div class="vertical-menu-item__text">Classic Novels</div>
-                    </div>
-
-                    <div class="vertical-menu-item">
-                        <div class="vertical-menu-item__pict fa fa-circle small violet"></div>
-                        <div class="vertical-menu-item__text">Non Fiction</div>
-                    </div>
-
-                </div>
-
-                <div class="vertical-menu-span recently-added">
-
-                    <div class="vertical-menu-item">
-
-                        <div class="vertical-menu-item__pict fa fa-clock-o"></div>
-
-                        <div class="list">
-                            <div class="recently-added__name">Fight Club</div>
-                            <div class="recently-added__author">Chuck Palahniuk</div>
-                            <div class="recently-added__location">Must Read Titles</div>
-                            <div class="recently-added__time">24 minutes</div>
+                            </ul>
                         </div>
 
-                    </div>
+                        <div class="book">
+                            <img src="images/does.jpg" alt="cakesbakes" class="book__image">
+                            <span class="book__name">Jamie Does</span>
+                            <span class="book__author">Jamie Oliver</span>
+                            <span class="book__rating">4</span>
+                            <ul class="rating">
+                     
+                            </ul>
+                        </div>
 
-                    <div class="vertical-menu-item recently-added">
-                        <div class="vertical-menu-item__pict fa fa-clock-o"></div>
+                        <div class="book">
+                            <img src="images/jamie italy.jpg" alt="cakesbakes" class="book__image">
+                            <span class="book__name">Jamie's Italy</span>
+                            <span class="book__author">Jamie Oliver</span>
+                            <span class="book__rating">4</span>
+                            <ul class="rating">
+                   
+                            </ul>
+                        </div>
 
-                        <div class="list">
-                            <div class="recently-added__name">The trial</div>
-                            <div class="recently-added__author">Franz Kafka</div>
-                            <div class="recently-added__location">Must Read Titles</div>
-                            <div class="recently-added__time">48 minutes</div>
+                        <div class="book">
+                            <img src="images/vegetables.jpg" alt="cakesbakes" class="book__image">
+                            <span class="book__name">Vegetables Cookbook</span>
+                            <span class="book__author">Metthew Biggs</span>
+                            <span class="book__rating">4</span>
+                            <ul class="rating">
+                           
+                            </ul>
                         </div>
                     </div>
 
-                </div>
-
-            </aside>
-
-            <section class="main-section">
-
-                <div class="section-name">Browse Avaliable Books</div>
-
-                <div class="horizontal-menu">
-
-                    <div class="horizontal-menu-span">
-
-                        <div class="horizontal-menu__item">All Books</div>
-
-                        <div class="horizontal-menu__item">Most Recent</div>
-
-                        <div class="horizontal-menu__item">Most Popular</div>
-
-                        <div class="horizontal-menu__item">Free Books</div>
-
-                    </div>
-
-                    <div class="container">
-                        <input type="text" class="search" placeholder="Enter Keywords" />
-                        <span class="fa fa-search"></span>
-                    </div>
-                    
                     
 
                 </div>
 
-                    <div class="thumbnail-list">
+            </main>
 
-                        <div class="thumbnail">
+            <footer class="footer">
+                <ul class="footer__menu">
+                    <li class="link">
+                        <i class="link__pic fa fa-question-circle"></i>
+                    </li>
 
-                            <img class="thumbnail__pic" src="images/jewels.jpg" />
+                    <li class="link link_highlighted">
+                        <i class="link__pic fa fa-gear"></i>
+                    </li>
 
-                            <div class="thumbnail__name">Jewels of Nizam</div>
+                </ul>
 
-                            <div class="thumbnail__author">Geeta Devi</div>
 
-                            <div class="thumbnail__rating">
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                            </div>
+                <script src="scripts/index.js"></script>
+            </footer>
 
-                        </div>
-
-                        <div class="thumbnail">
-
-                            <img class="thumbnail__pic" src="images/cakes and bakes.jpg" />
-
-                            <div class="thumbnail__name">Cakes &amp; Bakes</div>
-
-                            <div class="thumbnail__author">Sanjeev Kapoor</div>
-
-                            <div class="thumbnail__rating">
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                            </div>
-
-                        </div>
-
-                        <div class="thumbnail">
-
-                            <img class="thumbnail__pic" src="images/jamie.jpg" />
-
-                            <div class="thumbnail__name">Jamie's kitchen</div>
-
-                            <div class="thumbnail__author">Jamie Oliver</div>
-
-                            <div class="thumbnail__rating">
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star-half-o"></span>
-                            </div>
-
-                        </div>
-
-                        <div class="thumbnail">
-
-                            <img class="thumbnail__pic" src="images/family.jpg" />
-
-                            <div class="thumbnail__name">Inexpensive Family Meals</div>
-
-                            <div class="thumbnail__author">Simon Holst</div>
-
-                            <div class="thumbnail__rating">
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
-
-                        </div>
-
-                        <div class="thumbnail">
-
-                            <img class="thumbnail__pic" src="images/paleo.jpg" />
-
-                            <div class="thumbnail__name">Paleo Slow Cooking</div>
-
-                            <div class="thumbnail__author">Chrissy Goer</div>
-
-                            <div class="thumbnail__rating">
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star-half-o"></span>
-                            </div>
-
-                        </div>
-
-                        <div class="thumbnail">
-
-                            <img class="thumbnail__pic" src="images/italian.jpg" />
-
-                            <div class="thumbnail__name">Cook Like an Italian</div>
-
-                            <div class="thumbnail__author">Toby Puttock</div>
-
-                            <div class="thumbnail__rating">
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
-
-                        </div>
-
-                        <div class="thumbnail">
-
-                            <img class="thumbnail__pic" src="images/indian.jpg" />
-
-                            <div class="thumbnail__name">Suneeta Vasvani</div>
-
-                            <div class="thumbnail__author">Geeta Devi</div>
-
-                            <div class="thumbnail__rating">
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                            </div>
-
-                        </div>
-
-                        <div class="thumbnail">
-
-                            <img class="thumbnail__pic" src="images/does.jpg" />
-
-                            <div class="thumbnail__name">Jamie Does</div>
-
-                            <div class="thumbnail__author">Jamie Oliver</div>
-
-                            <div class="thumbnail__rating">
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
-
-                        </div>
-
-                        <div class="thumbnail">
-
-                            <img class="thumbnail__pic" src="images/jamie italy.jpg" />
-
-                            <div class="thumbnail__name">Jamie's Italy</div>
-
-                            <div class="thumbnail__author">Jamie Oliver</div>
-
-                            <div class="thumbnail__rating">
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
-
-                        </div>
-
-                        <div class="thumbnail">
-
-                            <img class="thumbnail__pic" src="images/vegetables.jpg" />
-
-                            <div class="thumbnail__name">Vegetables Cookbook</div>
-
-                            <div class="thumbnail__author">Matthew Biggs</div>
-
-                            <div class="thumbnail__rating">
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star-half-o"></span>
-                                <span class="fa fa-star-o"></span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-            </section>
-
-        </main>
-
-        <footer class="footer">
-
-            <div class="link">
-
-                <a class="link__pict fa fa-question-circle fa-lg"></a>
-            </div>
-
-            <div class="link highlighted">
-
-                <a class="link__pict fa fa-cog fa-lg"></a>
-            </div>
-
-        </footer>
-
+        </div>
+            
     </body>
-
 </html>
