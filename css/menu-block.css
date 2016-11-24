@@ -24,7 +24,7 @@
 }
 
 .menu-block__text {
-
+    
 }
 
 .menu-block__button {
@@ -39,16 +39,30 @@
     color: white;
     font-size: 1.4em;
     font-weight: bold;
+    transition: 0.5s;
+}
+
+.menu-block__button:hover {
+    box-shadow: 10px 10px 86px 0px dodgerblue;
 }
 
 
 .menu-block__add-a-book {
     min-width: 10em;
-    min-height: 4em;
+    min-height: 10em;
     display: flex;
     flex-flow: column;
     margin-top: 0;
     padding-right: 0;
+}
+
+.menu-block__book-name, .menu-block__book-author, .menu-block__book-picture {
+    margin: auto;
+    width: 80%;
+    border: #1f2638;
+    outline: 0;
+    border-radius: 0.5em;
+    padding: 0.3em 1em;
 }
 
 .menu-block__navigation {

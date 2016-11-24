@@ -3,6 +3,12 @@
     color: gold;
 }
 
-.rating__pic {
+.rating__pic::before {
     padding: 0 0.1em;
+    transition: 0.5s;
+}
+
+.rating__pic:hover::before {
+    content: "\f005";
+    color: dodgerblue;
 }
