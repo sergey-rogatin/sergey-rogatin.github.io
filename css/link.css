@@ -5,6 +5,13 @@
     padding: 0 0.6em;
     min-width: 2.2em;
     justify-content: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.link:hover {
+    background: #788097;
+    color: white;
 }
 
 .link_dot {
@@ -24,4 +31,8 @@
 .link_highlighted {
     color: white;
     background-color: #15a4fa;
+}
+
+.link_highlighted:hover {
+    background: orangered;
 }

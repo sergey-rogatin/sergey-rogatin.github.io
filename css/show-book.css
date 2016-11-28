@@ -1,0 +1,123 @@
+.show-book {
+    position: absolute;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2em;
+    background: rgba(24, 30, 44, 0.95);
+
+    top: 50%;
+    left: 50%;
+    width: 35em;
+    height: 24em;
+    margin: -14em 0 0 -20em;
+    transition: 0.5s;
+    visibility: hidden;
+    opacity: 0;
+    border-radius: 2em;
+}
+
+.show-book__body {
+    width: 50%;
+    display: flex;
+    flex-flow: column;
+    color: white;
+    justify-content: space-around;
+    align-items: flex-start;
+    font-size: 1.2em;
+    padding: 0.5em;
+}
+
+.show-book__image {
+    width: 15em;
+    height: 20em;
+}
+
+.show-book__name {
+    font-size: 2em;
+}
+
+.show-book__author {
+    font-size: 1.3em;
+}
+
+.show-book__author::before {
+    content: "by ";
+}
+
+.show-book__name, .show-book__author, .show-book__tag {
+    margin: 0 0 0.5em 0;
+    padding: 0.4em 0;
+    outline: none;
+}
+
+.show-book__tag {
+    background: #788097;
+    border-radius: 1em;
+    padding: 0.2em 0.4em;
+    cursor: pointer;
+}
+
+.show-book__button {
+    margin-top: 1em;
+    width: 70%;
+    padding: 0.5em 0;
+
+    background: #f2795a;
+    border: 0;
+    border-radius: 0.5em;
+    outline: 0;
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.show-book__button:hover {
+    box-shadow: 0px 0px 70px 20px #f2795a;
+}
+
+.show-book__taglist {
+    position: absolute;
+    visibility: visible;
+    opacity: 0;
+    transition: 0.3s;
+    display: flex;
+    flex-flow: column;
+    top: 12.5em;
+    background: #2f3649;
+    border-radius: 0.5em;
+    padding: 0.2em;
+}
+
+.show-book__tag-item {
+    padding: 0.3em 0;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.show-book__tag-item:hover {
+    background: #788097;
+}
+
+.show-book__tag-input {
+    font-size: 1em;
+    background: #788097;
+    color: white;
+    border: 1px solid #2f3649;
+    border-radius: 0.5em;
+    outline: none;
+    cursor: text;
+}
+
+.show-book__tag-input-container {
+    display: block;
+}
+
+.show-book__tag-add {
+    cursor: pointer;
+    position: absolute;
+    margin: 0.5em 0 0 -1.2em;
+}

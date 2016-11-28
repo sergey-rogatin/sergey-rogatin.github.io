@@ -5,6 +5,13 @@
     display: flex;
     flex-flow: column;
     color: #181e2c;
+    cursor: pointer;
+    transition: height 1s ease;
+    flex-shrink: 0;
+}
+
+.book:hover {
+    background: lightblue;
 }
 
 .book__image {

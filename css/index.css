@@ -13,6 +13,16 @@ html, body {
     height: 100%;
 }
 
+
 ::-webkit-scrollbar {
-    display: none;
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-thumb {
+  background: #788097;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-track {
+  background: #1f2638;
+  border-radius: 0px;
 }
