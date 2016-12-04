@@ -2,9 +2,7 @@ function View(model, controller) {
     this.model = model;
     this.controller = controller;
 
-    //listing books
-
-    //book to book element hashlist
+    //book to bookElement hashlist
     this.bookElements = {};
 
     this.bookListElement = document.getElementByClass("book-list");
@@ -14,8 +12,9 @@ function View(model, controller) {
     model.onBookRatingChanged.subscribe(this.publishBookRating.bind(this));
 
     //publishing notifications
-    this.notificationElements = {};
 
+    //hashlists of notifications
+    this.notificationElements = {};
     this.historyElements = {};
 
     this.notificationListElement = document.getElementByClass("menu-block__activity");
@@ -28,19 +27,12 @@ function View(model, controller) {
     //search
     this.searchElement = document.getElementByClass("search__input");
     this.searchElement.addEventListener("input", (function() {
-        this.controller.addBookFilter("name", this.searchElement.value, false, "hasSymbols");
-    }).bind(this));
-    this.searchElement.addEventListener("input", (function() {
-        this.controller.addBookFilter("author", this.searchElement.value, false, "hasSymbols");
+        this.controller.addBookFilter(["name", "author"], [this.searchElement.value]);   
     }).bind(this));
 
     this.searchElement.addEventListener("blur", (function() {
         if (this.searchElement.value != "")
-            this.controller.addNotification(false, 
-            ["Searching ",
-            this.searchElement.value,
-            " in ",
-            "Must Read Titles"]);
+            this.controller.addNotification(NoteType.SEARCH);
     }).bind(this));
 
     //filter buttons
@@ -54,31 +46,31 @@ function View(model, controller) {
             for (var i = 0; i < filterButtonElements.length; i++) {
                 filterButtonElements[i].className = "filters__item";
             }
-            controller.removeBookFilter("rating");
+            controller.addBookFilter(["rating"], [""]);
+            //controller.removeBookFilter("rating");
             this.className = "filters__item filters__item_highlighted";
         });
 
         switch (filterButton.innerHTML) {
             case "All Books":
                 filterButton.addEventListener("click", (function() {
-                    this.controller.addNotification(false, [" Showing ", " all books"]);
+                    this.controller.addNotification(NoteType.FILTER, "all books");
                 }).bind(this));
             break;
             case "Most Recent":
                 filterButton.addEventListener("click", (function() {
-                    this.controller.addNotification(false, [" Showing ", " recent books"]);
-                    
+                    this.controller.addNotification(NoteType.FILTER, "recent books");            
                 }).bind(this));
             break;
             case "Most Popular":
                 filterButton.addEventListener("click", (function() {
-                    this.controller.addBookFilter("rating", "5", true, "equals");
-                    this.controller.addNotification(false, [" Showing ", " popular books"]);
+                    this.controller.addBookFilter(["rating"], ["5"]);
+                    this.controller.addNotification(NoteType.FILTER, "popular books");
                 }).bind(this));
             break;
             case "Free Books":
                 filterButton.addEventListener("click", (function() {
-                    this.controller.addNotification(false, [" Showing ", " free books"]);
+                    this.controller.addNotification(NoteType.FILTER, "free books");
                 }).bind(this));
             break;
         }
@@ -104,11 +96,13 @@ function View(model, controller) {
     }).bind(this));
 
 
-    var addPictureButton = document.getElementByClass("add-book__picture");
+    this.addPictureButton = document.getElementByClass("add-book__picture");
     this.bookImage = "images/jamie.jpg";
 
-    addPictureButton.view = this;
-    addPictureButton.addEventListener("change", function() {
+    this.addPictureButton.view = this;
+
+    // reading uploaded picture file path
+    this.addPictureButton.addEventListener("change", function() {
         var file = this.files[0];
         if (file.type.indexOf('image') < 0) {
             this.view.bookImage = "images/jamie.jpg";
@@ -125,6 +119,8 @@ function View(model, controller) {
 
     var addBookPopupButton = this.addBookPopup.getChildByClass("add-book__button");
     addBookPopupButton.view = this;
+
+    //adding a book
     addBookPopupButton.addEventListener("click", (function() {
         var name = this.addBookPopup.getChildByClass("add-book__name").value;
         var author = this.addBookPopup.getChildByClass("add-book__author").value;
@@ -142,15 +138,22 @@ function View(model, controller) {
     this.categoryElements = {};
     model.onCategoryAdded.subscribe(this.publishCategory.bind(this));
 
-    model.onCategoryChanged.subscribe((function(tag) {
+    //filtering books by categories
+    model.onCategoryChanged.subscribe((function(shownCategories) {
+        console.log(shownCategories);
+        this.controller.addBookFilter(["tag"], shownCategories);
+
         for (var key in this.categoryElements) {
-            this.categoryElements[key].className = "menu-block__item";
+            var category = this.categoryElements[key];
+            var text = category.getChildByClass("menu-block__text");
+            console.log(text.innerHTML);
+            if (shownCategories.indexOf(text.innerHTML) >= 0)
+                category.className = "menu-block__item menu-block__item_highlighted";
+            else
+                category.className = "menu-block__item";
         }
 
-        this.categoryElements[tag].className += " menu-block__item_highlighted";
-        this.controller.addBookFilter("tag", tag, true, "equals");
-        this.controller.addNotification(false, ["Browsing ", tag]);
-
+        var tag = shownCategories[shownCategories.length - 1];
     }).bind(this));
 
 
@@ -163,53 +166,10 @@ function View(model, controller) {
 
     model.onBookTagChanged.subscribe((function(book){
         this.showBookPopupTag.innerHTML = book.tag;
-        this.controller.addNotification(true, [book.name, " tag changed to ", book.tag]);
+        this.controller.addNotification(NoteType.BOOK_TAG_CHANGE, book);
     }).bind(this));
 
-    this.showBookPopupTag.addEventListener("click", (function() {
-        if (this.showBookPopupTaglist.style.visibility === "hidden") {
-            showPopup(this.showBookPopupTaglist);
-
-            var taglist = this.showBookPopupTaglist;
-
-            while (taglist.firstChild) {
-                taglist.removeChild(taglist.firstChild);
-            }
-
-            var view = this;
-
-            for (var i = 0; i < this.model.categories.length; i ++) {
-                var tagElement = document.createElement("div");
-                tagElement.className = "show-book__tag-item";
-                tagElement.innerHTML = this.model.categories[i];
-                taglist.appendChild(tagElement);
-
-                tagElement.addEventListener("click", function() {
-                    view.controller.changeBookTag(view.showBookPopupTag.book, this.innerHTML);
-                    hidePopup(taglist);
-                });
-            }
-
-            var addTagContainer = document.createElement("div");
-            addTagContainer.className = "show-book__tag-input-container";
-            var addTagInput = document.createElement("input");
-            addTagInput.className = "show-book__tag-item show-book__tag-input";
-            addTagInput.setAttribute("type", "text");
-            addTagInput.setAttribute("placeholder", "New tag...");
-            var pic = document.createElement("i");
-            pic.className = "show-book__tag-add fa fa-plus";
-
-            pic.addEventListener("click", function() {
-                view.controller.addCategory(addTagInput.value);
-                view.controller.changeBookTag(view.showBookPopupTag.book, addTagInput.value);
-                hidePopup(taglist);
-            });
-
-            taglist.appendChild(addTagContainer);
-            addTagContainer.appendChild(addTagInput);
-            addTagContainer.appendChild(pic);
-        }
-    }).bind(this));
+    this.showBookPopupTag.addEventListener("click", this.showTagList.bind(this));
 
     var showBookPopupButton = document.getElementByClass("show-book__button");
     showBookPopupButton.addEventListener("click", (function() {
@@ -221,77 +181,122 @@ function View(model, controller) {
     this.contentTitleElement = document.getElementByClass("content__title");
 
     this.navigationElement = document.getElementByClass("menu-block__navigation");
-    var navItems = this.navigationElement.getChildrenByClass("menu-block__item");
-    navItems.push(this.navigationElement.getChildByClass("menu-block__item menu-block__item_highlighted"));
-    navItems.forEach(function(element) {
+    this.navItems = this.navigationElement.getChildrenByClass("menu-block__item");
+    this.navItems.push(this.navigationElement.getChildByClass("menu-block__item menu-block__item_highlighted"));
+    this.navItems.forEach(function(element) {
         var text = element.getChildByClass("menu-block__text").innerHTML;
         console.log(text);
         switch(text) {
             case "History" : {
-                element.addEventListener("click", (function() {
-
-                    while(this.bookListElement.firstChild) {
-                        this.bookListElement.removeChild(this.bookListElement.firstChild);
-                    }
-
-                    this.bookListElement.style.flexFlow = "column nowrap";
-                    this.contentTitleElement.innerHTML = "History";
-                    fadeOut(this.categoryListElement);
-                    fadeOut(this.browsingPanelElement);
-                    fadeOut(this.addABook);
-                    fadeOut(this.notificationListElement);
-
-                    this.model.notifications.forEach(function(note) {
-                        this.publishNotification(note, true);
-                    }, this);
-
-                    navItems.forEach(function(item) {
-                        item.className = "menu-block__item";
-                    }, this);
-                    element.className = "menu-block__item menu-block__item_highlighted";
-                    
-
-                }).bind(this));
+                element.addEventListener("click", this.showHistoryPage.bind(this));
                 break;     
             }
             case "Browse" : {
-                element.addEventListener("click", (function() {
-                    console.log("AJDSjask");
-                    while(this.bookListElement.firstChild) {
-                        this.bookListElement.removeChild(this.bookListElement.firstChild);
-                    }
-
-                    this.bookListElement.style.flexFlow = "row wrap";
-                    this.contentTitleElement.innerHTML = "Browse Avaliable Books";
-                    this.categoryListElement.style.display = "flex";
-                    this.categoryListElement.style.flexFlow = "column";
-                    this.categoryListElement.style.flexShrink = "0";
-                    this.browsingPanelElement.style.display = "flex";
-                    this.addABook.style.display = "flex";
-                    this.notificationListElement.style.display = "flex";
-                    this.notificationListElement.style.flexFlow = "column";
-                    this.notificationListElement.style.flexShrink = "0";
-
-                    this.model.books.forEach(function(book) {
-                        this.publishBook(book);
-                    }, this);
-
-                    navItems.forEach(function(item) {
-                        item.className = "menu-block__item";
-                    }, this);
-                    element.className = "menu-block__item menu-block__item_highlighted";
-
-                    this.controller.changeCategory("Must Read Titles");
-
-                }).bind(this));
+                element.addEventListener("click", this.showBrowsePage.bind(this));                
                 break;
             }
         }
+        element.addEventListener("click", function() {
+            this.className = "menu-block__item menu-block__item_highlighted";
+        });
+    }, this); 
+}
+
+function fadeOut(element, direction) {
+    element.style.display = "none";
+}
+
+View.prototype.showTagList = function() {
+    if (this.showBookPopupTaglist.style.visibility === "hidden") {
+        showPopup(this.showBookPopupTaglist);
+
+        var taglist = this.showBookPopupTaglist;
+
+        while (taglist.firstChild) {
+            taglist.removeChild(taglist.firstChild);
+        }
+
+        var view = this;
+
+        for (var i = 0; i < this.model.categories.length; i ++) {
+            var tagElement = document.createElement("div");
+            tagElement.className = "show-book__tag-item";
+            tagElement.innerHTML = this.model.categories[i];
+            taglist.appendChild(tagElement);
+
+            tagElement.addEventListener("click", function() {
+                view.controller.changeBookTag(view.showBookPopupTag.book, this.innerHTML);
+                hidePopup(taglist);
+            });
+        }
+
+        var addTagContainer = document.createElement("div");
+        addTagContainer.className = "show-book__tag-input-container";
+        var addTagInput = document.createElement("input");
+        addTagInput.className = "show-book__tag-item show-book__tag-input";
+        addTagInput.setAttribute("type", "text");
+        addTagInput.setAttribute("placeholder", "New tag...");
+        var pic = document.createElement("i");
+        pic.className = "show-book__tag-add fa fa-plus";
+
+        pic.addEventListener("click", function() {
+            view.controller.addCategory(addTagInput.value);
+            view.controller.changeBookTag(view.showBookPopupTag.book, addTagInput.value);
+            hidePopup(taglist);
+        });
+
+        taglist.appendChild(addTagContainer);
+        addTagContainer.appendChild(addTagInput);
+        addTagContainer.appendChild(pic);
+    }
+}
+
+View.prototype.showHistoryPage = function() {
+    while(this.bookListElement.firstChild) {
+        this.bookListElement.removeChild(this.bookListElement.firstChild);
+    }
+
+    this.bookListElement.style.flexFlow = "column nowrap";
+    this.contentTitleElement.innerHTML = "History";
+    fadeOut(this.categoryListElement);
+    fadeOut(this.browsingPanelElement);
+    fadeOut(this.addABook);
+    fadeOut(this.notificationListElement);
+
+    this.model.notifications.forEach(function(note) {
+        this.publishNotification(note, true);
     }, this);
 
-    function fadeOut(element, direction) {
-        element.style.display = "none";
+    this.navItems.forEach(function(item) {
+        item.className = "menu-block__item";
+    }, this);
+}
+
+View.prototype.showBrowsePage = function() {
+    while(this.bookListElement.firstChild) {
+        this.bookListElement.removeChild(this.bookListElement.firstChild);
     }
+
+    this.bookListElement.style.flexFlow = "row wrap";
+    this.contentTitleElement.innerHTML = "Browse Avaliable Books";
+    this.categoryListElement.style.display = "flex";
+    this.categoryListElement.style.flexFlow = "column";
+    this.categoryListElement.style.flexShrink = "0";
+    this.browsingPanelElement.style.display = "flex";
+    this.addABook.style.display = "flex";
+    this.notificationListElement.style.display = "flex";
+    this.notificationListElement.style.flexFlow = "column";
+    this.notificationListElement.style.flexShrink = "0";
+
+    this.model.books.forEach(function(book) {
+        this.publishBook(book);
+    }, this);
+
+    this.navItems.forEach(function(item) {
+        item.className = "menu-block__item";
+    }, this);
+
+    this.controller.changeCategory("Must Read Titles");
 }
 
 View.prototype.publishBook = function(book) {
@@ -389,6 +394,50 @@ View.prototype.publishBookRating = function(book) {
 }
 
 View.prototype.publishNotification = function(notification, isHistory) {
+
+    var strings = [];
+    var isBrightFirst = true;
+
+    switch(notification.type) {
+        case NoteType.BOOK_ADD:
+            strings = ["You added ", notification.book.name, " by ", notification.book.author, 
+            " to your ", this.model.currentCategory];
+            isBrightFirst = false;
+        break;
+
+        case NoteType.RATING:
+            strings = ["You rated ", notification.book.name, " by ", notification.book.author +
+            " " + notification.book.rating + " / 5"];
+            isBrightFirst = false;
+        break;
+
+        case NoteType.CATEGORY_ADD:
+            strings = ["Category ", "'"+notification.book+"'", " added"];
+            isBrightFirst = false;
+        break;
+
+        case NoteType.SEARCH:
+            strings = ["Searching ", this.searchElement.value, " in ", this.model.currentCategory];
+            isBrightFirst = false;
+        break;
+
+        case NoteType.FILTER:
+            strings = ["Browsing ", notification.book];
+            isBrightFirst = false;
+        break;
+
+        case NoteType.BOOK_TAG_CHANGE:
+            strings = [notification.book.name, " tag changed to ", notification.book.tag];
+            isBrightFirst = true;
+        break;
+
+        case NoteType.CATEGORY_CHANGE:
+            strings = ["Showing ", notification.book];
+            isBrightFirst = false;
+        break;
+
+    }
+
     var notificationElement = document.createElement("li"); //wrapper
     notificationElement.className = "menu-block__item";
     var icon = document.createElement("i"); //icon
@@ -398,15 +447,15 @@ View.prototype.publishNotification = function(notification, isHistory) {
 
 
     //assigning text bright or pale
-    for (var i = 0; i < notification.strings.length; i++) {
+    for (var i = 0; i < strings.length; i++) {
         var text = document.createElement("span");
-        if (i % 2 === Number(notification.isBrightFirst)) {
+        if (i % 2 === Number(isBrightFirst)) {
             text.className = "menu-block__text_pale"; //pale text
         }
         else {
             text.className = "menu-block__text"; //bright text
         }
-        text.innerHTML = notification.strings[i];
+        text.innerHTML = strings[i];
         body.appendChild(text);
     }
 
@@ -468,9 +517,10 @@ View.prototype.publishNotificationTime = function(notification) {
 
 
 //filtering books
-View.prototype.updateFilteredBooks = function() {
-    for (var i = 0; i < this.model.books.length; i++) {
-        var book = this.model.books[i];
+
+View.prototype.updateFilteredBooks = function(books) {
+    for (var i = 0; i < books.length; i++) {
+        var book = books[i];
         var bookElement = this.bookElements[book.hash];
         if (book.show === true) {
             bookElement.style.display = "flex";
@@ -502,12 +552,19 @@ View.prototype.publishCategory = function(tag) {
     this.categoryListElement.insertBefore(categoryElement, this.categoryListElement.firstChild);
 
     console.log("Category " + tag + " added");
-    this.controller.addNotification(false, ["Category ", "'"+tag+"'", " added"]);
+    this.controller.addNotification(NoteType.CATEGORY_ADD, tag);
 
     var view = this;
     categoryElement.addEventListener("click", function() {
         var category = this.getChildByClass("menu-block__text").innerHTML;
-        view.controller.changeCategory(category);
+
+        if (this.className.indexOf("menu-block__item_highlighted") < 0) {
+            view.controller.showCategory(tag);
+            view.controller.addNotification(NoteType.CATEGORY_CHANGE, tag);
+        }
+        else {
+            view.controller.hideCategory(tag);
+        }
     });
 
     this.categoryElements[tag] = categoryElement;

@@ -6,7 +6,6 @@
     flex-flow: column;
     color: #181e2c;
     cursor: pointer;
-    transition: height 1s ease;
     flex-shrink: 0;
 }
 

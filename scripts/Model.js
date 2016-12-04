@@ -1,24 +1,29 @@
 function Model() {
-
+    //list of books
     this.books = [];
     this.onBookAdded = new EventEmitter();
     this.onBookRatingChanged = new EventEmitter();
+    this.onBookTagChanged = new EventEmitter();
 
+    //hashset of book filters
     this.bookFilters = {};
     this.onBooksFiltered = new EventEmitter();
 
+    //list of notifications
     this.notifications = [];
     this.onNotificationAdded = new EventEmitter();
     this.onNotificationTimeUpdated = new EventEmitter();
+
+    //updating notification time every minute
     setInterval(this.updateNotificationTime.bind(this), 60000);
 
+    //all categories
     this.categories = [];
     this.currentCategory = "Must Read Titles";
     this.onCategoryAdded = new EventEmitter();
+    //categories being shown
+    this.shownCategories = [];
     this.onCategoryChanged = new EventEmitter();
-
-    this.onBookTagChanged = new EventEmitter();
-
 }
 
 function Book(name, author, image, rating, category) {
@@ -33,14 +38,6 @@ function Book(name, author, image, rating, category) {
     this.hash = hashGen.get();
 }
 
-function BookFilter(field, query, strict, compareFunc) {
-    this.field = field;
-    this.query = query;
-    this.strict = strict;
-    this.compareFunc = compareFunc;
-
-    this.hash = field;
-}
 
 //adding books and changing their rating
 Model.prototype.addBook = function(name, author, image, rating) {
@@ -48,8 +45,8 @@ Model.prototype.addBook = function(name, author, image, rating) {
     this.books.push(book);
     this.onBookAdded.notify(book);
 
-    this.addNotification(false, ["You added ", book.name, " by ", book.author, 
-            " to your ", this.currentCategory]);
+    this.addNotification(NoteType.BOOK_ADD, book);
+    this.applyBookFilters();
 
     return book;
 }
@@ -57,24 +54,32 @@ Model.prototype.addBook = function(name, author, image, rating) {
 Model.prototype.changeBookRating = function(book, newRating) {
     book.rating = newRating;
     this.onBookRatingChanged.notify(book);
-    this.addNotification(false, ["You rated ", book.name, " by ", book.author +
-            " " + book.rating + " / 5"]);
+    this.addNotification(NoteType.RATING, book);
 }
 
 //adding notifications and updating their timestamps
-function Notification(isBrightFirst, strings) {
-    this.isBrightFirst = isBrightFirst;
-    this.strings = strings;
 
+var NoteType = {
+    BOOK_ADD : 0,
+    BOOK_TAG_CHANGE : 1,
+    RATING : 2,
+    SEARCH : 3,
+    FILTER : 4,
+    CATEGORY_ADD : 5,
+    CATEGORY_CHANGE : 6
+};
+
+function Notification(type, book) {
+    this.type = type;
+    this.book = book;
     this.minutes = 0;
     this.hours = 0;
-    this.date = new Date();
-    
+       
     this.hash = hashGen.get();
 }
 
-Model.prototype.addNotification = function(isBrightFirst, strings) {
-    var notification = new Notification(isBrightFirst, strings);
+Model.prototype.addNotification = function(type, book) {
+    var notification = new Notification(type, book);
     this.notifications.push(notification);
     this.onNotificationAdded.notify(notification);
 
@@ -98,84 +103,40 @@ Model.prototype.updateNotificationTime = function() {
 
 //book filters
 
-Model.prototype.addBookFilter = function(filter) {
-    this.bookFilters[filter.hash] = filter;
-    this.applyBookFilters();
-    this.onBooksFiltered.notify();
+Model.prototype.createBookFilter = function(fields, querys) {
+    return function(book) {
+        var result = false;
+        return fields.some(function(field) {
+            return querys.some(function(query) {
+                var fieldValue = book[field].toLowerCase();
+                var queryValue = query.toLowerCase();
+                return (fieldValue.indexOf(queryValue) >= 0);
+            });
+        }, this);
+    }
 }
 
-Model.prototype.removeBookFilter = function(field) {
-    delete this.bookFilters[field];
+Model.prototype.addBookFilter = function(fields, querys) {
+    var hash = fields.join();
+    this.bookFilters[hash] = this.createBookFilter(fields, querys);
     this.applyBookFilters();
-    this.onBooksFiltered.notify();
 }
 
 Model.prototype.applyBookFilters = function() {
-    var compareFuncs = {
-        equals: function(book) {
-            //console.log(book);
-            return String(book[filter.field]).toLowerCase() === filter.query.toLowerCase();
-        },
-
-        hasSymbols: function(book) {
-            //console.log(book);
-            return String(book[filter.field]).toLowerCase().indexOf(filter.query.toLowerCase()) >= 0;
-        }
-    }
-
-    //resetting book state for strict filters
     this.books.forEach(function(book) {
         book.show = true;
-        book.hiddenByStrict = false;
-    }, this);
-
-    var nonStrictCount = 0;
-
-    //applying strict filters first
-    for (var key in this.bookFilters) {
-        var filter = this.bookFilters[key];
-        if (filter.strict === true)
-            applyFilter.bind(this)(filter);
-        else
-            nonStrictCount++;
-    }
-
-    if (nonStrictCount > 0) {
-        //resetting book state for non-strict filters
-        this.books.forEach(function(book) {
-            book.show = false;
-        }, this);
-
-        //applying non-strict filters
         for (var key in this.bookFilters) {
-            var filter = this.bookFilters[key];
-            if (filter.strict === false)
-                applyFilter.bind(this)(filter);
+            var filterFunc = this.bookFilters[key];
+            if (!filterFunc(book)) {
+                book.show = false;
+                break;
+            }
         }
-    }
-    
-    function applyFilter(filter) {      
-        this.books.forEach(function(book) {
-            if (!(compareFuncs[filter.compareFunc](book))) {
-                if (filter.strict) {
-                    book.show = false;
-                    book.hiddenByStrict = true;
-                }
-            }
-            else {
-                if (!filter.strict && !book.hiddenByStrict) {
-                    book.show = true;
-                }
-            }
-            // console.log(filter.compareFunc + 
-            // " (" + book[filter.field] + ", " +
-            // filter.query + ") " +
-            // book.show);
-        }, this);
-    }
-    if (filter != undefined)
-        console.log("Filtered by " + filter.query + " in " + filter.field);
+    }, this);
+    this.onBooksFiltered.notify(this.books);
 }
+
+//categories
 
 Model.prototype.addCategory = function(tag) {
     this.categories.push(tag);
@@ -185,10 +146,17 @@ Model.prototype.addCategory = function(tag) {
 Model.prototype.changeBookTag = function(book, tag) {
     book.tag = tag;
     console.log(book.name + " tag changed to " + book.tag);
+
     this.onBookTagChanged.notify(book);
+    this.applyBookFilters();
 }
 
-Model.prototype.changeCategory = function(tag) {
-    this.currentCategory = tag;
-    this.onCategoryChanged.notify(tag);
+Model.prototype.showCategory = function(tag) {
+    this.shownCategories.push(tag);
+    this.onCategoryChanged.notify(this.shownCategories);
+}
+
+Model.prototype.hideCategory = function(tag) {
+    this.shownCategories.deleteItem(tag);
+    this.onCategoryChanged.notify(this.shownCategories);
 }

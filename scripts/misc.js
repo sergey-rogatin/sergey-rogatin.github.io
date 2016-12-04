@@ -44,3 +44,12 @@ HashGenerator.prototype.id = 0;
 HashGenerator.prototype.get = function() {
     return ++HashGenerator.prototype.id;
 }
+
+
+Array.prototype.deleteItem = function(value) {
+    var index = this.indexOf(value);
+    if (index >= 0) {
+        this.splice(index, 1);
+    }
+    return this;
+}

@@ -7,14 +7,13 @@ function Application() {
 
 var app = new Application();
 
-
 //adding initial books
 app.ctrl.addCategory("Non Fiction");
 app.ctrl.addCategory("Classic Novels");
 app.ctrl.addCategory("Best Of List");
 app.ctrl.addCategory("Must Read Titles");
 
-app.ctrl.changeCategory("Must Read Titles");
+app.ctrl.showCategory("Must Read Titles");
 
 app.ctrl.addBook("Jewels of Nizam", "Geeta Devi", "images/jewels.jpg", getRandomInt(1, 5));
 app.ctrl.addBook("Cakes and Bakes", "Sanjeev Kapoor", "images/cakes and bakes.jpg", getRandomInt(1, 5));
