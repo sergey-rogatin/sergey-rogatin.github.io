@@ -1,9 +1,0 @@
-.side-bar {
-    display: flex;
-    flex-flow: column;
-    min-width: 12em;
-    width: 15em;
-    background: #181e2c;
-    overflow-y: scroll;
-}
-

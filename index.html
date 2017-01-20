@@ -1,172 +1,69 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Library</title>
 
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <link rel="stylesheet" type="text/css" href="css/wrapper.css">
-        <link rel="stylesheet" type="text/css" href="css/header_footer.css">
-        <link rel="stylesheet" type="text/css" href="css/link.css">
-        <link rel="stylesheet" type="text/css" href="css/user.css">
-        <link rel="stylesheet" type="text/css" href="css/add-book.css">
-        <link rel="stylesheet" type="text/css" href="css/show-book.css">
+<head>
+	<title>lvl5 stuff</title>
 
-         <link rel="stylesheet" type="text/css" href="css/main.css">
-         <link rel="stylesheet" type="text/css" href="css/content.css">
-         <link rel="stylesheet" type="text/css" href="css/browsing.css">
-         <link rel="stylesheet" type="text/css" href="css/filters.css">
-         <link rel="stylesheet" type="text/css" href="css/search.css">
-         <link rel="stylesheet" type="text/css" href="css/side-bar.css">
-         <link rel="stylesheet" type="text/css" href="css/menu-block.css">
-         <link rel="stylesheet" type="text/css" href="css/book-list.css">
-         <link rel="stylesheet" type="text/css" href="css/book.css">
-         <link rel="stylesheet" type="text/css" href="css/rating.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
 
-         <script src="https://use.fontawesome.com/a8e89d6e9d.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
 
-    </head>
+	<script src="https://use.fontawesome.com/a7aed6cf46.js"></script>
+</head>
 
-    <body>
-        
-        <div class="wrapper">
+<body>
+	
+<div class="wrapper">
 
-            <header class="header">
-                <ul class="header__menu">
-                    <li class="link">
-                        <span class="link__text">Help Center</span>
-                    </li>
+	<aside class="side-menu">
 
-                    <li class="link link_dot">
-                        <span class="link__text">Our Support</span>
-                    </li>
+		<div class="site-title side-menu__item">
+			<i class="fa fa-cog fa-3x"></i>
+			<span class="site-title__text">
+				lvl5 stuff
+			</span>
+		</div>
 
-                    <li class="link user link_highlighted">
-                        <img src="images/user.jpg" alt="username" class="user__photo">
-                        <span class="user__name">Alyona</span>
-                        <i class="user__pic fa fa-caret-down"></i>
-                    </li>
-                </ul>
-            </header>
+		<div class="search side-menu__item">
+			<input type="text" class="search__input" placeholder="Search">
+		</div>
+		
+		<ul class="link-list side-menu__item">
+			<li class="link-list__item">link1</li>
+			<li class="link-list__item">link2</li>
+			<li class="link-list__item">link3</li>
+			<li class="link-list__item">link4</li>
+		</ul>
 
-            <main class="main">
+	</aside>
 
-                <aside class="side-bar">
+	<main class="content">
+		<div class="content__title">Title</div>
+		
+		<canvas height="320" width="460" id="game"></canvas>
 
-                    <div class="menu-block menu-block__add-a-book">
-                        <button class="menu-block__button">
-                            <i class="menu-block__pic fa fa-plus menu-block__pic_button"></i>
-                            <span class="menu-block__text">ADD A BOOK</span>
-                        </button>
+	</main>
 
-                        <div class="add-book">
-                            <input type="text" class="add-book__name" placeholder="Title">
-                            <input type="text" class="add-book__author" placeholder="Author">
-                            <input type="file" class="add-book__picture">
-                            <button class="add-book__button">Confirm</button>
-                        </div>
+	<script src="js/game/util.js"></script>
+	<script src="js/game/camera.js"></script>
+	<script src="js/game/scene.js"></script>
+	<script src="js/game/gameObjects/gameObject.js"></script>
 
-                    </div>
+	<script src="js/game/modules/module.js"></script>
+	<script src="js/game/modules/renderer.js"></script>
+	<script src="js/game/modules/collider.js"></script>
+	<script src="js/game/modules/circleCollider.js"></script>
+	<script src="js/game/modules/boxCollider.js"></script>
+	<script src="js/game/input.js"></script>
+	<script src="js/game/engine.js"></script>
 
-                    <ul class="menu-block menu-block__navigation">
-                        <li class="menu-block__item">
-                            <i class="menu-block__pic fa fa-book"></i>
-                            <span class="menu-block__text">Now Reading</span>
-                        </li>
-                        <li class="menu-block__item menu-block__item_highlighted">
-                            <i class="menu-block__pic fa fa-globe"></i>
-                            <span class="menu-block__text">Browse</span>
-                        </li>
-                        <li class="menu-block__item">
-                            <i class="menu-block__pic fa fa-shopping-cart"></i>
-                            <span class="menu-block__text">Buy Books</span>
-                        </li>
-                        <li class="menu-block__item">
-                            <i class="menu-block__pic fa fa-star"></i>
-                            <span class="menu-block__text">Favourite Books</span>
-                        </li>
-                        <li class="menu-block__item">
-                            <i class="menu-block__pic fa fa-list"></i>
-                            <span class="menu-block__text">Wishlist</span>
-                        </li>
-                        <li class="menu-block__item">
-                            <i class="menu-block__pic fa fa-history"></i>
-                            <span class="menu-block__text">History</span>
-                        </li>
-                    </ul>
+	<script src="js/game/gameObjects/player.js"></script>
+	<script src="js/game/gameObjects/enemy.js"></script>
+	
+	<script src="js/game/game.js"></script>
 
-                    <ul class="menu-block menu-block__categories">
-                        
-                    </ul>
+</div>
 
-                    <ul class="menu-block menu-block__activity">
-  
-                    </ul>
+</body>
 
-                </aside>
-
-                <div class="content">
-
-                    <div class="content__title">Browse Avaliable Books</div>
-
-                    <div class="browsing">
-                        <ul class="filters">
-                            <li class="filters__item filters__item_highlighted">All Books</li>
-                            <li class="filters__item">Most Recent</li>
-                            <li class="filters__item">Most Popular</li>
-                            <li class="filters__item">Free Books</li>
-                        </ul>
-
-                        <div class="search">
-                            <input type="text" class="search__input">
-                            <i class="search__pic fa fa-search"></i>
-                        </div>
-                    </div>
-
-                    <div class="book-list">
-
-                    </div>
-
-                    <div class="show-book">
-                        <div class="show-book__body">
-                            <div class="show-book__name">HEhaw</div>
-                            <div class="show-book__author">JADSkl</div>
-                            <div class="show-book__tag">Best Of List</div>
-                            <div class="show-book__taglist">
-
-                            </div>
-                            <button class="show-book__button">Close</button>
-                        </div>
-                        <img src="images/jamie.jpg" alt="image" class="show-book__image">
-                    </div>
-
-                    
-
-                </div>
-
-            </main>
-
-            <footer class="footer">
-                <ul class="footer__menu">
-                    <li class="link">
-                        <i class="link__pic fa fa-question-circle"></i>
-                    </li>
-
-                    <li class="link link_highlighted">
-                        <i class="link__pic fa fa-gear"></i>
-                    </li>
-
-                </ul>
-
-
-                <script src="scripts/misc.js"></script>
-                <script src="scripts/EventEmitter.js"></script>
-                <script src="scripts/Model.js"></script>
-                <script src="scripts/View.js"></script>
-                <script src="scripts/Controller.js"></script>
-                <script src="scripts/app.js"></script>
-            </footer>
-
-        </div>
-            
-    </body>
 </html>
