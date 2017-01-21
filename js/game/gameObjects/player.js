@@ -9,17 +9,6 @@ player.collider.bounds = new Rect(0, 0, 32, 32);
 player.collider.xOff = -16;
 player.collider.yOff = -16;
 
-player.onInit = function() {
-    this.acc = 0.2;
-    this.hspd = 0;
-    this.vspd = 0;
-    this.frict = 0.05;
-    this.maxSpd = 4;
-
-    this.rend = this.getModule(ModuleType.renderer);
-    this.collider = this.getModule(ModuleType.boxCollider);
-}
-
 GameObject.prototype.moveAndCollide = function(keys, collideWith) {
     if (keys.moveRight) {
         this.hspd += this.acc;
@@ -79,6 +68,19 @@ GameObject.prototype.moveAndCollide = function(keys, collideWith) {
     }
 }
 
+player.onInit = function() {
+    this.acc = 0.2;
+    this.hspd = 0;
+    this.vspd = 0;
+    this.frict = 0.05;
+    this.maxSpd = 4;
+
+    this.rend = this.getModule(ModuleType.renderer);
+    this.collider = this.getModule(ModuleType.boxCollider);
+
+    this.cam = Engine.mainCamera;
+}
+
 player.onUpdate = function() {
     var controls = {};
     controls.moveRight = Input.getKeyPressed(KeyCode.right);
@@ -90,4 +92,6 @@ player.onUpdate = function() {
 
     this.x = Math.median(this.x, 0, Engine.mainCamera.x + Engine.mainCamera.width);
     this.y = Math.median(this.y, 0, Engine.mainCamera.y + Engine.mainCamera.height);
+
+    this.cam.follow(this);
 }
