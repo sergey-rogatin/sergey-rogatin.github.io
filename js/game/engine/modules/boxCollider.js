@@ -6,10 +6,10 @@ function BoxCollider(gameObject) {
 BoxCollider.prototype = Object.create(Collider.prototype);
 
 BoxCollider.prototype.checkCollisionWith = function(x, y, other) {
-    var x1 = x + this.xOff;
-    var y1 = y + this.yOff;
-    var x2 = other.gameObject.x + other.xOff;
-    var y2 = other.gameObject.y + other.yOff;
+    var x1 = x - this.xOff;
+    var y1 = y - this.yOff;
+    var x2 = other.gameObject.x - other.xOff;
+    var y2 = other.gameObject.y - other.yOff;
 
     if (x1+this.bounds.left > x2+other.bounds.right) {
         return false;

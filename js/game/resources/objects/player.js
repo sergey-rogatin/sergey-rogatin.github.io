@@ -3,7 +3,7 @@ var player = new GameObject("oPlayer");
 let p = player;
 p.addModule(ModuleType.renderer);
 p.rend = player.addModule(ModuleType.renderer);
-p.rend.sprite = Loader.loadSprite("img/game/rect_yellow.png");
+p.rend.sprite = Loader.loadSprite("js/game/resources/sprites/rect_yellow.png");
 p.rend.xOff = -16;
 p.rend.yOff = -16;
 p.collider = player.addModule(ModuleType.boxCollider);
