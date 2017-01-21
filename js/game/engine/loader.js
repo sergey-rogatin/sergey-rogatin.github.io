@@ -2,9 +2,11 @@ var Loader = {};
 
 Loader.loadQueue = [];
 
-Loader.loadSprite = function(url) {
+Loader.loadSprite = function(url, width, height) {
     var img = new Image();
     img.contentType = "sprite";
+    img.width = width;
+    img.height = height;
     Loader.enqueue(img);
     img.src = url;
     return img;

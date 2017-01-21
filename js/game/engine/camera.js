@@ -30,26 +30,20 @@ Camera.prototype.draw = function() {
     this.clr();
 
     renderers.forEach(function(rend) {
-        rend.render(this);
+        //console.log(rend);
+        if (rend != null) {
+            rend.render(this);
+        }
     }, this);
 
     this.ctx.restore();
 }
 
 Camera.prototype.clr = function() {
-    this.ctx.fillRect(
-        0, 
-        0,
-        this.width,
-        this.height
-    ); 
+    this.ctx.fillRect(0, 0, this.width, this.height); 
 
     if (this.background != null) {
-        this.ctx.drawImage(
-            this.background,
-            -this.x,
-            -this.y
-        );
+        this.ctx.drawImage(this.background, -this.x, -this.y);
     }  
 }
 

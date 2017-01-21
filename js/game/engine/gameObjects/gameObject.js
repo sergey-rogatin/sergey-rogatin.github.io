@@ -2,8 +2,8 @@ function GameObject(name) {
     this.x = 0;
     this.y = 0;
     this.angle = 0;
-    this.xscale = 0;
-    this.yscale = 0;
+    this.xScale = 1;
+    this.yScale = 1;
     this.name = name;
 
     this.onInit = function() {};
@@ -18,6 +18,8 @@ GameObject.prototype.instantiate = function(x, y) {
     inst.onUpdate = this.onUpdate;
     inst.x = x;
     inst.y = y;
+    inst.xScale = this.xScale;
+    inst.yScale = this.yScale;
 
     this.modules.forEach(function(module) {
         var copyMod = inst.addModule(module.type);
@@ -32,9 +34,10 @@ GameObject.prototype.instantiate = function(x, y) {
 
     var objList = Engine.currScene.gameObjects;
     if (objList[this.name] == undefined) {
-        objList[this.name] = [];
+        objList[this.name] = new List();
     }
-    objList[this.name].push(inst);
+
+    inst.index = objList[this.name].push(inst);
 
     inst.onInit();
 
@@ -62,4 +65,12 @@ GameObject.prototype.addModule = function(moduleId) {
 
 GameObject.prototype.getModule = function(moduleId) {
     return this.modules[moduleId];
+}
+
+GameObject.prototype.destroy = function() {
+    this.modules.forEach(function(m) {
+        m.destroy();
+    }, this);
+
+    Engine.currScene.gameObjects[this.name].remove(this.index);
 }

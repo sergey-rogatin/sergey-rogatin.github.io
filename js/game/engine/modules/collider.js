@@ -9,9 +9,13 @@ Collider.prototype = Object.create(Module.prototype);
 Collider.prototype.init = function() {
     var collList = Engine.currScene.colliders;
     if (collList[this.gameObject.name] == undefined) {
-        collList[this.gameObject.name] = [];
+        collList[this.gameObject.name] = new List();
     }
-    collList[this.gameObject.name].push(this);
+    this.index = collList[this.gameObject.name].push(this);
+}
+
+Collider.prototype.destroy = function() {
+    Engine.currScene.colliders.remove(this.index);
 }
 
 Collider.prototype.collisionAt = function(x, y, gameObject) {
