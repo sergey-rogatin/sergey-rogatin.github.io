@@ -88,6 +88,6 @@ player.onUpdate = function() {
 
     this.moveAndCollide(controls, ["oEnemy"]);
 
-    this.x = Math.median(this.x, 0, Engine.canvas.width);
-    this.y = Math.median(this.y, 0, Engine.canvas.height);
+    this.x = Math.median(this.x, 0, Engine.mainCamera.x + Engine.mainCamera.width);
+    this.y = Math.median(this.y, 0, Engine.mainCamera.y + Engine.mainCamera.height);
 }

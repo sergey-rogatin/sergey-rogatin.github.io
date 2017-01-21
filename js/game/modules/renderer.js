@@ -12,18 +12,21 @@ Renderer.prototype.init = function() {
     Engine.currScene.renderers.push(this);
 }
 
-Renderer.prototype.render = function(ctx) {
+Renderer.prototype.render = function(cam) {
+    var ctx = cam.ctx;
+
     ctx.save();
     var go = this.gameObject;
-    var x = go.x;
-    var y = go.y;
-
+    var x = go.x - cam.x + this.xOff;
+    var y = go.y - cam.y + this.yOff;
     ctx.translate(x, y);
     ctx.rotate(go.angle * Math.degToRad);
+
     ctx.drawImage(
         this.sprite,
-        this.xOff,
-        this.yOff
+        0,
+        0
     );
+
     ctx.restore();
 }

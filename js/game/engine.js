@@ -1,11 +1,10 @@
 var Engine = {};
 
-Engine.fps = 30;
 Engine.currScene = null;
 Engine.lastFrameTime = 0;
 
-Engine.canvas = document.getElementById("game");
-Engine.ctx = Engine.canvas.getContext("2d");
+var canvas = document.getElementById("game");
+Engine.mainCamera = new Camera(canvas);
 
 Engine.loop = function(timestamp) {
     //update objects and draw them
@@ -16,13 +15,8 @@ Engine.loop = function(timestamp) {
             o.onUpdate();
         });
     }
-
-    Engine.ctx.fillStyle = "black";
-    Engine.ctx.fillRect(0, 0, Engine.canvas.width, Engine.canvas.height);
     
-    Engine.currScene.renderers.forEach(function(rend) {
-        rend.render(Engine.ctx);
-    });
+    Engine.mainCamera.draw();
     
     Input.resetKeys();
     

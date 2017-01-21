@@ -20,7 +20,7 @@ enemy.onUpdate = function() {
 
     this.moveAndCollide(controls, ["oPlayer"]);
 
-    if (this.x > Engine.canvas.width + 100) {
+    if (this.x > Engine.mainCamera.canvas.width + 100) {
         this.x = -100;
     }
     // this.x = Math.median(this.x, 0, Engine.canvas.width);
