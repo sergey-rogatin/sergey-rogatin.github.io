@@ -17,9 +17,7 @@ Engine.loop = function(timestamp) {
     }
     
     Engine.mainCamera.draw();
-    
-    Input.resetKeys();
-    
+    Input.resetKeys();  
     requestAnimationFrame(Engine.loop);
 }
 

@@ -1,6 +1,6 @@
 var enemy = new GameObject("oEnemy");
 enemy.rend = enemy.addModule(ModuleType.renderer);
-enemy.rend.sprite = loadSprite("img/game/rect.png");
+enemy.rend.sprite = Loader.loadSprite("img/game/rect.png");
 enemy.collider = enemy.addModule(ModuleType.boxCollider);
 enemy.collider.bounds = new Rect(0, 0, 32, 32);
 enemy.rend.xOff = -16;

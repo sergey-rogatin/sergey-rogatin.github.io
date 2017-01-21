@@ -1,13 +1,15 @@
 var player = new GameObject("oPlayer");
-player.addModule(ModuleType.renderer);
-player.rend = player.addModule(ModuleType.renderer);
-player.rend.sprite = loadSprite("img/game/rect_yellow.png");
-player.rend.xOff = -16;
-player.rend.yOff = -16;
-player.collider = player.addModule(ModuleType.boxCollider);
-player.collider.bounds = new Rect(0, 0, 32, 32);
-player.collider.xOff = -16;
-player.collider.yOff = -16;
+
+let p = player;
+p.addModule(ModuleType.renderer);
+p.rend = player.addModule(ModuleType.renderer);
+p.rend.sprite = Loader.loadSprite("img/game/rect_yellow.png");
+p.rend.xOff = -16;
+p.rend.yOff = -16;
+p.collider = player.addModule(ModuleType.boxCollider);
+p.collider.bounds = new Rect(0, 0, 32, 32);
+p.collider.xOff = -16;
+p.collider.yOff = -16;
 
 GameObject.prototype.moveAndCollide = function(keys, collideWith) {
     if (keys.moveRight) {
@@ -99,10 +101,10 @@ player.onUpdate = function() {
     this.y = Math.median(this.y, 0, Engine.currScene.height);
 
     if (zoomInKey) {
-        this.cam.setZoom(this.cam.zoom + 0.01);
+        this.cam.setZoom(this.cam.zoom + 0.02);
     }
 
     if (zoomOutKey) {
-        this.cam.setZoom(this.cam.zoom - 0.01);
+        this.cam.setZoom(this.cam.zoom - 0.02);
     }
 }
