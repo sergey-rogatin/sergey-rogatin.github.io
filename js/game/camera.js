@@ -4,12 +4,17 @@ function Camera(canvas) {
     this.canvas = canvas;
     this.width = canvas.width;
     this.height = canvas.height;
+
+    this.showWidth = canvas.width;
+    this.showHeight = canvas.height;
     this.ctx = canvas.getContext("2d");
 
     this.bgColor = "black";
     this.ctx.fillStyle = this.bgColor;
 
     this.background = null;
+
+    this.zoom = 1;
 }
 
 Camera.prototype.setColor = function(color) {
@@ -20,11 +25,15 @@ Camera.prototype.setColor = function(color) {
 Camera.prototype.draw = function() {
     var renderers = Engine.currScene.renderers;
    
+    this.ctx.save();
+    this.ctx.scale(this.zoom, this.zoom);
     this.clr();
 
     renderers.forEach(function(rend) {
         rend.render(this);
     }, this);
+
+    this.ctx.restore();
 }
 
 Camera.prototype.clr = function() {
@@ -46,8 +55,8 @@ Camera.prototype.clr = function() {
 
 //follow a GameObject
 Camera.prototype.follow = function(go) {
-    this.x = go.x - this.width/2;
-    this.y = go.y - this.height/2;
+    this.x = go.x - this.showWidth/2/this.zoom;
+    this.y = go.y - this.showHeight/2/this.zoom;
 
     this.limit();
 }
@@ -55,16 +64,22 @@ Camera.prototype.follow = function(go) {
 Camera.prototype.limit = function() {
     var sc = Engine.currScene;
 
-    if (this.x < 0) {
-        this.x = 0;
-    }
     if (this.x + this.width > sc.width) {
         this.x = sc.width - this.width;
-    }
-    if (this.y < 0) {
-        this.y = 0;
     }
     if (this.y + this.height > sc.height) {
         this.y = sc.height - this.height;
     }
+    if (this.x < 0) {
+        this.x = 0;
+    }
+    if (this.y < 0) {
+        this.y = 0;
+    }
+}
+
+Camera.prototype.setZoom = function(zoom) {
+    this.zoom = zoom;
+    this.width = this.showWidth/zoom;
+    this.height = this.showHeight/zoom;
 }

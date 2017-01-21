@@ -4,7 +4,15 @@ KeyCode = {
     left: 37,
     up: 38,
     right: 39,
-    down: 40
+    down: 40,
+    num_add: 107,
+    num_sub: 109,
+    enter: 13,
+    tab: 9,
+    esc: 27,
+    caps_lock: 20,
+    shift: 16,
+    space: 32
 };
 
 Input.keysPressed = [];

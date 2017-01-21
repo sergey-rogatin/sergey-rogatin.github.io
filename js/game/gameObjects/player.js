@@ -88,10 +88,21 @@ player.onUpdate = function() {
     controls.moveUp = Input.getKeyPressed(KeyCode.up);
     controls.moveDown = Input.getKeyPressed(KeyCode.down);
 
+    var zoomInKey = Input.getKeyPressed(KeyCode.num_add);
+    var zoomOutKey = Input.getKeyPressed(KeyCode.num_sub);
+
     this.moveAndCollide(controls, ["oEnemy"]);
 
-    this.x = Math.median(this.x, 0, Engine.mainCamera.x + Engine.mainCamera.width);
-    this.y = Math.median(this.y, 0, Engine.mainCamera.y + Engine.mainCamera.height);
-
     this.cam.follow(this);
+
+    this.x = Math.median(this.x, 0, Engine.currScene.width);
+    this.y = Math.median(this.y, 0, Engine.currScene.height);
+
+    if (zoomInKey) {
+        this.cam.setZoom(this.cam.zoom + 0.01);
+    }
+
+    if (zoomOutKey) {
+        this.cam.setZoom(this.cam.zoom - 0.01);
+    }
 }
