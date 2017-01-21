@@ -90,8 +90,8 @@ player.onUpdate = function() {
     controls.moveUp = Input.getKeyPressed(KeyCode.up);
     controls.moveDown = Input.getKeyPressed(KeyCode.down);
 
-    var zoomInKey = Input.getKeyPressed(KeyCode.num_add);
-    var zoomOutKey = Input.getKeyPressed(KeyCode.num_sub);
+    var zoomInKey = Input.getKeyPressed(KeyCode.page_up);
+    var zoomOutKey = Input.getKeyPressed(KeyCode.page_down);
 
     this.moveAndCollide(controls, ["oEnemy"]);
 

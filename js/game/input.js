@@ -12,7 +12,9 @@ KeyCode = {
     esc: 27,
     caps_lock: 20,
     shift: 16,
-    space: 32
+    space: 32,
+    page_up: 33,
+    page_down: 34
 };
 
 Input.keysPressed = [];
