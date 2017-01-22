@@ -6,4 +6,6 @@ function Scene(name, width, height) {
 
     this.width = width;
     this.height = height;
+    
+    this.gameObjects.particles = new List();
 }

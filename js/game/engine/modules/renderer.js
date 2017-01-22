@@ -3,6 +3,7 @@ function Renderer(gameObject) {
     this.sprite = null;
     this.xOff = 0;
     this.yOff = 0;
+    this.alpha = 1;
 }
 
 Renderer.prototype = Object.create(Module.prototype);
@@ -24,6 +25,7 @@ Renderer.prototype.render = function(cam) {
     ctx.translate(x, y);
     ctx.rotate(-go.angle * Math.degToRad);
     ctx.scale(go.xScale, go.yScale);
+    ctx.globalAlpha = this.alpha;
     ctx.drawImage(this.sprite, -this.xOff, -this.yOff);
     ctx.restore();
 }

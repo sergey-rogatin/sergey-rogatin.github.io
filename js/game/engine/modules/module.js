@@ -5,5 +5,6 @@ function Module(gameObject) {
 var ModuleType = {
     renderer: 0,
     circleCollider: 1,
-    boxCollider: 2
+    boxCollider: 2,
+    particleEmitter: 3
 };

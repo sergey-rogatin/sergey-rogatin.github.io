@@ -21,6 +21,7 @@ GameObject.prototype.instantiate = function(x, y) {
     inst.xScale = this.xScale;
     inst.yScale = this.yScale;
 
+
     this.modules.forEach(function(module) {
         var copyMod = inst.addModule(module.type);
         for (var key in module) {
@@ -55,6 +56,9 @@ GameObject.prototype.addModule = function(moduleId) {
             break;
         case ModuleType.boxCollider:
             module = new BoxCollider(this);
+            break;
+        case ModuleType.particleEmitter: 
+            module = new ParticleEmitter(this);
             break;
         default: return;
     }

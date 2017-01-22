@@ -19,6 +19,8 @@ o.onInit = function() {
     o.lifetime = 50;
 
     o.lifeStart = Engine.time;
+
+    o.rend = o.getModule(ModuleType.renderer);
 }
 
 o.onUpdate = function() {
@@ -30,6 +32,8 @@ o.onUpdate = function() {
     o.x += o.hspd;
     o.y += o.vspd;
 
+    o.rend.alpha -= 0.018;
+    o.xScale += 0.03;
     if (o.lifeStart + o.lifetime <= Engine.time) {
         this.destroy();
     }

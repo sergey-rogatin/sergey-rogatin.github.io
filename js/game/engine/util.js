@@ -47,6 +47,7 @@ function sign(a) {
 function List() {
     this.first = null;
     this.last = null;
+    this.length = 0;
 }
 
 List.prototype.push = function(val) {
@@ -63,6 +64,8 @@ List.prototype.push = function(val) {
 
     this.last.next = newNode;
     this.last = newNode;
+
+    this.length++;
     return newNode;
 }
 
@@ -83,6 +86,8 @@ List.prototype.remove = function(node) {
     } else {
         next.prev = prev;
     }
+
+    this.length--;
 }
 
 List.prototype.forEach = function(handler, that) {

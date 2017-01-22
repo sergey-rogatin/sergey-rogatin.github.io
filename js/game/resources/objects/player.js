@@ -8,13 +8,20 @@ var coll = o.addModule(ModuleType.boxCollider);
 coll.offX = 16;
 coll.offY = 16;
 
+var emit = o.addModule(ModuleType.particleEmitter);
+
 //behaviour
 o.onInit = function() {
+    let o = this;
     oUnit.onInit.call(this);
 
-    o.acc = 0.1;
+    o.acc = 0.25;
+
+    o.emit = o.getModule(ModuleType.particleEmitter);
 }
 
 o.onUpdate = function() {
+    let o = this;
     oUnit.onUpdate.call(this);
+    o.emit.burst(10);
 }
