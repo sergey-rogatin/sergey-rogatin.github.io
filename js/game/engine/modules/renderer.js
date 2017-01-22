@@ -4,16 +4,29 @@ function Renderer(gameObject) {
     this.xOff = 0;
     this.yOff = 0;
     this.alpha = 1;
+    this.layer = 1;
+    this.index = null;
 }
 
 Renderer.prototype = Object.create(Module.prototype);
 
 Renderer.prototype.init = function() {
-    this.index = Engine.currScene.renderers.push(this);
+    this.setLayer(this.layer);
+}
+
+Renderer.prototype.setLayer = function(l) {
+    if (this.index != null) {
+        Engine.currScene.renderers[this.layer].remove(this.index);
+    }
+    if (Engine.currScene.renderers[l] == undefined) {
+        Engine.currScene.renderers[l] = new List();
+    }
+    this.index = Engine.currScene.renderers[l].push(this);
+    this.layer = l;
 }
 
 Renderer.prototype.destroy = function() {
-    Engine.currScene.renderers.remove(this.index);
+    Engine.currScene.renderers[this.layer].remove(this.index);
 }
 
 Renderer.prototype.render = function(cam) {

@@ -7,16 +7,19 @@ rend.setSprite(spr, 16, 16);
 var coll = o.addModule(ModuleType.boxCollider);
 coll.offX = 16;
 coll.offY = 16;
+rend.layer = 1;
 
 var emit = o.addModule(ModuleType.particleEmitter);
 emit.setAlpha(0.05, 0.15, 0.01);
 emit.setColor("lawngreen");
 emit.setLifeTime(5, 10);
 emit.setDirection(160, 200);
-emit.setSpeed(2, 4, 0.1);
-emit.setScale(0.4, 0.4, 0.4, 0.4, -0.03);
-emit.setRegion(-25, 0, -16, 0);
+emit.setSpeed(5, 8);
+emit.setAccel(-1, -1);
+emit.setScale(0.8, 0.8, 0.4, 0.7, -0.09);
+emit.setRegion(-35, 0, -16, 0);
 emit.setAlpha(0.2, 0.4, -0.02);
+emit.layer = 0;
 
 //behaviour
 o.onInit = function() {
@@ -26,6 +29,7 @@ o.onInit = function() {
     o.acc = 0.25;
 
     o.emit = o.getModule(ModuleType.particleEmitter);
+    o.rend = o.getModule(ModuleType.renderer);
 }
 
 o.onUpdate = function() {

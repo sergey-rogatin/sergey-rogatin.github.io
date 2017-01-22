@@ -59,11 +59,30 @@ List.prototype.push = function(val) {
     if (this.first == null) {
         this.first = newNode;
         this.last = newNode;
+        this.length++;
         return newNode;
     }
 
     this.last.next = newNode;
     this.last = newNode;
+
+    this.length++;
+    return newNode;
+}
+
+List.prototype.insertBefore = function(node, val) {
+    var newNode = {};
+    newNode.val = val;
+    newNode.next = node;
+    newNode.prev = node.prev;
+
+    if (node.prev != null) {
+        node.prev.next = newNode;
+    } else {
+        this.first = newNode;
+    }
+
+    node.prev = newNode;
 
     this.length++;
     return newNode;

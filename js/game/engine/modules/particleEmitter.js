@@ -56,6 +56,8 @@ function ParticleEmitter(gameObject) {
 
     this.particleMax = 150;
     this.color = "dodgerblue";
+
+    this.layer = 0;
 }
 
 ParticleEmitter.prototype = Object.create(Module.prototype);
@@ -124,7 +126,9 @@ ParticleEmitter.prototype.setColor = function(color) {
     this.color = color;
 }
 
-ParticleEmitter.prototype.init = function() {};
+ParticleEmitter.prototype.init = function() {
+
+};
 
 ParticleEmitter.prototype.burst = function(amount) {
     for (let i = 0; i < amount; i++) {
@@ -154,10 +158,21 @@ ParticleEmitter.prototype.burst = function(amount) {
         let p = new Particle(x, y, angle, alpha, speed, rotSpd, dir, acc,
                 rotAcc, lifeTime, xScale, yScale, this.sprite, xOff, yOff, alphaChange, scaleChange, color);
 
-        p.rendIndex = Engine.currScene.renderers.push(p);
+        
+        p.setLayer(this.layer);
         p.objIndex = Engine.currScene.gameObjects.particles.push(p);
     }
-    
+}
+
+Particle.prototype.setLayer = function(l) {
+    if (this.index != null) {
+        Engine.currScene.renderers[this.layer].remove(this.rendIndex);
+    }
+    if (Engine.currScene.renderers[l] == undefined) {
+        Engine.currScene.renderers[l] = new List();
+    }
+    this.rendIndex = Engine.currScene.renderers[l].push(this);
+    this.layer = l;
 }
 
 function Particle(x, y, angle, alpha, speed, rotSpd, dir, acc,
@@ -209,19 +224,26 @@ Particle.prototype.onUpdate = function() {
     //moving to direction and accelerating
     this.hspd = cos(this.dir) * this.speed;
     this.vspd = -sin(this.dir) * this.speed;
-    this.speed += this.acc;
+
+    let spdLen = sqrt(pow(this.hspd, 2) + pow(this.vspd, 2));
+    this.hspd *= 1/spdLen * this.speed;
+    this.vspd *= 1/spdLen * this.speed;
 
     this.x += this.hspd;
     this.y += this.vspd;
 
-    let spdLen = sqrt(pow(this.hspd, 2) + pow(this.vspd, 2));
-    if (spdLen > this.speed) {
-        this.hspd *= 1/spdLen * this.speed;
-        this.vspd *= 1/spdLen * this.speed;
+    this.speed += this.acc;
+
+    if (this.speed < 0) {
+        this.speed = 0.01;
     }
 
     //changing alpha
     this.alpha += this.alphaChange;
+
+    if (this.alpha < 0) {
+        this.alpha = 0;
+    }
 
     //rotating
     this.angle += this.rotSpd;
@@ -231,6 +253,13 @@ Particle.prototype.onUpdate = function() {
     this.xScale += this.scaleChange;
     this.yScale += this.scaleChange;
 
+    if (this.xScale < 0) {
+        this.xScale = 0;
+    }
+    if (this.yScale < 0) {
+        this.yScale = 0;
+    }
+
     this.lifeTime--;
     if (this.lifeTime <= 0) {
         this.destroy();
@@ -238,6 +267,7 @@ Particle.prototype.onUpdate = function() {
 }
 
 Particle.prototype.destroy = function() {
-    Engine.currScene.renderers.remove(this.rendIndex);
+    //console.log(this.rendIndex);
+    Engine.currScene.renderers[this.layer].remove(this.rendIndex);
     Engine.currScene.gameObjects.particles.remove(this.objIndex);
 }

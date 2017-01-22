@@ -15,6 +15,8 @@ function Camera(canvas) {
     this.background = null;
 
     this.zoom = 1;
+
+    this.layers = [];
 }
 
 Camera.prototype.setColor = function(color) {
@@ -29,11 +31,10 @@ Camera.prototype.draw = function() {
     this.ctx.scale(this.zoom, this.zoom);
     this.clr();
 
-    renderers.forEach(function(rend) {
-        //console.log(rend);
-        if (rend != null) {
+    renderers.forEach(function(layer) {
+        layer.forEach(function(rend) {
             rend.render(this);
-        }
+        }, this);
     }, this);
 
     this.ctx.restore();
@@ -45,7 +46,7 @@ Camera.prototype.clr = function() {
 
     if (this.background != null) {
         this.ctx.drawImage(this.background, -this.x, -this.y);
-    }  
+    }
 }
 
 //follow a GameObject
