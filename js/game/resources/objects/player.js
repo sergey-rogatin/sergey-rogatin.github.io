@@ -10,7 +10,13 @@ coll.offY = 16;
 
 var emit = o.addModule(ModuleType.particleEmitter);
 emit.setAlpha(0.05, 0.15, 0.01);
-emit.color = "green";
+emit.setColor("lawngreen");
+emit.setLifeTime(5, 10);
+emit.setDirection(160, 200);
+emit.setSpeed(2, 4, 0.1);
+emit.setScale(0.4, 0.4, 0.4, 0.4, -0.03);
+emit.setRegion(-25, 0, -16, 0);
+emit.setAlpha(0.2, 0.4, -0.02);
 
 //behaviour
 o.onInit = function() {
@@ -25,7 +31,7 @@ o.onInit = function() {
 o.onUpdate = function() {
     let o = this;
     oUnit.onUpdate.call(this);
-    o.emit.burst(50);
+    o.emit.burst(5);
 
     let incrPart = Input.getKeyPressed(KeyCode.page_up);
     let decrPart = Input.getKeyPressed(KeyCode.page_down);

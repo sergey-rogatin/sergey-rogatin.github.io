@@ -214,6 +214,12 @@ Particle.prototype.onUpdate = function() {
     this.x += this.hspd;
     this.y += this.vspd;
 
+    let spdLen = sqrt(pow(this.hspd, 2) + pow(this.vspd, 2));
+    if (spdLen > this.speed) {
+        this.hspd *= 1/spdLen * this.speed;
+        this.vspd *= 1/spdLen * this.speed;
+    }
+
     //changing alpha
     this.alpha += this.alphaChange;
 
