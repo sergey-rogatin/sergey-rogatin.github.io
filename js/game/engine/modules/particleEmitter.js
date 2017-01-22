@@ -55,7 +55,10 @@ function ParticleEmitter(gameObject) {
     this.rotAccMax = 1;
 
     this.particleMax = 150;
+    this.color = "dodgerblue";
 }
+
+ParticleEmitter.prototype = Object.create(Module.prototype);
 
 ParticleEmitter.prototype.setSprite = function(spr) {
     this.sprite = spr;
@@ -121,8 +124,6 @@ ParticleEmitter.prototype.setColor = function(color) {
     this.color = color;
 }
 
-ParticleEmitter.prototype = Object.create(Module.prototype);
-
 ParticleEmitter.prototype.init = function() {};
 
 ParticleEmitter.prototype.burst = function(amount) {
@@ -178,6 +179,7 @@ function Particle(x, y, angle, alpha, speed, rotSpd, dir, acc,
     this.rotAcc = rotAcc;
     this.alphaChange = alphaChange;
     this.scaleChange = scaleChange;
+    this.color = color;
 
     this.vspd = 0;
     this.hspd = 0;

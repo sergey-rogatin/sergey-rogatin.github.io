@@ -10,6 +10,7 @@ coll.offY = 16;
 
 var emit = o.addModule(ModuleType.particleEmitter);
 emit.setAlpha(0.05, 0.15, 0.01);
+emit.color = "green";
 
 //behaviour
 o.onInit = function() {
