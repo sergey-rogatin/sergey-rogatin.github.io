@@ -120,3 +120,8 @@ List.prototype.forEach = function(handler, that) {
 function randomRange(min, max) {
     return Math.random() * (max - min) + min;
 }
+
+function playSound(sound) {
+    let newSnd = new Audio(sound.src);
+    newSnd.play();
+}

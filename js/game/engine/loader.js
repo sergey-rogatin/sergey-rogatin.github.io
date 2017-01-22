@@ -1,7 +1,8 @@
-var Loader = {};
-
+//Loads up all of the objects before starting the engine
+let Loader = {};
 Loader.loadQueue = [];
 
+//Load a sprite for a gameObject renderer
 Loader.loadSprite = function(url, width, height) {
     var img = new Image();
     img.contentType = "sprite";
@@ -12,6 +13,7 @@ Loader.loadSprite = function(url, width, height) {
     return img;
 }
 
+//Load a sound to play
 Loader.loadSound = function(url) {
     var snd = new Audio(url);
     snd.contentType = "sound";
@@ -19,24 +21,24 @@ Loader.loadSound = function(url) {
     return snd;
 }
 
+//Puts a loading object into a queue
 Loader.enqueue = function(res) {
     res.hash = HashGen.get();
     Loader.loadQueue.push(res.hash);
-
     if (res.contentType == "sprite") {
         res.onload = () => {
             dequeue(res);
         }
     }
-
     if (res.contentType == "sound") {
-        res.addEventListener("canplaythrough", () => {
+        res.oncanplaythrough = () => {
             dequeue(res);
-        })
+        }
     }
-    
 }
 
+//Removes an object that has finished loading from the queue.
+//If the queue is empty, start the engine
 function dequeue(res) {
     var pos = Loader.loadQueue.indexOf(res.hash);
     if (pos >= 0) {
@@ -47,4 +49,5 @@ function dequeue(res) {
         console.log("Game loaded!");
         Engine.start();
     }
+    res.oncanplaythrough = null;
 }

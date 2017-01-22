@@ -36,10 +36,22 @@ Renderer.prototype.render = function(cam) {
     var x = go.x - cam.x;//(0.5 + go.x - cam.x) << 0;
     var y = go.y - cam.y;//(0.5 + go.y - cam.y) << 0;
     ctx.translate(x, y);
+
+    if (go.coll != undefined && go.coll.show) {
+        ctx.fillStyle = "red";
+        ctx.fillRect(
+            go.coll.bounds.left * go.xScale,
+            go.coll.bounds.up * go.yScale,
+            (go.coll.bounds.right - go.coll.bounds.left) * go.xScale,
+            (go.coll.bounds.down - go.coll.bounds.up) * go.yScale
+        );
+    }
+
     ctx.rotate(-go.angle * Math.degToRad);
     ctx.scale(go.xScale, go.yScale);
     ctx.globalAlpha = this.alpha;
     ctx.drawImage(this.sprite, -this.xOff, -this.yOff);
+
     ctx.restore();
 }
 

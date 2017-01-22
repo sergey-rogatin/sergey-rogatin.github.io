@@ -1,3 +1,5 @@
+//Camera is responsible for drawing renderers on the canvas.
+//Cameras can be moved and zoomed in/out
 function Camera(canvas) {
     this.x = 0;
     this.y = 0;
@@ -11,19 +13,28 @@ function Camera(canvas) {
 
     this.bgColor = "black";
     this.ctx.fillStyle = this.bgColor;
-
     this.background = null;
 
     this.zoom = 1;
-
-    this.layers = [];
 }
 
-Camera.prototype.setColor = function(color) {
+//Change the camera zoom
+//bigger = closer
+Camera.prototype.setZoom = function(zoom) {
+    this.zoom = zoom;
+    this.width = this.showWidth/zoom;
+    this.height = this.showHeight/zoom;
+}
+
+//Change camera background color
+Camera.prototype.setBgColor = function(color) {
     this.bgColor = color;
     this.ctx.fillStyle = color;
 }
 
+//The rest is used by engine
+
+//draws all the renderers of the currScene
 Camera.prototype.draw = function() {
     var renderers = Engine.currScene.renderers;
    
@@ -40,6 +51,7 @@ Camera.prototype.draw = function() {
     this.ctx.restore();
 }
 
+//Clears screen with color/background if any
 Camera.prototype.clr = function() {
     this.ctx.fillStyle = this.bgColor;
     this.ctx.fillRect(0, 0, this.width, this.height); 
@@ -57,6 +69,7 @@ Camera.prototype.follow = function(go) {
     this.limit();
 }
 
+//limits the camera by currScene's bounds
 Camera.prototype.limit = function() {
     var sc = Engine.currScene;
 
@@ -72,10 +85,4 @@ Camera.prototype.limit = function() {
     if (this.y < 0) {
         this.y = 0;
     }
-}
-
-Camera.prototype.setZoom = function(zoom) {
-    this.zoom = zoom;
-    this.width = this.showWidth/zoom;
-    this.height = this.showHeight/zoom;
 }

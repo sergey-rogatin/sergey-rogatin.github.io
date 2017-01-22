@@ -1,38 +1,56 @@
 function BoxCollider(gameObject) {
     Collider.call(this, gameObject);
     this.bounds = new Rect(0, 0, 0, 0);
+    //this.show = true;
 }
 
 BoxCollider.prototype = Object.create(Collider.prototype);
 
 BoxCollider.prototype.checkCollisionWith = function(x, y, other) {
-    var x1 = x - this.xOff;
-    var y1 = y - this.yOff;
-    var x2 = other.gameObject.x - other.xOff;
-    var y2 = other.gameObject.y - other.yOff;
+    var xScale1 = this.gameObject.xScale;
+    var yScale1 = this.gameObject.yScale;
+    var xScale2 = other.gameObject.xScale;
+    var yScale2 = other.gameObject.yScale;
+
+    var x2 = other.gameObject.x;
+    var y2 = other.gameObject.y;
     
-    if (x1+this.bounds.left > x2+other.bounds.right) {
+    if (x + this.bounds.left*xScale1 > x2 + other.bounds.right*xScale2) {
         return false;
     }
-    if (y1+this.bounds.up > y2+other.bounds.down) {
+    if (y + this.bounds.up*yScale1 > y2 + other.bounds.down*yScale2) {
         return false;
     }
-    if (x2+other.bounds.left > x1+this.bounds.right) {
+    if (x2 + other.bounds.left*xScale2 > x + this.bounds.right*xScale1) {
         return false;
     }
-    if (y2+other.bounds.up > y1+this.bounds.down) {
+    if (y2 + other.bounds.up*yScale2 > y + this.bounds.down*yScale1) {
         return false;
     }
     return true;
 }
 
 BoxCollider.prototype.collisionAt = function(x, y, gameObject) {
-    var colliders = Engine.currScene.colliders[gameObject];
-    for (var i = 0; i < colliders.length; i++) {
-        var other = colliders[i];
-        if (this.checkCollisionWith(x, y, other)) {
-            return other;
-        }
+    let colliders = Engine.currScene.colliders[gameObject];
+    if (colliders == undefined) {
+        return null;
     }
-    return null;
+    let result = null;
+    colliders.forEach(function(other) {
+        if (this.checkCollisionWith(x, y, other)) {
+            result = other;
+            return;
+        }
+    }, this);
+    return result;
 }
+
+// BoxCollider.prototype.render = function(cam) {
+//     var ctx = cam.ctx;
+//     ctx.save();
+//     var go = this.gameObject;
+//     var x = go.x - cam.x;//(0.5 + go.x - cam.x) << 0;
+//     var y = go.y - cam.y;//(0.5 + go.y - cam.y) << 0;
+//     ctx.translate(x, y);
+//     ctx.restore();
+// }

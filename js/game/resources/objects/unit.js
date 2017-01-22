@@ -13,7 +13,7 @@ o.onInit = function() {
 
     o.keys = {};
 
-    o.dmg = 0;
+    o.dmg = 1;
     o.shotCooldown = 5;
     o.shotSpeed = 5;
     o.prevShotTime = 0;
@@ -22,26 +22,12 @@ o.onInit = function() {
 o.onUpdate = function() {
     let o = this;
 
-    o.keys.up = Input.getKeyPressed(KeyCode.w);
-    o.keys.down = Input.getKeyPressed(KeyCode.s);
-    o.keys.right = Input.getKeyPressed(KeyCode.d);
-    o.keys.left = Input.getKeyPressed(KeyCode.a);
-
-    let shootKey = Input.getKeyPressed(KeyCode.space);
-
     move.call(this, o.keys);
 
-    if (shootKey && o.prevShotTime + o.shotCooldown < Engine.time) {
-        let s = shoot.call(
-            this,
-            o.x,
-            o.y, 
-            o.shotSpeed, 
-            oProjectile, 
-            o.angle,
-            o.dmg
-        );
-        o.prevShotTime = Engine.time;
+    if (o.hp <= 0) {
+        o.partDestroy.burst(50);
+        playSound(explosionSnd);
+        o.destroy();
     }
 }
 

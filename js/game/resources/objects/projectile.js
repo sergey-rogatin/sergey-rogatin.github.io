@@ -1,14 +1,7 @@
 var oProjectile = new GameObject("oProjectile");
 var o = oProjectile;
 
-var rend = o.addModule(ModuleType.renderer);
-var spr = Loader.loadSprite("js/game/resources/sprites/rect.png");
-rend.setSprite(spr);
-rend.xOff = 16;
-rend.yOff = 16;
-
-o.xScale = 0.2;
-o.yScale = 0.2;
+var img = Loader.loadSprite("js/game/resources/sprites/rect.png");
 
 o.onInit = function() {
     let o = this;
@@ -21,6 +14,33 @@ o.onInit = function() {
     o.lifeStart = Engine.time;
 
     o.rend = o.getModule(ModuleType.renderer);
+    o.emit = o.getModule(ModuleType.particleEmitter);
+    o.coll = o.getModule(ModuleType.boxCollider);
+
+    o.dmg = 1;
+
+    o.rend = o.addModule(ModuleType.renderer);
+    o.rend.setSprite(img);
+    o.rend.xOff = 16;
+    o.rend.yOff = 16;
+    o.rend.layer = 1;
+
+    o.xScale = 0.6;
+    o.yScale = 0.3;
+
+    o.emit = o.addModule(ModuleType.particleEmitter);
+    o.emit.setColor("lawngreen");
+    o.emit.setLifeTime(5, 10);
+    o.emit.setDirection(60, 300);
+    o.emit.setSpeed(9, 15);
+    o.emit.setAccel(-1, -1);
+    o.emit.setScale(0.2, 0.3, 0.2, 0.3, -0.01);
+    o.emit.setRegion(10, 0, 10, 0);
+    o.emit.setAlpha(0.5, 0.7, -0.06);
+    o.emit.layer = 0;
+
+    o.coll = o.addModule(ModuleType.boxCollider);
+    o.coll.bounds = new Rect(-16, -16, 32, 32);
 }
 
 o.onUpdate = function() {
@@ -32,9 +52,14 @@ o.onUpdate = function() {
     o.x += o.hspd;
     o.y += o.vspd;
 
-    o.rend.alpha -= 0.018;
-    o.xScale += 0.03;
     if (o.lifeStart + o.lifetime <= Engine.time) {
-        this.destroy();
+        o.destroy();
+    }
+
+    let hit = o.coll.collisionAt(o.x, o.y, "oEnemy");
+    if (hit != null) {
+        hit.gameObject.hp -= o.dmg;
+        o.emit.burst(20);
+        o.destroy();
     }
 }

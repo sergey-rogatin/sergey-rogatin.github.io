@@ -15,7 +15,7 @@ Collider.prototype.init = function() {
 }
 
 Collider.prototype.destroy = function() {
-    Engine.currScene.colliders.remove(this.index);
+    Engine.currScene.colliders[this.gameObject.name].remove(this.index);
 }
 
 Collider.prototype.collisionAt = function(x, y, gameObject) {

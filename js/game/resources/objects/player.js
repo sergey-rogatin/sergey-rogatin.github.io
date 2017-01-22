@@ -1,25 +1,8 @@
 var oPlayer = new GameObject("oPlayer");
 var o = oPlayer;
 
-var rend = o.addModule(ModuleType.renderer);
-var spr = Loader.loadSprite("js/game/resources/sprites/player.png", 32, 32);
-rend.setSprite(spr, 16, 16);
-var coll = o.addModule(ModuleType.boxCollider);
-coll.offX = 16;
-coll.offY = 16;
-rend.layer = 1;
-
-var emit = o.addModule(ModuleType.particleEmitter);
-emit.setAlpha(0.05, 0.15, 0.01);
-emit.setColor("lawngreen");
-emit.setLifeTime(5, 10);
-emit.setDirection(160, 200);
-emit.setSpeed(5, 8);
-emit.setAccel(-1, -1);
-emit.setScale(0.8, 0.8, 0.4, 0.7, -0.09);
-emit.setRegion(-35, 0, -16, 0);
-emit.setAlpha(0.2, 0.4, -0.02);
-emit.layer = 0;
+var playerSpr = Loader.loadSprite("js/game/resources/sprites/player.png", 32, 32);
+var shotSnd = Loader.loadSound("js/game/resources/sounds/shot.wav");
 
 //behaviour
 o.onInit = function() {
@@ -28,8 +11,25 @@ o.onInit = function() {
 
     o.acc = 0.25;
 
-    o.emit = o.getModule(ModuleType.particleEmitter);
-    o.rend = o.getModule(ModuleType.renderer);
+    o.rend = o.addModule(ModuleType.renderer);
+    o.rend.setSprite(playerSpr, 16, 16);
+    o.rend.setLayer(3);
+
+    o.emit = o.addModule(ModuleType.particleEmitter);
+    o.emit.setColor("lawngreen");
+    o.emit.setLifeTime(5, 10);
+    o.emit.setDirection(160, 210);
+    o.emit.setSpeed(5, 8);
+    o.emit.setAccel(-1, -1);
+    o.emit.setScale(0.8, 0.3, 0.8, 0.3, -0.09);
+    o.emit.setRegion(-25, 0, -16, 0);
+    o.emit.setAlpha(0.2, 0.4, -0.02);
+    o.emit.setRotSpeed(2, 8);
+    o.emit.setSprite("circle");
+    o.emit.layer = 0;
+
+    o.coll = o.addModule(ModuleType.boxCollider);
+    o.coll.bounds = new Rect(-16, -16, 32, 32);
 }
 
 o.onUpdate = function() {
@@ -37,15 +37,23 @@ o.onUpdate = function() {
     oUnit.onUpdate.call(this);
     o.emit.burst(5);
 
-    let incrPart = Input.getKeyPressed(KeyCode.page_up);
-    let decrPart = Input.getKeyPressed(KeyCode.page_down);
+    o.keys.up = Input.getKeyPressed(KeyCode.w);
+    o.keys.down = Input.getKeyPressed(KeyCode.s);
+    o.keys.right = Input.getKeyPressed(KeyCode.d);
+    o.keys.left = Input.getKeyPressed(KeyCode.a);
 
-    if (incrPart) {
-        o.emit.particleMax++;
-        console.log("Dsd");
-    }
-
-    if (decrPart) {
-        o.emit.particleMax--;
+    let shootKey = Input.getKeyPressed(KeyCode.space);
+    if (shootKey && o.prevShotTime + o.shotCooldown < Engine.time) {
+        let s = shoot.call(
+            this,
+            o.x,
+            o.y, 
+            o.shotSpeed, 
+            oProjectile, 
+            o.angle,
+            o.dmg
+        );
+        playSound(shotSnd);
+        o.prevShotTime = Engine.time;
     }
 }

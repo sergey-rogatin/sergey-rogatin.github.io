@@ -1,8 +1,7 @@
-var defaultParticle = Loader.loadSprite("js/game/engine/particles/default.png");
 
 function ParticleEmitter(gameObject) {
     Module.call(this, gameObject);
-    this.sprite = defaultParticle;
+    this.sprite = "circle";
     this.sprWidth = 32;
     this.sprHeight = 32;
 
@@ -13,10 +12,10 @@ function ParticleEmitter(gameObject) {
     this.height = 0;
 
     //particle scale range
-    this.xScaleMin = 0.01;
-    this.xScaleMax = 0.4;
-    this.yScaleMin = 0.01;
-    this.yScaleMax = 0.7;
+    this.xScaleMin = 1;
+    this.xScaleMax = 1;
+    this.yScaleMin = 1;
+    this.yScaleMax = 1;
 
     this.scaleChange = 0;//-0.01;
 
@@ -24,35 +23,35 @@ function ParticleEmitter(gameObject) {
     this.alphaMin = 0;
     this.alphaMax = 0;
 
-    this.alphaChange = 0.03;
+    this.alphaChange = 0;
 
     //particle speed range
-    this.speedMin = 0.5;
-    this.speedMax = 2;
+    this.speedMin = 0;
+    this.speedMax = 0;
 
     //particle angle range
     this.angleMin = 0;
-    this.angleMax = 360;
+    this.angleMax = 0;
 
     //particle rotation speed range
-    this.rotSpeedMin = 1;
-    this.rotSpeedMax = 5;
+    this.rotSpeedMin = 0;
+    this.rotSpeedMax = 0;
 
     //particle direction rangle
     this.dirMin = 0;
     this.dirMax = 360;
 
     //particle lifeTime range (in frames)
-    this.lifeTimeMin = 30;
+    this.lifeTimeMin = 100;
     this.lifeTimeMax = 100;
 
     //particle acceleration rangle
     this.accMin = 0;
-    this.accMax = 0.1;
+    this.accMax = 0;
 
     //particle rotation acceleration range
     this.rotAccMin = 0;
-    this.rotAccMax = 1;
+    this.rotAccMax = 0;
 
     this.particleMax = 150;
     this.color = "dodgerblue";
@@ -63,7 +62,7 @@ function ParticleEmitter(gameObject) {
 ParticleEmitter.prototype = Object.create(Module.prototype);
 
 ParticleEmitter.prototype.setSprite = function(spr) {
-    this.sprite = spr;
+    this.sprite = spr; //square or circle
 }
 
 ParticleEmitter.prototype.setRegion = function(x, y, width, height) {
@@ -124,6 +123,10 @@ ParticleEmitter.prototype.setRotAccel = function(min, max) {
 
 ParticleEmitter.prototype.setColor = function(color) {
     this.color = color;
+}
+
+ParticleEmitter.prototype.setLayer = function(l) {
+    this.layer = l;
 }
 
 ParticleEmitter.prototype.init = function() {
@@ -215,8 +218,24 @@ Particle.prototype.render = function(cam) {
     ctx.scale(this.xScale, this.yScale);
     ctx.globalAlpha = this.alpha;
     ctx.fillStyle = this.color;
-    ctx.fillRect(-this.xOff, -this.yOff, 32, 32);
-    //ctx.drawImage(this.sprite, -this.xOff, -this.yOff);
+    
+    switch (this.sprite) {
+        case "square": {
+            ctx.fillRect(-this.xOff, -this.yOff, 32, 32);
+            break;
+        }
+        case "circle": {
+            ctx.beginPath();
+            ctx.arc(0, 0, 16, 0, Math.PI*2, true); 
+            ctx.closePath();
+            ctx.fill();
+            break;
+        }
+        default: {
+            ctx.drawImage(this.sprite, -this.xOff, -this.yOff);
+        }
+    }
+
     ctx.restore();
 }
 
@@ -270,4 +289,8 @@ Particle.prototype.destroy = function() {
     //console.log(this.rendIndex);
     Engine.currScene.renderers[this.layer].remove(this.rendIndex);
     Engine.currScene.gameObjects.particles.remove(this.objIndex);
+}
+
+ParticleEmitter.prototype.destroy = function() {
+    
 }
