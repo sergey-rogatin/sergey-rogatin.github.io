@@ -40,6 +40,7 @@ Camera.prototype.draw = function() {
 }
 
 Camera.prototype.clr = function() {
+    this.ctx.fillStyle = this.bgColor;
     this.ctx.fillRect(0, 0, this.width, this.height); 
 
     if (this.background != null) {

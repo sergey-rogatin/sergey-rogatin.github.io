@@ -192,7 +192,9 @@ Particle.prototype.render = function(cam) {
     ctx.rotate(-this.angle * Math.degToRad);
     ctx.scale(this.xScale, this.yScale);
     ctx.globalAlpha = this.alpha;
-    ctx.drawImage(this.sprite, -this.xOff, -this.yOff);
+    ctx.fillStyle = "dodgerblue";
+    ctx.fillRect(-this.xOff, -this.yOff, 32, 32);
+    //ctx.drawImage(this.sprite, -this.xOff, -this.yOff);
     ctx.restore();
 }
 
