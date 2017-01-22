@@ -97,3 +97,7 @@ List.prototype.forEach = function(handler, that) {
         curr = curr.next;
     }
 }
+
+function randomRange(min, max) {
+    return Math.random() * (max - min) + min;
+}
