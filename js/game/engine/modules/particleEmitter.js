@@ -117,6 +117,10 @@ ParticleEmitter.prototype.setRotAccel = function(min, max) {
     this.rotAccMax = max;
 }
 
+ParticleEmitter.prototype.setColor = function(color) {
+    this.color = color;
+}
+
 ParticleEmitter.prototype = Object.create(Module.prototype);
 
 ParticleEmitter.prototype.init = function() {};
@@ -144,9 +148,10 @@ ParticleEmitter.prototype.burst = function(amount) {
         let rotAcc = randomRange(this.rotAccMin, this.rotAccMax);
         let alphaChange = this.alphaChange;
         let scaleChange = this.scaleChange;
+        let color = this.color;
 
         let p = new Particle(x, y, angle, alpha, speed, rotSpd, dir, acc,
-                rotAcc, lifeTime, xScale, yScale, this.sprite, xOff, yOff, alphaChange, scaleChange);
+                rotAcc, lifeTime, xScale, yScale, this.sprite, xOff, yOff, alphaChange, scaleChange, color);
 
         p.rendIndex = Engine.currScene.renderers.push(p);
         p.objIndex = Engine.currScene.gameObjects.particles.push(p);
@@ -155,7 +160,7 @@ ParticleEmitter.prototype.burst = function(amount) {
 }
 
 function Particle(x, y, angle, alpha, speed, rotSpd, dir, acc,
-        rotAcc, lifeTime, xScale, yScale, sprite, xOff, yOff, alphaChange, scaleChange) {
+        rotAcc, lifeTime, xScale, yScale, sprite, xOff, yOff, alphaChange, scaleChange, color) {
     this.x = x;
     this.y = y;
     this.angle = angle;
@@ -192,7 +197,7 @@ Particle.prototype.render = function(cam) {
     ctx.rotate(-this.angle * Math.degToRad);
     ctx.scale(this.xScale, this.yScale);
     ctx.globalAlpha = this.alpha;
-    ctx.fillStyle = "dodgerblue";
+    ctx.fillStyle = this.color;
     ctx.fillRect(-this.xOff, -this.yOff, 32, 32);
     //ctx.drawImage(this.sprite, -this.xOff, -this.yOff);
     ctx.restore();
