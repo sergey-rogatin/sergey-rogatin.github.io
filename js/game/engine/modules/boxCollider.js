@@ -45,12 +45,14 @@ BoxCollider.prototype.collisionAt = function(x, y, gameObject) {
     return result;
 }
 
-// BoxCollider.prototype.render = function(cam) {
-//     var ctx = cam.ctx;
-//     ctx.save();
-//     var go = this.gameObject;
-//     var x = go.x - cam.x;//(0.5 + go.x - cam.x) << 0;
-//     var y = go.y - cam.y;//(0.5 + go.y - cam.y) << 0;
-//     ctx.translate(x, y);
-//     ctx.restore();
-// }
+BoxCollider.prototype.collisionAll = function(x, y, gameObject, callback) {
+    let colliders = Engine.currScene.colliders[gameObject];
+    if (colliders == undefined) {
+        return null;
+    }
+    colliders.forEach(function(other) {
+        if (this.checkCollisionWith(x, y, other)) {
+            callback(other);
+        }
+    }, this);
+}

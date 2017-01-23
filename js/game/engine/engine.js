@@ -7,17 +7,23 @@ Engine.currScene = null; //the scene holds all of gameObjects and their modules
 Engine.mainCamera = new Camera(canvas); //main camera of the scene
 
 //Rest is used by the engine
+Engine.sleepTime = 0;
 
 Engine.loop = function(timestamp) {
     //update objects and particles every frame
-    var objArr = Engine.currScene.gameObjects;
-    for (var objType in objArr) {
-        var objList = objArr[objType];
-        objList.forEach(function(o) {
-            o.onUpdate();
-        });
-    } 
-    Engine.mainCamera.draw(); //the main camera renders all of the objects
+
+    if (Engine.sleepTime == 0) {
+        var objArr = Engine.currScene.gameObjects;
+        for (var objType in objArr) {
+            var objList = objArr[objType];
+            objList.forEach(function(o) {
+                o.onUpdate();
+            });
+        } 
+        Engine.mainCamera.draw(); //the main camera renders all of the objects
+    } else {
+        Engine.sleepTime--;
+    }
     Input.resetKeys(); //resetting pressed and released keys
     requestAnimationFrame(Engine.loop); //start next animation frame
     Engine.time++;
@@ -27,3 +33,9 @@ Engine.loop = function(timestamp) {
 Engine.start = function() {
     requestAnimationFrame(Engine.loop);
 }
+
+Engine.sleep = function(frames) {
+    Engine.sleepTime = frames;
+}
+
+Engine.volume = 0.01;

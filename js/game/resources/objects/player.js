@@ -9,8 +9,6 @@ o.onInit = function() {
     let o = this;
     oUnit.onInit.call(this);
 
-    o.acc = 0.25;
-
     o.rend = o.addModule(ModuleType.renderer);
     o.rend.setSprite(playerSpr, 16, 16);
     o.rend.setLayer(3);
@@ -30,11 +28,17 @@ o.onInit = function() {
 
     o.coll = o.addModule(ModuleType.boxCollider);
     o.coll.bounds = new Rect(-16, -16, 32, 32);
+
+    o.acc = 0.25;
+    o.shotSpeed = 8;
+    o.shotObj = oPlayerBullet;
+    o.shootKey = false;
+
+    o.hp = 10;
 }
 
 o.onUpdate = function() {
     let o = this;
-    oUnit.onUpdate.call(this);
     o.emit.burst(5);
 
     o.keys.up = Input.getKeyPressed(KeyCode.w);
@@ -42,18 +46,6 @@ o.onUpdate = function() {
     o.keys.right = Input.getKeyPressed(KeyCode.d);
     o.keys.left = Input.getKeyPressed(KeyCode.a);
 
-    let shootKey = Input.getKeyPressed(KeyCode.space);
-    if (shootKey && o.prevShotTime + o.shotCooldown < Engine.time) {
-        let s = shoot.call(
-            this,
-            o.x,
-            o.y, 
-            o.shotSpeed, 
-            oProjectile, 
-            o.angle,
-            o.dmg
-        );
-        playSound(shotSnd);
-        o.prevShotTime = Engine.time;
-    }
+    o.shootKey = Input.getKeyPressed(KeyCode.space);
+    oUnit.onUpdate.call(this);
 }

@@ -123,5 +123,6 @@ function randomRange(min, max) {
 
 function playSound(sound) {
     let newSnd = new Audio(sound.src);
+    newSnd.volume = Engine.volume;
     newSnd.play();
 }

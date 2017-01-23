@@ -9,24 +9,20 @@ o.onInit = function() {
     o.vspd = 0;
     o.hspd = 0;
     o.spd = 0;
-    o.lifetime = 50;
+    o.lifetime = 100;
 
     o.lifeStart = Engine.time;
 
-    o.rend = o.getModule(ModuleType.renderer);
-    o.emit = o.getModule(ModuleType.particleEmitter);
-    o.coll = o.getModule(ModuleType.boxCollider);
-
     o.dmg = 1;
+
+    o.xScale = 0.6;
+    o.yScale = 0.3;
 
     o.rend = o.addModule(ModuleType.renderer);
     o.rend.setSprite(img);
     o.rend.xOff = 16;
     o.rend.yOff = 16;
     o.rend.layer = 1;
-
-    o.xScale = 0.6;
-    o.yScale = 0.3;
 
     o.emit = o.addModule(ModuleType.particleEmitter);
     o.emit.setColor("lawngreen");
@@ -41,6 +37,8 @@ o.onInit = function() {
 
     o.coll = o.addModule(ModuleType.boxCollider);
     o.coll.bounds = new Rect(-16, -16, 32, 32);
+
+    o.collisionObj = "";
 }
 
 o.onUpdate = function() {
@@ -56,10 +54,37 @@ o.onUpdate = function() {
         o.destroy();
     }
 
-    let hit = o.coll.collisionAt(o.x, o.y, "oEnemy");
+    let hit = o.coll.collisionAt(o.x, o.y, o.collisionObj);
     if (hit != null) {
         hit.gameObject.hp -= o.dmg;
         o.emit.burst(20);
         o.destroy();
+        Engine.sleep(1);
     }
+}
+
+var oPlayerBullet = new GameObject("oPlayerBullet");
+var o = oPlayerBullet;
+
+o.onInit = function() {
+    oProjectile.onInit.call(this);
+
+    this.collisionObj = "oEnemy";
+}
+
+o.onUpdate = function() {
+    oProjectile.onUpdate.call(this);
+}
+
+var oEnemyBullet = new GameObject("oEnemyBullet");
+var o = oEnemyBullet;
+
+o.onInit = function() {
+    oProjectile.onInit.call(this);
+
+    this.collisionObj = "oPlayer";
+}
+
+o.onUpdate = function() {
+    oProjectile.onUpdate.call(this);
 }

@@ -14,18 +14,6 @@ o.onInit = function() {
     o.rend.setSprite(enemySpr, 16, 16);
     o.rend.setLayer(3);
 
-    o.partDestroy = o.addModule(ModuleType.particleEmitter);
-    o.partDestroy.setAlpha(0.05, 0.15, 0);
-    o.partDestroy.setColor("orange");
-    o.partDestroy.setLifeTime(40, 90);
-    o.partDestroy.setDirection(0, 360);
-    o.partDestroy.setSpeed(1, 6);
-    o.partDestroy.setAccel(-0.2, -0.2);
-    o.partDestroy.setScale(0.1, 0.2, 0.1, 0.2, 0.05);
-    o.partDestroy.setRegion(0, 0, 0, 0);
-    o.partDestroy.setAlpha(0.4, 0.4, -0.015);
-    o.partDestroy.setLayer(4);
-
     o.coll = o.addModule(ModuleType.boxCollider);
     o.coll.bounds = new Rect(-16, -16, 32, 32);
 
@@ -33,6 +21,9 @@ o.onInit = function() {
     o.maxSpd = 2;
 
     o.goDown = true;
+
+    o.shotObj = oEnemyBullet;
+    o.shootKey = false;
 }
 
 o.onUpdate = function() {
@@ -55,6 +46,8 @@ o.onUpdate = function() {
     // }
 
     //o.x--;
+
+    o.shootKey = true;
 
     oUnit.onUpdate.call(o);
 }

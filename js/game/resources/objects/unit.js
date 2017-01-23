@@ -14,9 +14,10 @@ o.onInit = function() {
     o.keys = {};
 
     o.dmg = 1;
-    o.shotCooldown = 5;
+    o.shotCooldown = 10;
     o.shotSpeed = 5;
     o.prevShotTime = 0;
+    o.shotObj = null;
 }
 
 o.onUpdate = function() {
@@ -24,10 +25,24 @@ o.onUpdate = function() {
 
     move.call(this, o.keys);
 
+    if (o.shootKey && o.prevShotTime + o.shotCooldown < Engine.time) {
+        let s = shoot.call(
+            this,
+            o.x,
+            o.y, 
+            o.shotSpeed, 
+            o.shotObj, 
+            o.angle + randomRange(-4, 4),
+            o.dmg
+        );
+        playSound(shotSnd);
+        o.prevShotTime = Engine.time;
+    }
+
     if (o.hp <= 0) {
-        o.partDestroy.burst(50);
-        playSound(explosionSnd);
+        oExplosion.instantiate(o.x, o.y);
         o.destroy();
+        Engine.sleep(3);
     }
 }
 
