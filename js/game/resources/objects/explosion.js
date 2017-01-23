@@ -20,7 +20,7 @@ o.onInit = function() {
     o.partDestroy.setLayer(4);
 
     o.coll.collisionAll(o.x, o.y, "oEnemy", function(other) {
-        console.log(other);
+        //console.log(other);
         other.gameObject.hp -= 10;
     });
 
