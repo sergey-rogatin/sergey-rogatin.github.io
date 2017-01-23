@@ -251,7 +251,6 @@ Particle.prototype.onUpdate = function() {
     this.x += this.hspd;
     this.y += this.vspd;
 
-    console.log(this.hspd);
 
     this.speed += this.acc;
 

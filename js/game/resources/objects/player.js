@@ -48,4 +48,18 @@ o.onUpdate = function() {
 
     o.shootKey = Input.getKeyPressed(KeyCode.space);
     oUnit.onUpdate.call(this);
+
+    if (o.shootKey && o.prevShotTime + o.shotCooldown < Engine.time) {
+        let s = shoot.call(
+            this,
+            o.x,
+            o.y, 
+            o.shotSpeed, 
+            o.shotObj, 
+            o.angle + randomRange(-4, 4),
+            o.dmg
+        );
+        o.prevShotTime = Engine.time;
+        playSound(shotSnd);
+    }
 }

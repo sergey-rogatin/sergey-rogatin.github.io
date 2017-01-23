@@ -24,28 +24,42 @@ o.onInit = function() {
 
     o.shotObj = oEnemyBullet;
     o.shootKey = false;
+    o.shotCooldown = randomRange(30, 90);
 }
 
 o.onUpdate = function() {
     let o = this;
 
-    // if (o.y < 0) {
-    //     o.goDown = true;
-    // }
+    if (o.y < 0) {
+        o.goDown = true;
+        o.x -= 1;
+    }
 
-    // if (o.y > Engine.mainCamera.showHeight) {
-    //     o.goDown = false
-    // } 
+    if (o.y > Engine.mainCamera.showHeight) {
+        o.goDown = false
+        o.x -= 1;
+    } 
 
-    // if (o.goDown) {
-    //     o.keys.down = true;
-    //     o.keys.up = false;
-    // } else {
-    //     o.keys.up = true;
-    //     o.keys.down = false;
-    // }
+    if (o.goDown) {
+        o.keys.down = true;
+        o.keys.up = false;
+    } else {
+        o.keys.up = true;
+        o.keys.down = false;
+    }
 
-    //o.x--;
+    if (o.shootKey && o.prevShotTime + o.shotCooldown < Engine.time) {
+        let s = shoot.call(
+            this,
+            o.x,
+            o.y, 
+            o.shotSpeed, 
+            o.shotObj, 
+            o.angle + randomRange(-4, 4),
+            o.dmg
+        );
+        o.prevShotTime = Engine.time;
+    }
 
     o.shootKey = true;
 
