@@ -59,7 +59,7 @@ o.onUpdate = function() {
         hit.gameObject.hp -= o.dmg;
         o.emit.burst(20);
         o.destroy();
-        Engine.sleep(1);
+        //Engine.sleep(1);
     }
 }
 

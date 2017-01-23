@@ -19,12 +19,22 @@ o.onInit = function() {
     o.partDestroy.setAlpha(0.7, 1, -0.01);
     o.partDestroy.setLayer(4);
 
-    o.coll.collisionAll(o.x, o.y, "oEnemy", function(other) {
-        //console.log(other);
-        other.gameObject.hp -= 10;
-    });
-
     o.partDestroy.burst(20);
     playSound(explosionSnd);
-    o.destroy();
+
+    o.lifetime = 10;
+}
+
+o.onUpdate = function() {
+    let o = this;
+    o.lifetime--;
+
+    if (o.lifetime <= 0) {
+        o.coll.collisionAll(o.x, o.y, "oEnemy", function(other) {
+            console.log(other.name);
+            other.gameObject.hp -= 10;
+        });
+        o.destroy();
+       // Engine.sleep(2);
+    }
 }

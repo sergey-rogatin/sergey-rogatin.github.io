@@ -28,7 +28,6 @@ o.onUpdate = function() {
     if (o.hp <= 0) {
         oExplosion.instantiate(o.x, o.y);
         o.destroy();
-        //Engine.sleep(3);
     }
 }
 
