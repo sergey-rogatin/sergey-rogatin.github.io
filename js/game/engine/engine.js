@@ -38,4 +38,4 @@ Engine.sleep = function(frames) {
     Engine.sleepTime = frames;
 }
 
-Engine.volume = 0.01;
+Engine.volume = 0.005;

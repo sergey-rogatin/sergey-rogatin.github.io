@@ -12,11 +12,11 @@ o.onInit = function() {
     o.partDestroy.setColor("orange");
     o.partDestroy.setLifeTime(200, 200);
     o.partDestroy.setDirection(0, 360);
-    o.partDestroy.setSpeed(10, 10);
-    o.partDestroy.setAccel(-0.5, -2);
-    o.partDestroy.setScale(0.1, 0.2, 0.1, 0.2, 0.05);
+    o.partDestroy.setSpeed(3, 5);
+    o.partDestroy.setAccel(-0.1, -0.1);
+    o.partDestroy.setScale(2, 2, 2, 2, -0.04);
     o.partDestroy.setRegion(0, 0, 0, 0);
-    o.partDestroy.setAlpha(1, 2, -0.05);
+    o.partDestroy.setAlpha(0.7, 1, -0.01);
     o.partDestroy.setLayer(4);
 
     o.coll.collisionAll(o.x, o.y, "oEnemy", function(other) {
@@ -24,7 +24,7 @@ o.onInit = function() {
         other.gameObject.hp -= 10;
     });
 
-    o.partDestroy.burst(40);
+    o.partDestroy.burst(20);
     playSound(explosionSnd);
     o.destroy();
 }

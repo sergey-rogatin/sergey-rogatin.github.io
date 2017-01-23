@@ -29,6 +29,10 @@ function ParticleEmitter(gameObject) {
     this.speedMin = 0;
     this.speedMax = 0;
 
+    //particle acceleration rangle
+    this.accMin = 0;
+    this.accMax = 0;
+
     //particle angle range
     this.angleMin = 0;
     this.angleMax = 0;
@@ -37,6 +41,10 @@ function ParticleEmitter(gameObject) {
     this.rotSpeedMin = 0;
     this.rotSpeedMax = 0;
 
+    //particle rotation acceleration range
+    this.rotAccMin = 0;
+    this.rotAccMax = 0;
+
     //particle direction rangle
     this.dirMin = 0;
     this.dirMax = 360;
@@ -44,14 +52,6 @@ function ParticleEmitter(gameObject) {
     //particle lifeTime range (in frames)
     this.lifeTimeMin = 100;
     this.lifeTimeMax = 100;
-
-    //particle acceleration rangle
-    this.accMin = 0;
-    this.accMax = 0;
-
-    //particle rotation acceleration range
-    this.rotAccMin = 0;
-    this.rotAccMax = 0;
 
     this.particleMax = 150;
     this.color = "dodgerblue";
@@ -245,23 +245,21 @@ Particle.prototype.onUpdate = function() {
     this.vspd = -sin(this.dir) * this.speed;
 
     let spdLen = sqrt(pow(this.hspd, 2) + pow(this.vspd, 2));
-    this.hspd *= 1/spdLen * this.speed;
-    this.vspd *= 1/spdLen * this.speed;
+    this.hspd *= 1/spdLen * abs(this.speed);
+    this.vspd *= 1/spdLen * abs(this.speed);
 
     this.x += this.hspd;
     this.y += this.vspd;
 
-    this.speed += this.acc;
+    console.log(this.hspd);
 
-    if (this.speed < 0) {
-        this.speed = 0.01;
-    }
+    this.speed += this.acc;
 
     //changing alpha
     this.alpha += this.alphaChange;
 
     if (this.alpha < 0) {
-        this.alpha = 0;
+        this.destroy();
     }
 
     //rotating
@@ -273,10 +271,10 @@ Particle.prototype.onUpdate = function() {
     this.yScale += this.scaleChange;
 
     if (this.xScale < 0) {
-        this.xScale = 0;
+        this.destroy();
     }
     if (this.yScale < 0) {
-        this.yScale = 0;
+        this.destroy();
     }
 
     this.lifeTime--;
