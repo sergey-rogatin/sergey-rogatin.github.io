@@ -54,9 +54,12 @@ o.onUpdate = function() {
         o.destroy();
     }
 
-    let hit = o.coll.collisionAt(o.x, o.y, o.collisionObj) ||
-        o.coll.collisionAt(o.x, o.y, "oEnemyRocket") ||
-        o.coll.collisionAt(o.x, o.y, "oPlayerRocket");
+    let hit = o.coll.collisionAt(o.x, o.y, o.collisionObj);
+    if (!hit) {
+        if (o.collisionObj == "oEnemy") {
+            hit = o.coll.collisionAt(o.x, o.y, "oEnemyRocket");
+        }
+    }
     if (hit != null) {
         if (hit.gameObject.name == "oPlayer") {
             if (!hit.gameObject.iframes) {

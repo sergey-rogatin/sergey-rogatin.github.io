@@ -3,4 +3,3 @@ Engine.currScene = new Scene("testScene", 460, 320);
 
 
 let control = oControl.instantiate(0, 0);
-let player0 = oPlayer.instantiate(100, 100);

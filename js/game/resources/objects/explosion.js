@@ -5,7 +5,7 @@ o.onInit = function() {
     let o = this;
 
     o.coll = o.addModule(ModuleType.boxCollider);
-    o.coll.bounds = new Rect(-64, -64, 128, 128);
+    o.coll.bounds = new Rect(-48, -48, 96, 96);
 
     o.partDestroy = o.addModule(ModuleType.particleEmitter);
     o.partDestroy.setAlpha(0.05, 0.15, 0);

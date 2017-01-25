@@ -33,7 +33,7 @@ o.onInit = function() {
     o.shotSpeed = 8;
     o.shotObj = oPlayerBullet;
     o.shootKey = false;
-    o.shotCooldown = 10;
+    o.shotCooldown = 1;
     o.dmg = 1;
 
     o.hp = 10;
@@ -56,13 +56,17 @@ o.onUpdate = function() {
     if (o.shootKey && o.prevShotTime + o.shotCooldown < Engine.time) {
         let i = 0;
         //for (let i = -10; i <= 10; i += 10) {
+            let shotAngle = randomRange(-4, 4) - o.vspd*5;
+            if (abs(shotAngle) > 10) {
+                shotAngle = 10 * sign(shotAngle);
+            }
             let s = shoot.call(
                 this,
                 o.x,
                 o.y, 
                 o.shotSpeed, 
                 o.shotObj, 
-                o.angle + randomRange(-4, 4) - o.vspd*3 + i,
+                o.angle + shotAngle + i,
                 o.dmg
             );
             //o.hspd -= 0.4;

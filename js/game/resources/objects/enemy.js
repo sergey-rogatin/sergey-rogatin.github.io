@@ -18,25 +18,27 @@ o.onInit = function() {
     o.coll.bounds = new Rect(-16, -16, 32, 32);
 
     o.hp = 5;
-    o.maxSpd = 2;
-    o.acc = 0.03;
-    o.frc = 0.02;
+    o.maxSpd = 8;
+    o.acc = 0.1;
+    o.frc = 0.08;
 
     o.goDown = 70;
     o.goUp = 0;
 
-    o.shotObj = oEnemyRocket;
+    o.shotObj = oEnemyBullet;
     o.shootKey = false;
-    o.shotCooldown = randomRange(60, 120);
+    o.shotCooldown = randomRange(100, 200);
+    o.prevShotTime = randomRange(100, 150)+ 200;
 
     o.maxIframes = 4;
+    o.targetX = 0;
 }
 
 o.onUpdate = function() {
     let o = this;
 
     //AI
-    if (o.x > Engine.currScene.width - 15) {
+    if (o.x > o.targetX) {
         o.keys.left = true;
     } else {
         o.keys.left = false;
@@ -93,5 +95,26 @@ o.onUpdate = function() {
         control.enemyCount--;
     }
 
+    if (o.x < -16) {
+        control.enemyCount--;
+        o.destroy();
+    }
+
     oUnit.onUpdate.call(o);
+}
+
+
+let oEnemyRocketeer = new GameObject("oEnemy");
+var o = oEnemyRocketeer;
+
+o.onInit = function() {
+    let o = this;
+    oEnemy.onInit.call(this);
+    o.shotObj = oEnemyRocket;
+    o.shotCooldown = randomRange(140, 260);
+}
+
+o.onUpdate = function() {
+    let o = this;
+    oEnemy.onUpdate.call(this);
 }

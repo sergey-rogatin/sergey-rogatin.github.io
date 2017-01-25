@@ -20,6 +20,7 @@ GameObject.prototype.instantiate = function(x, y) {
     inst.onUpdate = this.onUpdate;
     inst.onDestroy = this.onDestroy;
     inst.modules = [];
+    inst.dead = false;
 
     let objList = Engine.currScene.gameObjects;
     if (objList[this.name] == undefined) {
@@ -75,5 +76,6 @@ GameObject.prototype.destroy = function() {
     }, this);
 
     this.onDestroy();
+    this.dead = true;
     Engine.currScene.gameObjects[this.name].remove(this.index);
 }

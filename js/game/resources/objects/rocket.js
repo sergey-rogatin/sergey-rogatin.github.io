@@ -22,8 +22,8 @@ oRocket.onInit = function() {
 
     o.collisionObj = "oEnemy";
 
-    o.maxSpd = 0.01;
-    o.acc = 0.08;
+    o.maxSpd = -1;
+    o.acc = 0.06;
 
     o.hp = 1;
 }
