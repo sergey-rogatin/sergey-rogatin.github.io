@@ -7,6 +7,10 @@ function BoxCollider(gameObject) {
 BoxCollider.prototype = Object.create(Collider.prototype);
 
 BoxCollider.prototype.checkCollisionWith = function(x, y, other) {
+    if (other == this) {
+        return false;
+    }
+
     var xScale1 = this.gameObject.xScale;
     var yScale1 = this.gameObject.yScale;
     var xScale2 = other.gameObject.xScale;

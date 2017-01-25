@@ -5,7 +5,7 @@ function Rect(x, y, width, height) {
     this.down = y + height;
 }
 
-Math.median = function(a, b, c) {
+median = function(a, b, c) {
     return (a <= b) 
     ? ((b <= c) ? b : ((a < c) ? c : a)) 
     : ((a <= c) ? a : ((b < c) ? c : b));
@@ -121,8 +121,8 @@ function randomRange(min, max) {
     return Math.random() * (max - min) + min;
 }
 
-function playSound(sound) {
+function playSound(sound, vol = 1) {
     let newSnd = new Audio(sound.src);
-    newSnd.volume = Engine.volume;
+    newSnd.volume = Engine.volume*vol;
     newSnd.play();
 }

@@ -2,7 +2,7 @@ var oEnemy = new GameObject("oEnemy");
 var o = oEnemy;
 
 var enemySpr = Loader.loadSprite("js/game/resources/sprites/enemy.png", 32, 32);
-var explosionSnd = Loader.loadSound("js/game/resources/sounds/explosion.wav");
+var explosionSnd = Loader.loadSound("js/game/resources/sounds/explosion.mp3");
 
 o.onInit = function() {
     let o = this;
@@ -17,35 +17,51 @@ o.onInit = function() {
     o.coll = o.addModule(ModuleType.boxCollider);
     o.coll.bounds = new Rect(-16, -16, 32, 32);
 
-    o.hp = 10;
+    o.hp = 5;
     o.maxSpd = 2;
+    o.acc = 0.03;
+    o.frc = 0.02;
 
-    o.goDown = true;
+    o.goDown = 70;
+    o.goUp = 0;
 
-    o.shotObj = oEnemyBullet;
+    o.shotObj = oEnemyRocket;
     o.shootKey = false;
-    o.shotCooldown = randomRange(30, 90);
+    o.shotCooldown = randomRange(60, 120);
+
+    o.maxIframes = 4;
 }
 
 o.onUpdate = function() {
     let o = this;
 
-    if (o.y < 0) {
-        o.goDown = true;
-        o.x -= 1;
+    //AI
+    if (o.x > Engine.currScene.width - 15) {
+        o.keys.left = true;
+    } else {
+        o.keys.left = false;
+        o.shootKey = true;
     }
 
-    if (o.y > Engine.mainCamera.showHeight) {
-        o.goDown = false
-        o.x -= 1;
-    } 
+    //wiggling up/down
+    if (o.keys.down) {
+        o.goUp++;
+    }
 
-    if (o.goDown) {
-        o.keys.down = true;
-        o.keys.up = false;
-    } else {
+    if (o.keys.up) {
+        o.goDown++;
+    }
+
+    if (o.goUp > 60) {
+        o.goUp = 0;
         o.keys.up = true;
         o.keys.down = false;
+    }
+
+    if (o.goDown > 60) {
+        o.goDown = 0;
+        o.keys.down = true;
+        o.keys.up = false;
     }
 
     if (o.shootKey && o.prevShotTime + o.shotCooldown < Engine.time) {
@@ -59,9 +75,23 @@ o.onUpdate = function() {
             o.dmg
         );
         o.prevShotTime = Engine.time;
+        s.collisionObj = "oPlayer";
+        s.emit.setRegion(15, 0, 15, 0);
+        s.emit.setDirection(20, -20);
     }
 
-    o.shootKey = true;
+    let hit = o.coll.collisionAt(o.x, o.y, "oPlayer");
+    if (hit) {
+        if (!hit.gameObject.iframes) {
+            hit.gameObject.hp -= 2;
+            hit.gameObject.iframes = hit.gameObject.maxIframes;
+        }
+        this.hp = 0;
+    }
+
+    if (this.hp <= 0) {
+        control.enemyCount--;
+    }
 
     oUnit.onUpdate.call(o);
 }

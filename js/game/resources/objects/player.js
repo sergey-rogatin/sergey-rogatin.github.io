@@ -27,19 +27,17 @@ o.onInit = function() {
     o.emit.layer = 0;
 
     o.coll = o.addModule(ModuleType.boxCollider);
-    o.coll.bounds = new Rect(-16, -16, 32, 32);
+    o.coll.bounds = new Rect(-16, -13, 32, 26);
 
     o.acc = 0.25;
     o.shotSpeed = 8;
     o.shotObj = oPlayerBullet;
     o.shootKey = false;
+    o.shotCooldown = 10;
 
     o.hp = 10;
 
-    o.hpText = o.addModule(ModuleType.text);
-    o.hpText.align = "center";
-    o.hpText.yOff = -20;
-    o.hpText.text = "jsdkfhd";
+    o.maxIframes = 60;
 }
 
 o.onUpdate = function() {
@@ -55,16 +53,23 @@ o.onUpdate = function() {
     oUnit.onUpdate.call(this);
 
     if (o.shootKey && o.prevShotTime + o.shotCooldown < Engine.time) {
-        let s = shoot.call(
-            this,
-            o.x,
-            o.y, 
-            o.shotSpeed, 
-            o.shotObj, 
-            o.angle + randomRange(-4, 4),
-            o.dmg
-        );
+        let i = 0;
+        //for (let i = -10; i <= 10; i += 10) {
+            let s = shoot.call(
+                this,
+                o.x,
+                o.y, 
+                o.shotSpeed, 
+                o.shotObj, 
+                o.angle + randomRange(-4, 4) - o.vspd*3 + i,
+                o.dmg
+            );
+            //o.hspd -= 0.4;
+        //}
         o.prevShotTime = Engine.time;
         playSound(shotSnd);
     }
+
+    o.x = median(o.x, 16, Engine.currScene.width-16);
+    o.y = median(o.y, 16, Engine.currScene.height-16);
 }

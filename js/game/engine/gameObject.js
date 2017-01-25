@@ -5,6 +5,7 @@ function GameObject(name) {
 
     this.onInit = function() {};
     this.onUpdate = function() {};
+    this.onDestroy = function() {};
 }
 
 //Puts a copy of a GameObject into the currScene
@@ -17,6 +18,7 @@ GameObject.prototype.instantiate = function(x, y) {
     inst.yScale = 1;
     inst.onInit = this.onInit;
     inst.onUpdate = this.onUpdate;
+    inst.onDestroy = this.onDestroy;
     inst.modules = [];
 
     let objList = Engine.currScene.gameObjects;
@@ -72,5 +74,6 @@ GameObject.prototype.destroy = function() {
         m.destroy();
     }, this);
 
+    this.onDestroy();
     Engine.currScene.gameObjects[this.name].remove(this.index);
 }

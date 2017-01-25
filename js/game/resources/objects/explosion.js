@@ -10,7 +10,7 @@ o.onInit = function() {
     o.partDestroy = o.addModule(ModuleType.particleEmitter);
     o.partDestroy.setAlpha(0.05, 0.15, 0);
     o.partDestroy.setColor("orange");
-    o.partDestroy.setLifeTime(200, 200);
+    o.partDestroy.setLifeTime(50, 50);
     o.partDestroy.setDirection(0, 360);
     o.partDestroy.setSpeed(3, 5);
     o.partDestroy.setAccel(-0.1, -0.1);
@@ -21,7 +21,7 @@ o.onInit = function() {
 
     o.sparks = o.addModule(ModuleType.particleEmitter);
     o.sparks.setColor("white");
-    o.sparks.setLifeTime(100, 100);
+    o.sparks.setLifeTime(50, 50);
     o.sparks.setDirection(0, 360);
     o.sparks.setSpeed(10, 12);
     o.sparks.setAccel(-0.3, -0.5);
@@ -31,11 +31,13 @@ o.onInit = function() {
     o.sparks.setLayer(4);
     o.sparks.setSprite("square"); 
 
-    o.partDestroy.burst(10);
-    o.sparks.burst(20);
-    playSound(explosionSnd);
+    o.partDestroy.burst(20);
+    o.sparks.burst(15);
+    playSound(explosionSnd, 5);
 
     o.lifetime = 10;
+
+    o.collisionObj = "oEnemy";
 }
 
 o.onUpdate = function() {
@@ -43,8 +45,21 @@ o.onUpdate = function() {
     o.lifetime--;
 
     if (o.lifetime <= 0) {
-        o.coll.collisionAll(o.x, o.y, "oEnemy", function(other) {
+        o.coll.collisionAll(o.x, o.y, o.collisionObj, function(other) {
             other.gameObject.hp -= 10;
+        });
+        if (o.collisionObj != "oEnemy") {
+            o.coll.collisionAll(o.x, o.y, "oEnemy", function(other) {
+                other.gameObject.hp -= 10;
+            });
+        }
+        o.coll.collisionAll(o.x, o.y, "oEnemyRocket", function(other) {
+            other.gameObject.destroy();
+            explode(other.gameObject);
+        });
+        o.coll.collisionAll(o.x, o.y, "oPlayerRocket", function(other) {
+            other.gameObject.destroy();
+            explode(other.gameObject);
         });
         o.destroy();
        // Engine.sleep(2);

@@ -3,6 +3,8 @@ var o = oProjectile;
 
 var plasmaGreen = Loader.loadSprite("js/game/resources/sprites/plasmaGreen.png");
 
+var hitSound = Loader.loadSound("js/game/resources/sounds/hit.mp3");
+
 o.onInit = function() {
     let o = this;
 
@@ -23,7 +25,7 @@ o.onInit = function() {
 
     o.emit = o.addModule(ModuleType.particleEmitter);
     o.emit.setColor("orangered");
-    o.emit.setLifeTime(100, 100);
+    o.emit.setLifeTime(50, 50);
     o.emit.setDirection(60, 300);
     o.emit.setSpeed(7, 10);
     o.emit.setAccel(-0.3, -0.3);
@@ -48,14 +50,25 @@ o.onUpdate = function() {
     o.x += o.hspd;
     o.y += o.vspd;
 
-    if (o.lifeStart + o.lifetime <= Engine.time) {
+    if (o.x > Engine.currScene.width || o.x < 0 || o.y > Engine.currScene.height || o.y < 0) {
         o.destroy();
     }
 
-    let hit = o.coll.collisionAt(o.x, o.y, o.collisionObj);
+    let hit = o.coll.collisionAt(o.x, o.y, o.collisionObj) ||
+        o.coll.collisionAt(o.x, o.y, "oEnemyRocket") ||
+        o.coll.collisionAt(o.x, o.y, "oPlayerRocket");
     if (hit != null) {
-        hit.gameObject.hp -= o.dmg;
-        o.emit.burst(10);
+        if (hit.gameObject.name == "oPlayer") {
+            if (!hit.gameObject.iframes) {
+                hit.gameObject.hp -= o.dmg;
+                hit.gameObject.iframes = hit.gameObject.maxIframes;
+            }
+        } else {
+            hit.gameObject.hp -= o.dmg;
+            hit.gameObject.iframes = hit.gameObject.maxIframes;
+        }
+        playSound(hitSound, 0.3);
+        o.emit.burst(7);
         o.destroy();
     }
 }

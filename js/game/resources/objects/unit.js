@@ -18,16 +18,35 @@ o.onInit = function() {
     o.shotSpeed = 5;
     o.prevShotTime = 0;
     o.shotObj = null;
+
+    o.hpText = o.addModule(ModuleType.text);
+    o.hpText.align = "center";
+    o.hpText.yOff = -20;
+
+    o.iframes = 0;
 }
 
 o.onUpdate = function() {
     let o = this;
+
+    o.hpText.text = this.hp;
 
     move.call(this, o.keys);
 
     if (o.hp <= 0) {
         oExplosion.instantiate(o.x, o.y);
         o.destroy();
+    }
+
+    if (this.iframes) {
+        if (this.rend.alpha && Engine.time % 4 == 0) {
+            this.rend.alpha = 0;
+        } else {
+            this.rend.alpha = 1;
+        }
+        this.iframes--;
+    } else {
+        this.rend.alpha = 1;
     }
 }
 

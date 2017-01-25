@@ -39,9 +39,9 @@ Text.prototype.render = function(cam) {
     var y = (0.5 + go.y - cam.y + this.yOff) << 0;
     ctx.translate(x, y);
 
-    if (go.angle != 1) {
-        ctx.rotate(-go.angle * Math.degToRad);
-    }
+    // if (go.angle != 1) {
+    //     ctx.rotate(-go.angle * Math.degToRad);
+    // }
     if (go.xScale != 1 || go.yScale != 1) {
         ctx.scale(go.xScale, go.yScale);
     }
