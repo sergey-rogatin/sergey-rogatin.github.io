@@ -1,7 +1,7 @@
 var oEnemy = new GameObject("oEnemy");
 var o = oEnemy;
 
-var enemySpr = Loader.loadSprite("js/game/resources/sprites/player.png", 32, 32);
+var enemySpr = Loader.loadSprite("js/game/resources/sprites/enemy.png", 32, 32);
 var explosionSnd = Loader.loadSound("js/game/resources/sounds/explosion.wav");
 
 o.onInit = function() {

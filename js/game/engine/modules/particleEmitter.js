@@ -134,7 +134,7 @@ ParticleEmitter.prototype.init = function() {
 };
 
 ParticleEmitter.prototype.burst = function(amount) {
-    for (let i = 0; i < amount; i++) {
+    for (let i = 0; i < amount*Engine.particles; i++) {
 
         if (this.particleMax < Engine.currScene.renderers.length) {
             return;
@@ -211,11 +211,15 @@ Particle.prototype.render = function(cam) {
 
     var ctx = cam.ctx;
     ctx.save();
-    var x = this.x - cam.x;//(0.5 + go.x - cam.x) << 0;
-    var y = this.y - cam.y;//(0.5 + go.y - cam.y) << 0;
+    var x = (0.5 + this.x - cam.x) << 0;
+    var y = (0.5 + this.y - cam.y) << 0;
     ctx.translate(x, y);
-    ctx.rotate(-this.angle * Math.degToRad);
-    ctx.scale(this.xScale, this.yScale);
+    if (this.angle != 0) {
+        ctx.rotate(-this.angle * Math.degToRad);
+    }
+    if (this.xScale != 1 || this.yScale != 1) {
+        ctx.scale(this.xScale, this.yScale);
+    }
     ctx.globalAlpha = this.alpha;
     ctx.fillStyle = this.color;
     
@@ -232,7 +236,7 @@ Particle.prototype.render = function(cam) {
             break;
         }
         default: {
-            ctx.drawImage(this.sprite, -this.xOff, -this.yOff);
+            ctx.drawImage(this.sprite, (0.5-this.xOff)<<0, (0.5-this.yOff)<<0);
         }
     }
 

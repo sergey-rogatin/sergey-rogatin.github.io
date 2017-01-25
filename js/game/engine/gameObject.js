@@ -44,6 +44,9 @@ GameObject.prototype.addModule = function(moduleId) {
         case ModuleType.particleEmitter: 
             module = new ParticleEmitter(this);
             break;
+        case ModuleType.text:
+            module = new Text(this);
+            break;
         default: return;
     }
     module.type = moduleId;

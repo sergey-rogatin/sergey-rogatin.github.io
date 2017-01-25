@@ -6,5 +6,6 @@ var ModuleType = {
     renderer: 0,
     circleCollider: 1,
     boxCollider: 2,
-    particleEmitter: 3
+    particleEmitter: 3,
+    text: 4
 };

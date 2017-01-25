@@ -35,6 +35,11 @@ o.onInit = function() {
     o.shootKey = false;
 
     o.hp = 10;
+
+    o.hpText = o.addModule(ModuleType.text);
+    o.hpText.align = "center";
+    o.hpText.yOff = -20;
+    o.hpText.text = "jsdkfhd";
 }
 
 o.onUpdate = function() {

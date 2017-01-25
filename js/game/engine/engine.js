@@ -39,3 +39,5 @@ Engine.sleep = function(frames) {
 }
 
 Engine.volume = 0.005;
+
+Engine.particles = 0.8;

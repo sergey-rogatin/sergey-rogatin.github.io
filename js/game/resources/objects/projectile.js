@@ -1,7 +1,7 @@
 var oProjectile = new GameObject("oProjectile");
 var o = oProjectile;
 
-var img = Loader.loadSprite("js/game/resources/sprites/rect.png");
+var plasmaGreen = Loader.loadSprite("js/game/resources/sprites/plasmaGreen.png");
 
 o.onInit = function() {
     let o = this;
@@ -15,28 +15,26 @@ o.onInit = function() {
 
     o.dmg = 1;
 
-    o.xScale = 0.6;
-    o.yScale = 0.3;
-
     o.rend = o.addModule(ModuleType.renderer);
-    o.rend.setSprite(img);
-    o.rend.xOff = 16;
-    o.rend.yOff = 16;
+    o.rend.setSprite(plasmaGreen);
+    o.rend.xOff = 10;
+    o.rend.yOff = 5;
     o.rend.layer = 1;
 
     o.emit = o.addModule(ModuleType.particleEmitter);
-    o.emit.setColor("lawngreen");
-    o.emit.setLifeTime(5, 10);
+    o.emit.setColor("orangered");
+    o.emit.setLifeTime(100, 100);
     o.emit.setDirection(60, 300);
-    o.emit.setSpeed(9, 15);
-    o.emit.setAccel(-1, -1);
+    o.emit.setSpeed(7, 10);
+    o.emit.setAccel(-0.3, -0.3);
     o.emit.setScale(0.2, 0.3, 0.2, 0.3, -0.01);
     o.emit.setRegion(10, 0, 10, 0);
-    o.emit.setAlpha(0.5, 0.7, -0.06);
+    o.emit.setAlpha(0.8, 0.9);
     o.emit.layer = 0;
+    o.emit.setSprite("square"); 
 
     o.coll = o.addModule(ModuleType.boxCollider);
-    o.coll.bounds = new Rect(-16, -16, 32, 32);
+    o.coll.bounds = new Rect(-10, -5, 20, 10);
 
     o.collisionObj = "";
 }
@@ -57,9 +55,8 @@ o.onUpdate = function() {
     let hit = o.coll.collisionAt(o.x, o.y, o.collisionObj);
     if (hit != null) {
         hit.gameObject.hp -= o.dmg;
-        o.emit.burst(20);
+        o.emit.burst(10);
         o.destroy();
-        //Engine.sleep(1);
     }
 }
 
@@ -79,10 +76,14 @@ o.onUpdate = function() {
 var oEnemyBullet = new GameObject("oEnemyBullet");
 var o = oEnemyBullet;
 
+var plasmaRed = Loader.loadSprite("js/game/resources/sprites/plasmaRed.png");
+
 o.onInit = function() {
     oProjectile.onInit.call(this);
 
     this.collisionObj = "oPlayer";
+    this.rend.setSprite(plasmaRed);
+    this.emit.setColor("lawngreen");
 }
 
 o.onUpdate = function() {

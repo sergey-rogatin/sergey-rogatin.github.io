@@ -1,20 +1,22 @@
-function Renderer(gameObject) {
+function Text(gameObject) {
     Module.call(this, gameObject);   
-    this.sprite = null;
     this.xOff = 0;
     this.yOff = 0;
     this.alpha = 1;
-    this.layer = 1;
+    this.layer = 10;
     this.index = null;
+    this.align = "left";
+    this.size = 15;
+    this.face = "Arial";
 }
 
-Renderer.prototype = Object.create(Module.prototype);
+Text.prototype = Object.create(Module.prototype);
 
-Renderer.prototype.init = function() {
+Text.prototype.init = function() {
     this.setLayer(this.layer);
 }
 
-Renderer.prototype.setLayer = function(l) {
+Text.prototype.setLayer = function(l) {
     if (this.index != null) {
         Engine.currScene.renderers[this.layer].remove(this.index);
     }
@@ -25,29 +27,19 @@ Renderer.prototype.setLayer = function(l) {
     this.layer = l;
 }
 
-Renderer.prototype.destroy = function() {
+Text.prototype.destroy = function() {
     Engine.currScene.renderers[this.layer].remove(this.index);
 }
 
-Renderer.prototype.render = function(cam) {
+Text.prototype.render = function(cam) {
     var ctx = cam.ctx;
     ctx.save();
     var go = this.gameObject;
-    var x = (0.5 + go.x - cam.x) << 0;
-    var y = (0.5 + go.y - cam.y) << 0;
+    var x = (0.5 + go.x - cam.x + this.xOff) << 0;
+    var y = (0.5 + go.y - cam.y + this.yOff) << 0;
     ctx.translate(x, y);
 
-    if (go.coll != undefined && go.coll.show) {
-        ctx.fillStyle = "red";
-        ctx.fillRect(
-            go.coll.bounds.left * go.xScale,
-            go.coll.bounds.up * go.yScale,
-            (go.coll.bounds.right - go.coll.bounds.left) * go.xScale,
-            (go.coll.bounds.down - go.coll.bounds.up) * go.yScale
-        );
-    }
-
-    if (go.angle != 0) {
+    if (go.angle != 1) {
         ctx.rotate(-go.angle * Math.degToRad);
     }
     if (go.xScale != 1 || go.yScale != 1) {
@@ -56,12 +48,16 @@ Renderer.prototype.render = function(cam) {
     if (go.globalAlpha != 1) {
         ctx.globalAlpha = this.alpha;
     }
-    ctx.drawImage(this.sprite, (-this.xOff + 0.5) << 0, (-this.yOff + 0.5) << 0);
+
+    ctx.textAlign = this.align;
+    ctx.fillStyle = "white";
+    ctx.font = this.size + "px " + this.face;
+    ctx.fillText(this.text, 0, 0);
 
     ctx.restore();
 }
 
-Renderer.prototype.setSprite = function(img, xOff, yOff) {
+Text.prototype.setSprite = function(img, xOff, yOff) {
     this.sprite = img;
     this.xOff = xOff || img.width/2;
     this.yOff = yOff || img.height/2;
