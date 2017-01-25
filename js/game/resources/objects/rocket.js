@@ -52,9 +52,10 @@ oRocket.onUpdate = function() {
     }
 }
 
-explode = function(o) {
+explode = function(o, dmg) {
     let expl = oExplosion.instantiate(o.x, o.y);
     expl.collisionObj = o.collisionObj;
+    expl.dmg = o.dmg;
 }
 
 
@@ -71,8 +72,7 @@ oPlayerRocket.onUpdate = function() {
     let o = this;
     let hit = o.coll.collisionAt(o.x, o.y, "oEnemyRocket");
     if (hit != null) {
-        let expl = oExplosion.instantiate(o.x, o.y);
-        expl.collisionObj = o.collisionObj;
+        explode(o);
         o.destroy();
     }
     oRocket.onUpdate.call(this);
@@ -95,8 +95,7 @@ oEnemyRocket.onUpdate = function() {
     let o = this;
     let hit = o.coll.collisionAt(o.x, o.y, "oPlayerRocket");
     if (hit != null) {
-        let expl = oExplosion.instantiate(o.x, o.y);
-        expl.collisionObj = o.collisionObj;
+        explode(o);
         o.destroy();
     }
     oRocket.onUpdate.call(this);

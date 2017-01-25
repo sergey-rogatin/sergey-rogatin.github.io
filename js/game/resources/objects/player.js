@@ -34,6 +34,7 @@ o.onInit = function() {
     o.shotObj = oPlayerBullet;
     o.shootKey = false;
     o.shotCooldown = 10;
+    o.dmg = 1;
 
     o.hp = 10;
 

@@ -38,6 +38,7 @@ o.onInit = function() {
     o.lifetime = 10;
 
     o.collisionObj = "oEnemy";
+    o.dmg = 3;
 }
 
 o.onUpdate = function() {
@@ -46,11 +47,13 @@ o.onUpdate = function() {
 
     if (o.lifetime <= 0) {
         o.coll.collisionAll(o.x, o.y, o.collisionObj, function(other) {
-            other.gameObject.hp -= 10;
+            other.gameObject.hp -= o.dmg*3;
+            other.gameObject.iframes = other.gameObject.maxIframes;
         });
         if (o.collisionObj != "oEnemy") {
             o.coll.collisionAll(o.x, o.y, "oEnemy", function(other) {
-                other.gameObject.hp -= 10;
+                other.gameObject.hp -= o.dmg*5;
+                other.gameObject.iframes = other.gameObject.maxIframes;
             });
         }
         o.coll.collisionAll(o.x, o.y, "oEnemyRocket", function(other) {
