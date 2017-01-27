@@ -28,7 +28,7 @@ o.onInit = function() {
     o.shotObj = oEnemyBullet;
     o.shootKey = false;
     o.shotCooldown = randomRange(100, 200);
-    o.prevShotTime = randomRange(100, 150)+ 200;
+    o.prevShotTime = randomRange(50, 100) + Engine.time;
 
     o.maxIframes = 4;
     o.targetX = 0;

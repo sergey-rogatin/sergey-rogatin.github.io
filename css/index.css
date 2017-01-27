@@ -117,3 +117,32 @@ img {
 	width: 100%;
 	margin-bottom: 0.5em;
 }
+
+.part {
+	display: flex;
+	flex-flow: row wrap;
+	font-size: 12px;
+}
+
+.part__input {
+	width: 100px;
+	margin: 5px;
+}
+
+.part__input * {
+	width: 80px;
+}
+
+.color {
+	width: 80px;
+	display: flex;
+	flex-direction: column;
+}
+
+.color__input {
+	width: 150px;
+}
+
+.color__input * {
+	width: 80px;
+}
