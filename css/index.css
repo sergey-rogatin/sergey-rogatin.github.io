@@ -5,6 +5,8 @@
 
 ul {
 	list-style: none;
+	display: flex;
+	flex-flow: column;
 }
 
 body, html {
