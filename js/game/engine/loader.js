@@ -17,21 +17,16 @@ Loader.loadSprite = function(url, width, height) {
 Loader.loadSound = function(url) {
     var snd = new Audio(url);
     snd.contentType = "sound";
-    Loader.enqueue(snd);
+    //Loader.enqueue(snd);
     return snd;
 }
 
 //Puts a loading object into a queue
 Loader.enqueue = function(res) {
     res.hash = HashGen.get();
-    Loader.loadQueue.push(res.hash);
     if (res.contentType == "sprite") {
+        Loader.loadQueue.push(res.hash);
         res.onload = () => {
-            dequeue(res);
-        }
-    }
-    if (res.contentType == "sound") {
-        res.oncanplaythrough = () => {
             dequeue(res);
         }
     }
