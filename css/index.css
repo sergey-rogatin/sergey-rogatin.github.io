@@ -61,9 +61,16 @@ body {
 	flex-grow: 1;
 }
 
+.link-list * {
+	color: #A7E137;
+}
+
+.link-list_blue * {
+	color: #5FC8CB;
+}
+
 .link-list__item {
 	padding: 0.5em 0 0.5em 1em;
-	color: #A7E137;
 }
 
 .link-list__item:hover {
