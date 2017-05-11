@@ -2354,6 +2354,9 @@ const dialog = (state = {}) => {
     })
     let finalState = Object.assign({
         textInput: textInput,
+        onInit() {
+            this.textInput.text = 'sample'
+        },
         onUpdate() {
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["g" /* drawSprite */])({
                 sprite: __WEBPACK_IMPORTED_MODULE_2__sprites__["a" /* default */].dialog,
@@ -2409,9 +2412,9 @@ const dialog = (state = {}) => {
 
 const textArea = (state = {}) => {
     let result = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["i" /* entity */])({
-        text: '',
+        text: 'sample',
         onInit() {
-            __WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["f" /* input */].keyString('')
+            __WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["f" /* input */].keyString(this.text)
         },
         onEnable() {
             __WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["f" /* input */].keyString('')
