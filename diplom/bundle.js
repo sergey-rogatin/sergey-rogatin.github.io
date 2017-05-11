@@ -1246,6 +1246,8 @@ const circuit = (width, height) => {
     }
 
     c.fullCycle = (inputData) => {
+        c.reset()
+
         for (let i = 0; i < inputData.length; i++) {
             c.setInputData([inputData[i]], i)
         }
@@ -2788,7 +2790,7 @@ const uiController = (state = {}) => {
                         let outputData = machine.customCircuit.fullCycle(inputData)
                         outputData.forEach((d, i) => circuit.createDataAt(outPorts[i], d))
                     },
-                    sprite: __WEBPACK_IMPORTED_MODULE_3__sprites__["a" /* default */].incrementMachine
+                    sprite: __WEBPACK_IMPORTED_MODULE_3__sprites__["a" /* default */].customMachine_1x2
                 })
             }
         }
