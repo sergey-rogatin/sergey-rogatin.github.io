@@ -747,6 +747,7 @@ const binTree = (state = {}) => {
     subtractorMachine: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["e" /* loadImage */])('img/subtractor.png', __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["c" /* vec2 */])(32, 32)),
     repeaterMachine: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["e" /* loadImage */])('img/repeater.png', __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["c" /* vec2 */])(32, 32)),
     incrementMachine: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["e" /* loadImage */])('img/increment.png', __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["c" /* vec2 */])(32, 32)),
+    customMachine_1x2: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["e" /* loadImage */])('img/custom_1x2.png', __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["c" /* vec2 */])(32, 32)),
     decrementMachine: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["e" /* loadImage */])('img/decrement.png', __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["c" /* vec2 */])(32, 32)),
     wireStraight: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["e" /* loadImage */])('img/wire_straight.png', __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["c" /* vec2 */])(32, 32)),
     memoryMachine: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["e" /* loadImage */])('img/memory.png', __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["c" /* vec2 */])(32, 32)),
@@ -2172,7 +2173,7 @@ const circuitGraphic = (width, height) => {
                         angle: this.angle,
                         layer: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["d" /* getScene */])().layers.PORT
                     })
-                }    
+                }
             }
         })
         portGraphics.set(p, e)
@@ -2512,7 +2513,7 @@ const uiController = (state = {}) => {
                     name: saveDialog.textInput.text,
                     inPortsAmount: circuit.inputMachineCount,
                     outPortsAmount: circuit.outputMachineCount,
-                    sprite: __WEBPACK_IMPORTED_MODULE_3__sprites__["a" /* default */].incrementMachine,
+                    sprite: __WEBPACK_IMPORTED_MODULE_3__sprites__["a" /* default */].customMachine_1x2,
                     onInit(machine) {
                         machine.customCircuit = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__model_circuit__["a" /* default */])(40, 20)
                         machine.customCircuit.machineTypes = circuit.machineTypes
