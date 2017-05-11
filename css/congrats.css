@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.console-text {
+    color: white;
+    font-size: 1em;
+    font-family: 'Inconsolata', monospace;
+    background: transparent;
+    border: 0;
+    outline: 0;
+}
+
+.console-text__history {
+    color: white;
+    font-size: 1em;
+    font-family: 'Inconsolata', monospace;
+    background: transparent;
+    position: absolute;
+    transition-duration: 0.5s;
+    top: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+.wrapper {
+    display: flex;
+    background: black;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-flow: column;
+    overflow-y: hidden;
+}
+
+.text-exchange {
+    font-size: 3em;
+    position: relative;
+}
