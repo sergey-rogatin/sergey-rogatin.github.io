@@ -2414,10 +2414,10 @@ const textArea = (state = {}) => {
     let result = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["i" /* entity */])({
         text: 'sample',
         onInit() {
-            __WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["f" /* input */].keyString(this.text)
+            __WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["f" /* input */].keyString('sample')
         },
         onEnable() {
-            __WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["f" /* input */].keyString('')
+            __WEBPACK_IMPORTED_MODULE_0__canvasEngine_engine__["f" /* input */].keyString('sample')
         },
         maxLength: 10,
         onUpdate() {
