@@ -105,7 +105,7 @@ function createTable(index, tableWrapper) {
         addField(undefined, row, 'startTime', trialElement, number, 'Старт')
         addField(undefined, row, 'endTime', trialElement, number, 'Финиш')
         addField(undefined, row, 'pureTime', trialElement, number, 'Время')
-        for (let i = 0; i < gateNumber; i++) {
+        for (let i = 11; i < gateNumber; i++) {
             const element = addField(undefined, row, `gate${i+1}`, trialElement, number, i+1)
             element.classList.add('gate')
         }
@@ -181,7 +181,7 @@ function createTable(index, tableWrapper) {
             }
             if (name === 'pureTime' || name.includes('gate')) {
                 let totalTime = getFieldValue(row, 'pureTime', trial)
-                for (let i = 0; i < gateNumber; i++) {
+                for (let i = 11; i < gateNumber; i++) {
                     const gateTime = getFieldValue(row, `gate${i+1}`, trial) || 0
                     totalTime = addTimes(
                         totalTime,
