@@ -294,4 +294,13 @@ createTableBtn.onclick = () => {
     localStorage.setItem('tableCount', tableCount)
 }
 
-document.querySelector('#export').value = JSON.stringify(localStorage)
+const exportField = document.querySelector('#export')
+exportField.value = JSON.stringify(localStorage)
+
+document.querySelector('#exportBtn').onclick = () => {
+    localStorage.clear()
+    const storage = JSON.parse(exportField.value)
+    for (let key of Object.getOwnPropertyNames(storage)) {
+        localStorage.setItem(key, storage[key])
+    }
+}
