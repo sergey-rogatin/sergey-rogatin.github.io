@@ -293,3 +293,5 @@ createTableBtn.onclick = () => {
     tableCount++
     localStorage.setItem('tableCount', tableCount)
 }
+
+document.querySelector('#export').value = JSON.stringify(localStorage)
