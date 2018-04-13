@@ -17,7 +17,7 @@ a {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 60px;
+  margin: 60px 60px 20px;
   justify-content: space-around;
 }
 
@@ -25,6 +25,18 @@ a {
   width: 180px;
   height: 40px;
   margin-right: 15px;
+}
+
+.categoryButton {
+  width: 180px;
+  height: 40px;
+  margin-right: 15px;
+}
+
+.categorySelect {
+  display: flex;
+  justify-content: space-around;  
+  margin: 0 20px;
 }.settings {
   max-width: 1000px;
   margin: auto;
@@ -39,11 +51,12 @@ a {
   height: 40px;
 }
 
-.clearButton, .removeTeamButton {
+.clearButton, .removeTeamButton, .removeMemberButton, .removeCategoryButton {
   background-color: orangered !important;
+  color: white;
 }
 
-.clearButton:hover, .removeTeamButton {
+.clearButton:hover, .removeTeamButton, .removeMemberButton, .removeCategoryButton {
   background-color: red !important;
 }
 
@@ -128,7 +141,35 @@ a {
 .teamBottom {
   display: flex;
 }
-.textInput {
+
+.addCategoryButton {
+  width: 100%;
+  height: 100px;
+
+  margin: 20px 0 50px;
+  background-color: greenyellow !important;
+}
+
+.addCategoryButton:hover {
+  background-color: green !important;  
+}
+
+.categoryWrapper {
+  margin-top: 30px;
+}
+
+.categoryTop {
+  display: flex;
+}
+
+.categoryTop input {
+  margin-bottom: 0;
+}
+
+.removeCategoryButton {
+  margin-left: 10px;
+  width: 70px;
+}.textInput {
   width: 100%;
   height: 30px;
   font-size: 15px;
@@ -152,9 +193,15 @@ a {
   color: white;
 }
 
-.button:not(.disabled):hover {
+.button:not(.disabled):not(.selected):hover {
   background: goldenrod;
 }
+
+.selected {
+  background: greenyellow;
+  color: black;
+}
+
 
 .table {
   margin-bottom: 20px;
@@ -195,7 +242,7 @@ input.cellValue {
   background: transparent;
 }
 
-.categoryWrapper {
+.eventWrapper {
   margin: 40px;
   display: flex;
   flex-direction: column;

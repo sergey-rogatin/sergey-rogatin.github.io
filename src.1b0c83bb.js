@@ -77,7 +77,7 @@ parcelRequire = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({29:[function(require,module,exports) {
+})({27:[function(require,module,exports) {
 /*
 object-assign
 (c) Sindre Sorhus
@@ -168,7 +168,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 	return to;
 };
-},{}],34:[function(require,module,exports) {
+},{}],28:[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -186,7 +186,7 @@ if ('development' !== 'production') {
 }
 
 module.exports = emptyObject;
-},{}],28:[function(require,module,exports) {
+},{}],29:[function(require,module,exports) {
 "use strict";
 
 /**
@@ -223,7 +223,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 
 module.exports = emptyFunction;
-},{}],11:[function(require,module,exports) {
+},{}],8:[function(require,module,exports) {
 /** @license React v16.2.0
  * react.production.min.js
  *
@@ -330,7 +330,7 @@ var U = { Children: { map: function (a, b, e) {
   isValidElement: K, version: "16.2.0", __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: { ReactCurrentOwner: G, assign: m } },
     V = Object.freeze({ default: U }),
     W = V && U || V;module.exports = W["default"] ? W["default"] : W;
-},{"object-assign":29,"fbjs/lib/emptyObject":34,"fbjs/lib/emptyFunction":28}],36:[function(require,module,exports) {
+},{"object-assign":27,"fbjs/lib/emptyObject":28,"fbjs/lib/emptyFunction":29}],38:[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -384,7 +384,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 }
 
 module.exports = invariant;
-},{}],35:[function(require,module,exports) {
+},{}],37:[function(require,module,exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -447,7 +447,7 @@ if ('development' !== 'production') {
 }
 
 module.exports = warning;
-},{"./emptyFunction":28}],42:[function(require,module,exports) {
+},{"./emptyFunction":29}],42:[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -461,7 +461,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-},{}],37:[function(require,module,exports) {
+},{}],36:[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -521,7 +521,7 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 }
 
 module.exports = checkPropTypes;
-},{"fbjs/lib/invariant":36,"fbjs/lib/warning":35,"./lib/ReactPropTypesSecret":42}],12:[function(require,module,exports) {
+},{"fbjs/lib/invariant":38,"fbjs/lib/warning":37,"./lib/ReactPropTypesSecret":42}],9:[function(require,module,exports) {
 /** @license React v16.2.0
  * react.development.js
  *
@@ -1873,7 +1873,7 @@ if ('development' !== "production") {
     module.exports = react;
   })();
 }
-},{"object-assign":29,"fbjs/lib/emptyObject":34,"fbjs/lib/invariant":36,"fbjs/lib/warning":35,"fbjs/lib/emptyFunction":28,"prop-types/checkPropTypes":37}],6:[function(require,module,exports) {
+},{"object-assign":27,"fbjs/lib/emptyObject":28,"fbjs/lib/invariant":38,"fbjs/lib/warning":37,"fbjs/lib/emptyFunction":29,"prop-types/checkPropTypes":36}],6:[function(require,module,exports) {
 'use strict';
 
 if ('development' === 'production') {
@@ -1881,7 +1881,7 @@ if ('development' === 'production') {
 } else {
   module.exports = require('./cjs/react.development.js');
 }
-},{"./cjs/react.production.min.js":11,"./cjs/react.development.js":12}],26:[function(require,module,exports) {
+},{"./cjs/react.production.min.js":8,"./cjs/react.development.js":9}],30:[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -1915,7 +1915,7 @@ var ExecutionEnvironment = {
 };
 
 module.exports = ExecutionEnvironment;
-},{}],27:[function(require,module,exports) {
+},{}],34:[function(require,module,exports) {
 'use strict';
 
 /**
@@ -1990,7 +1990,7 @@ var EventListener = {
 };
 
 module.exports = EventListener;
-},{"./emptyFunction":28}],30:[function(require,module,exports) {
+},{"./emptyFunction":29}],32:[function(require,module,exports) {
 'use strict';
 
 /**
@@ -2093,7 +2093,7 @@ function shallowEqual(objA, objB) {
 }
 
 module.exports = shallowEqual;
-},{}],46:[function(require,module,exports) {
+},{}],48:[function(require,module,exports) {
 'use strict';
 
 /**
@@ -2116,7 +2116,7 @@ function isNode(object) {
 }
 
 module.exports = isNode;
-},{}],41:[function(require,module,exports) {
+},{}],43:[function(require,module,exports) {
 'use strict';
 
 /**
@@ -2139,7 +2139,7 @@ function isTextNode(object) {
 }
 
 module.exports = isTextNode;
-},{"./isNode":46}],32:[function(require,module,exports) {
+},{"./isNode":48}],33:[function(require,module,exports) {
 'use strict';
 
 /**
@@ -2177,7 +2177,7 @@ function containsNode(outerNode, innerNode) {
 }
 
 module.exports = containsNode;
-},{"./isTextNode":41}],33:[function(require,module,exports) {
+},{"./isTextNode":43}],35:[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -2202,7 +2202,7 @@ function focusNode(node) {
 }
 
 module.exports = focusNode;
-},{}],9:[function(require,module,exports) {
+},{}],10:[function(require,module,exports) {
 /** @license React v16.2.0
  * react-dom.production.min.js
  *
@@ -2433,7 +2433,7 @@ var Sg={createPortal:Qg,findDOMNode:function(a){if(null==a)return null;if(1===a.
 E("40");return a._reactRootContainer?(Z.unbatchedUpdates(function(){Pg(null,null,a,!1,function(){a._reactRootContainer=null})}),!0):!1},unstable_createPortal:Qg,unstable_batchedUpdates:tc,unstable_deferredUpdates:Z.deferredUpdates,flushSync:Z.flushSync,__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{EventPluginHub:mb,EventPluginRegistry:Va,EventPropagators:Cb,ReactControlledComponent:qc,ReactDOMComponentTree:sb,ReactDOMEventListener:xd}};
 Z.injectIntoDevTools({findFiberByHostInstance:pb,bundleType:0,version:"16.2.0",rendererPackageName:"react-dom"});var Tg=Object.freeze({default:Sg}),Ug=Tg&&Sg||Tg;module.exports=Ug["default"]?Ug["default"]:Ug;
 
-},{"react":6,"fbjs/lib/ExecutionEnvironment":26,"object-assign":29,"fbjs/lib/emptyFunction":28,"fbjs/lib/EventListener":27,"fbjs/lib/getActiveElement":30,"fbjs/lib/shallowEqual":31,"fbjs/lib/containsNode":32,"fbjs/lib/focusNode":33,"fbjs/lib/emptyObject":34}],45:[function(require,module,exports) {
+},{"react":6,"fbjs/lib/ExecutionEnvironment":30,"object-assign":27,"fbjs/lib/emptyFunction":29,"fbjs/lib/EventListener":34,"fbjs/lib/getActiveElement":32,"fbjs/lib/shallowEqual":31,"fbjs/lib/containsNode":33,"fbjs/lib/focusNode":35,"fbjs/lib/emptyObject":28}],46:[function(require,module,exports) {
 'use strict';
 
 /**
@@ -2464,7 +2464,7 @@ function hyphenate(string) {
 }
 
 module.exports = hyphenate;
-},{}],39:[function(require,module,exports) {
+},{}],40:[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -2501,7 +2501,7 @@ function hyphenateStyleName(string) {
 }
 
 module.exports = hyphenateStyleName;
-},{"./hyphenate":45}],44:[function(require,module,exports) {
+},{"./hyphenate":46}],47:[function(require,module,exports) {
 "use strict";
 
 /**
@@ -2531,7 +2531,7 @@ function camelize(string) {
 }
 
 module.exports = camelize;
-},{}],38:[function(require,module,exports) {
+},{}],41:[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -2569,7 +2569,7 @@ function camelizeStyleName(string) {
 }
 
 module.exports = camelizeStyleName;
-},{"./camelize":44}],10:[function(require,module,exports) {
+},{"./camelize":47}],11:[function(require,module,exports) {
 /** @license React v16.2.0
  * react-dom.development.js
  *
@@ -17927,7 +17927,7 @@ if ('development' !== "production") {
     module.exports = reactDom;
   })();
 }
-},{"react":6,"fbjs/lib/invariant":36,"fbjs/lib/warning":35,"fbjs/lib/ExecutionEnvironment":26,"object-assign":29,"fbjs/lib/emptyFunction":28,"fbjs/lib/EventListener":27,"fbjs/lib/getActiveElement":30,"fbjs/lib/shallowEqual":31,"fbjs/lib/containsNode":32,"fbjs/lib/focusNode":33,"fbjs/lib/emptyObject":34,"prop-types/checkPropTypes":37,"fbjs/lib/hyphenateStyleName":39,"fbjs/lib/camelizeStyleName":38}],5:[function(require,module,exports) {
+},{"react":6,"fbjs/lib/invariant":38,"fbjs/lib/warning":37,"fbjs/lib/ExecutionEnvironment":30,"object-assign":27,"fbjs/lib/emptyFunction":29,"fbjs/lib/EventListener":34,"fbjs/lib/getActiveElement":32,"fbjs/lib/shallowEqual":31,"fbjs/lib/containsNode":33,"fbjs/lib/focusNode":35,"fbjs/lib/emptyObject":28,"prop-types/checkPropTypes":36,"fbjs/lib/hyphenateStyleName":40,"fbjs/lib/camelizeStyleName":41}],5:[function(require,module,exports) {
 'use strict';
 
 function checkDCE() {
@@ -17963,7 +17963,7 @@ if ('development' === 'production') {
 } else {
   module.exports = require('./cjs/react-dom.development.js');
 }
-},{"./cjs/react-dom.production.min.js":9,"./cjs/react-dom.development.js":10}],22:[function(require,module,exports) {
+},{"./cjs/react-dom.production.min.js":10,"./cjs/react-dom.development.js":11}],22:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -18030,25 +18030,25 @@ module.exports = reloadCSS;
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"_css_loader":7}],8:[function(require,module,exports) {
+},{"_css_loader":7}],12:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"_css_loader":7}],48:[function(require,module,exports) {
+},{"_css_loader":7}],23:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"_css_loader":7}],47:[function(require,module,exports) {
+},{"_css_loader":7}],45:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"_css_loader":7}],43:[function(require,module,exports) {
+},{"_css_loader":7}],26:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -18109,7 +18109,7 @@ var TextInput = function (_Component) {
 
 exports.default = TextInput;
 ;
-},{"react":6,"./TextInput.css":47}],25:[function(require,module,exports) {
+},{"react":6,"./TextInput.css":45}],39:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
@@ -18159,7 +18159,7 @@ var TextInput = function (_Component) {
           onClick: function onClick() {
             return _this2.props.onClick();
           },
-          className: 'button ' + this.props.className + ' ' + (this.props.disabled ? 'disabled' : ''),
+          className: 'button ' + this.props.className + ' ' + (this.props.disabled ? 'disabled' : '') + ' ' + (this.props.selected ? 'selected' : ''),
           disabled: this.props.disabled
         },
         this.props.children
@@ -18176,7 +18176,7 @@ TextInput.defaultProps = {
   className: '',
   onClick: function onClick() {}
 };
-},{"react":6,"./Button.css":25}],19:[function(require,module,exports) {
+},{"react":6,"./Button.css":39}],19:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -18201,8 +18201,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var subscribers = [];
 
 var defaultStore = {
+  currentCategory: 0,
+  currentEvent: 0,
+
+  categories: [],
   teamUniqueId: 0,
-  teams: [],
   settings: {
     qualifiers: {
       checkpointCount: 4,
@@ -18231,6 +18234,9 @@ if (storedItem) {
   try {
     var obj = JSON.parse(storedItem);
     store = obj;
+    if (!obj.categories) {
+      store = defaultStore;
+    }
   } catch (err) {}
 }
 
@@ -18249,7 +18255,7 @@ store.setState = function (state) {
   store.update();
 };
 store.reset = function () {
-  defaultStore.teams = [];
+  defaultStore.categories = [];
   Object.assign(store, defaultStore);
   store.update();
 };
@@ -18282,7 +18288,164 @@ var wrap = exports.wrap = function wrap(Comp) {
     return Wrapper;
   }(_react.Component);
 };
-},{"react":6}],13:[function(require,module,exports) {
+},{"react":6}],24:[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _store = require('./store');
+
+var _store2 = _interopRequireDefault(_store);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function zfill(src, count) {
+  if (!_store2.default.settings.padWithZero) {
+    return src;
+  }
+
+  var result = '';
+  for (var i = 0; i < count - String(src).length; i++) {
+    result += '0';
+  }
+  result += String(src);
+
+  return result;
+}
+
+window.zfill = zfill;
+
+exports.default = {
+  zero: function zero() {
+    return {
+      m: 0,
+      s: 0,
+      ms: 0
+    };
+  },
+  add: function add(a, b) {
+    if (!a) {
+      a = this.zero();
+    }
+    if (!b) {
+      b = this.zero();
+    }
+
+    var m = a.m + b.m;
+    var s = a.s + b.s;
+    var ms = a.ms + b.ms;
+    while (ms >= 1000) {
+      ms -= 1000;
+      s++;
+    }
+    while (s >= 60) {
+      s -= 60;
+      m++;
+    }
+
+    return { m: m, s: s, ms: ms };
+  },
+  sub: function sub(a, b) {
+    if (!a) {
+      a = this.zero();
+    }
+    if (!b) {
+      b = this.zero();
+    }
+
+    var m = a.m - b.m;
+    var s = a.s - b.s;
+    var ms = a.ms - b.ms;
+    while (s < 0) {
+      m--;
+      s += 60;
+    }
+    while (ms < 0) {
+      s--;
+      ms += 1000;
+    }
+
+    return { m: m, s: s, ms: ms };
+  },
+  sort: function sort(a, b) {
+    var gt = this.gt(a, b);
+    if (gt) {
+      return 1;
+    }
+    return -1;
+  },
+  gt: function gt(a, b) {
+    if (a.m > b.m) {
+      return true;
+    } else if (b.m > a.m) {
+      return false;
+    }
+    if (a.s > b.s) {
+      return true;
+    } else if (b.s > a.s) {
+      return false;
+    }
+    if (a.ms > b.ms) {
+      return true;
+    } else if (b.ms > a.s) {
+      return false;
+    }
+  },
+  string: function string(a) {
+    if (!a) {
+      return this.string(this.zero());
+    }
+    return zfill(a.m, 2) + ':' + zfill(a.s, 2) + ':' + zfill(a.ms, 3);
+  },
+  cpstring: function cpstring(a) {
+    if (!a) {
+      return '0';
+    }
+    return a.s + a.m * 60 + a.ms / 1000;
+  },
+  parse: function parse(str) {
+    if (!str.split) {
+      return this.zero();
+    }
+    var parts = str.split(':');
+    if (parts.length === 1) {
+      return this.add({ m: 0, s: Number(str), ms: 0 }, this.zero());
+    }
+    if (parts.length !== 3) {
+      return this.zero();
+    }
+    return this.add({
+      m: Number(parts[0]),
+      s: Number(parts[1]),
+      ms: Number(parts[2])
+    }, this.zero());
+  },
+  isTime: function isTime(str) {
+    if (!str) {
+      return false;
+    }
+    if (!str.split) {
+      return false;
+    }
+    var parts = str.split(':');
+    if (parts.length === 1) {
+      return true;
+    }
+    if (parts.length !== 3) {
+      return false;
+    }
+    return true;
+  },
+  min: function min(a, b) {
+    if (this.gt(a, b)) {
+      return b;
+    }
+    return a;
+  }
+};
+},{"./store":19}],13:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -18309,6 +18472,10 @@ var _store = require('../store');
 
 var _store2 = _interopRequireDefault(_store);
 
+var _time = require('../time');
+
+var _time2 = _interopRequireDefault(_time);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18318,7 +18485,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Team = function Team(_ref) {
-  var team = _ref.team;
+  var team = _ref.team,
+      category = _ref.category;
 
   return _react2.default.createElement(
     'div',
@@ -18391,10 +18559,10 @@ var Team = function Team(_ref) {
         {
           className: 'removeTeamButton',
           onClick: function onClick() {
-            var teamIndex = _store2.default.teams.findIndex(function (t) {
+            var teamIndex = category.teams.findIndex(function (t) {
               return t.id === team.id;
             });
-            _store2.default.teams.splice(teamIndex, 1);
+            category.teams.splice(teamIndex, 1);
             _store2.default.update();
           }
         },
@@ -18425,18 +18593,96 @@ var InputWithHint = function InputWithHint(_ref2) {
   );
 };
 
+var Category = function Category(_ref3) {
+  var category = _ref3.category;
+
+  return _react2.default.createElement(
+    'div',
+    { className: 'categoryWrapper' },
+    _react2.default.createElement(
+      'div',
+      { className: 'categoryTop' },
+      _react2.default.createElement(_TextInput2.default, {
+        className: 'categoryTitle',
+        value: category.title,
+        placeholder: 'Название категории',
+        onChange: function onChange(v) {
+          category.title = v;
+          _store2.default.update();
+        }
+      }),
+      _react2.default.createElement(
+        _Button2.default,
+        {
+          className: 'removeCategoryButton',
+          onClick: function onClick() {
+            var index = _store2.default.categories.findIndex(function (c) {
+              return c.id === category.id;
+            });
+            _store2.default.categories.splice(index, 1);
+            _store2.default.update();
+          }
+        },
+        '\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u043A\u0430\u0442\u0435\u0433\u043E\u0440\u0438\u044E'
+      )
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'teamsWrapper' },
+      category.teams.map(function (team, i) {
+        return _react2.default.createElement(Team, { category: category, team: team, key: i });
+      }),
+      _react2.default.createElement(
+        'div',
+        { className: 'addTeamWrapper' },
+        _react2.default.createElement(
+          _Button2.default,
+          {
+            className: 'addTeamButton',
+            onClick: function onClick() {
+              category.teams.push({
+                id: _store2.default.teamUniqueId++,
+                number: '',
+                name: '',
+                subject: '',
+                members: [],
+                results: {
+                  qualifiers: {
+                    startTime: _time2.default.zero(),
+                    finishTime: _time2.default.zero(),
+                    checkpoints: [],
+                    points: 0
+                  },
+                  sprint: {
+                    parts: []
+                  },
+                  slalom: {
+                    attempts: [{
+                      checkpoints: []
+                    }, {
+                      checkpoints: []
+                    }]
+                  },
+                  longRace: {}
+                }
+              });
+              _store2.default.update();
+            }
+          },
+          '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043A\u043E\u043C\u0430\u043D\u0434\u0443'
+        )
+      )
+    )
+  );
+};
+
 var Settings = function (_Component) {
   _inherits(Settings, _Component);
 
   function Settings() {
     _classCallCheck(this, Settings);
 
-    var _this = _possibleConstructorReturn(this, (Settings.__proto__ || Object.getPrototypeOf(Settings)).call(this));
-
-    if (!_store2.default.teams) {
-      _store2.default.teams = [];
-    }
-    return _this;
+    return _possibleConstructorReturn(this, (Settings.__proto__ || Object.getPrototypeOf(Settings)).call(this));
   }
 
   _createClass(Settings, [{
@@ -18657,46 +18903,24 @@ var Settings = function (_Component) {
         ),
         _react2.default.createElement(
           'div',
-          { className: 'teamsWrapper' },
-          _store2.default.teams.map(function (team, i) {
-            return _react2.default.createElement(Team, { team: team, key: i });
+          { className: 'categoriesWrapper' },
+          _store2.default.categories.map(function (category, i) {
+            return _react2.default.createElement(Category, { category: category, key: i });
           }),
           _react2.default.createElement(
-            'div',
-            { className: 'addTeamWrapper' },
-            _react2.default.createElement(
-              _Button2.default,
-              {
-                className: 'addTeamButton',
-                onClick: function onClick() {
-                  _store2.default.teams.push({
-                    id: _store2.default.teamUniqueId++,
-                    number: '',
-                    name: '',
-                    subject: '',
-                    members: [],
-                    results: {
-                      qualifiers: {
-                        checkpoints: []
-                      },
-                      sprint: {
-                        parts: []
-                      },
-                      slalom: {
-                        attempts: [{
-                          checkpoints: []
-                        }, {
-                          checkpoints: []
-                        }]
-                      },
-                      longRace: {}
-                    }
-                  });
-                  _store2.default.update();
-                }
-              },
-              '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043A\u043E\u043C\u0430\u043D\u0434\u0443'
-            )
+            _Button2.default,
+            {
+              className: 'addCategoryButton',
+              onClick: function onClick() {
+                _store2.default.categories.push({
+                  title: '',
+                  teams: [],
+                  id: _store2.default.teamUniqueId++
+                });
+                _store2.default.update();
+              }
+            },
+            '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043A\u0430\u0442\u0435\u0433\u043E\u0440\u0438\u044E'
           )
         )
       );
@@ -18708,170 +18932,13 @@ var Settings = function (_Component) {
 
 exports.default = Settings;
 ;
-},{"react":6,"./Settings.css":48,"../components/TextInput/TextInput":43,"../components/Button/Button":20,"../store":19}],40:[function(require,module,exports) {
+},{"react":6,"./Settings.css":23,"../components/TextInput/TextInput":26,"../components/Button/Button":20,"../store":19,"../time":24}],44:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"_css_loader":7}],23:[function(require,module,exports) {
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _store = require('./store');
-
-var _store2 = _interopRequireDefault(_store);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function zfill(src, count) {
-  if (!_store2.default.settings.padWithZero) {
-    return src;
-  }
-
-  var result = '';
-  for (var i = 0; i < count - String(src).length; i++) {
-    result += '0';
-  }
-  result += String(src);
-
-  return result;
-}
-
-window.zfill = zfill;
-
-exports.default = {
-  zero: function zero() {
-    return {
-      m: 0,
-      s: 0,
-      ms: 0
-    };
-  },
-  add: function add(a, b) {
-    if (!a) {
-      a = this.zero();
-    }
-    if (!b) {
-      b = this.zero();
-    }
-
-    var m = a.m + b.m;
-    var s = a.s + b.s;
-    var ms = a.ms + b.ms;
-    while (ms >= 1000) {
-      ms -= 1000;
-      s++;
-    }
-    while (s >= 60) {
-      s -= 60;
-      m++;
-    }
-
-    return { m: m, s: s, ms: ms };
-  },
-  sub: function sub(a, b) {
-    if (!a) {
-      a = this.zero();
-    }
-    if (!b) {
-      b = this.zero();
-    }
-
-    var m = a.m - b.m;
-    var s = a.s - b.s;
-    var ms = a.ms - b.ms;
-    while (s < 0) {
-      m--;
-      s += 60;
-    }
-    while (ms < 0) {
-      s--;
-      ms += 1000;
-    }
-
-    return { m: m, s: s, ms: ms };
-  },
-  sort: function sort(a, b) {
-    var gt = this.gt(a, b);
-    if (gt) {
-      return 1;
-    }
-    return -1;
-  },
-  gt: function gt(a, b) {
-    if (a.m > b.m) {
-      return true;
-    } else if (b.m > a.m) {
-      return false;
-    }
-    if (a.s > b.s) {
-      return true;
-    } else if (b.s > a.s) {
-      return false;
-    }
-    if (a.ms > b.ms) {
-      return true;
-    } else if (b.ms > a.s) {
-      return false;
-    }
-  },
-  string: function string(a) {
-    if (!a) {
-      return this.string(this.zero());
-    }
-    return zfill(a.m, 2) + ':' + zfill(a.s, 2) + ':' + zfill(a.ms, 3);
-  },
-  cpstring: function cpstring(a) {
-    if (!a) {
-      return '0';
-    }
-    return a.s + a.m * 60 + a.ms / 1000;
-  },
-  parse: function parse(str) {
-    if (!str.split) {
-      return this.zero();
-    }
-    var parts = str.split(':');
-    if (parts.length === 1) {
-      return this.add({ m: 0, s: Number(str), ms: 0 }, this.zero());
-    }
-    if (parts.length !== 3) {
-      return this.zero();
-    }
-    return this.add({
-      m: Number(parts[0]),
-      s: Number(parts[1]),
-      ms: Number(parts[2])
-    }, this.zero());
-  },
-  isTime: function isTime(str) {
-    if (!str) {
-      return false;
-    }
-    if (!str.split) {
-      return false;
-    }
-    var parts = str.split(':');
-    if (parts.length === 1) {
-      return true;
-    }
-    if (parts.length !== 3) {
-      return false;
-    }
-    return true;
-  },
-  min: function min(a, b) {
-    if (this.gt(a, b)) {
-      return b;
-    }
-    return a;
-  }
-};
-},{"./store":19}],24:[function(require,module,exports) {
+},{"_css_loader":7}],25:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -19114,7 +19181,7 @@ var Table = function (_Component2) {
 }(_react.Component);
 
 exports.default = Table;
-},{"react":6,"./Table.css":40,"../TextInput/TextInput":43,"../Button/Button":20,"../../store":19,"../../time":23}],14:[function(require,module,exports) {
+},{"react":6,"./Table.css":44,"../TextInput/TextInput":26,"../Button/Button":20,"../../store":19,"../../time":24}],14:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -19146,20 +19213,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// import './Table.css';
-// import TextInput from '../components/TextInput/TextInput';
-// import Button from '../components/Button/Button';
-
 
 window.time = _time2.default;
 
 var QualifiersTable = function (_Component) {
   _inherits(QualifiersTable, _Component);
 
-  function QualifiersTable() {
+  function QualifiersTable(props) {
     _classCallCheck(this, QualifiersTable);
 
-    var _this = _possibleConstructorReturn(this, (QualifiersTable.__proto__ || Object.getPrototypeOf(QualifiersTable)).call(this));
+    var _this = _possibleConstructorReturn(this, (QualifiersTable.__proto__ || Object.getPrototypeOf(QualifiersTable)).call(this, props));
 
     _store2.default.subscribe(function () {
       var _iteratorNormalCompletion = true;
@@ -19167,7 +19230,7 @@ var QualifiersTable = function (_Component) {
       var _iteratorError = undefined;
 
       try {
-        for (var _iterator = _store2.default.teams[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        for (var _iterator = props.teams[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var team = _step.value;
 
           if (!team.results.qualifiers) {
@@ -19201,7 +19264,7 @@ var QualifiersTable = function (_Component) {
         }
       }
 
-      var sorted = _store2.default.teams.slice().sort(function (a, b) {
+      var sorted = _this.props.teams.slice().sort(function (a, b) {
         return _time2.default.sort(a.results.qualifiers.timeResult, b.results.qualifiers.timeResult);
       });
 
@@ -19219,7 +19282,7 @@ var QualifiersTable = function (_Component) {
       var _iteratorError2 = undefined;
 
       try {
-        for (var _iterator2 = _store2.default.teams[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+        for (var _iterator2 = _this.props.teams[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var _team = _step2.value;
 
           _loop(_team);
@@ -19247,7 +19310,7 @@ var QualifiersTable = function (_Component) {
   _createClass(QualifiersTable, [{
     key: 'render',
     value: function render() {
-      var teams = _store2.default.teams;
+      var teams = this.props.teams;
       var settings = _store2.default.settings.qualifiers;
 
       var titleRow = [{
@@ -19347,7 +19410,7 @@ var QualifiersTable = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'categoryWrapper' },
+        { className: 'eventWrapper' },
         _react2.default.createElement(
           'div',
           { className: 'categoryTitle' },
@@ -19364,7 +19427,7 @@ var QualifiersTable = function (_Component) {
 }(_react.Component);
 
 exports.default = QualifiersTable;
-},{"react":6,"../components/Table/Table":24,"../store":19,"../time":23}],15:[function(require,module,exports) {
+},{"react":6,"../components/Table/Table":25,"../store":19,"../time":24}],15:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -19404,10 +19467,10 @@ var getPotentialTeamCount = function getPotentialTeamCount(n) {
 var SprintTable = function (_Component) {
   _inherits(SprintTable, _Component);
 
-  function SprintTable() {
+  function SprintTable(props) {
     _classCallCheck(this, SprintTable);
 
-    var _this = _possibleConstructorReturn(this, (SprintTable.__proto__ || Object.getPrototypeOf(SprintTable)).call(this));
+    var _this = _possibleConstructorReturn(this, (SprintTable.__proto__ || Object.getPrototypeOf(SprintTable)).call(this, props));
 
     _store2.default.subscribe(function () {
       var _iteratorNormalCompletion = true;
@@ -19415,7 +19478,7 @@ var SprintTable = function (_Component) {
       var _iteratorError = undefined;
 
       try {
-        for (var _iterator = _store2.default.teams[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        for (var _iterator = props.teams[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var team = _step.value;
 
           if (!team.results.sprint) {
@@ -19694,7 +19757,7 @@ var SprintTable = function (_Component) {
         width: 50
       }];
 
-      var teams = _store2.default.teams.slice().sort(function (a, b) {
+      var teams = this.props.teams.slice().sort(function (a, b) {
         return b.results.qualifiers.points - a.results.qualifiers.points;
       });
 
@@ -19723,7 +19786,7 @@ var SprintTable = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'categoryWrapper' },
+        { className: 'eventWrapper' },
         _react2.default.createElement(
           'div',
           { className: 'categoryTitle' },
@@ -19759,7 +19822,7 @@ var SprintTable = function (_Component) {
 }(_react.Component);
 
 exports.default = SprintTable;
-},{"react":6,"../components/Table/Table":24,"../store":19,"../time":23}],16:[function(require,module,exports) {
+},{"react":6,"../components/Table/Table":25,"../store":19,"../time":24}],16:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -19795,10 +19858,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var LongRaceTable = function (_Component) {
   _inherits(LongRaceTable, _Component);
 
-  function LongRaceTable() {
+  function LongRaceTable(props) {
     _classCallCheck(this, LongRaceTable);
 
-    var _this = _possibleConstructorReturn(this, (LongRaceTable.__proto__ || Object.getPrototypeOf(LongRaceTable)).call(this));
+    var _this = _possibleConstructorReturn(this, (LongRaceTable.__proto__ || Object.getPrototypeOf(LongRaceTable)).call(this, props));
 
     _store2.default.subscribe(function () {
       var _iteratorNormalCompletion = true;
@@ -19806,7 +19869,7 @@ var LongRaceTable = function (_Component) {
       var _iteratorError = undefined;
 
       try {
-        for (var _iterator = _store2.default.teams[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        for (var _iterator = props.teams[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var team = _step.value;
 
           if (!team.results.longRace) {
@@ -19836,7 +19899,7 @@ var LongRaceTable = function (_Component) {
         }
       }
 
-      var sorted = _store2.default.teams.slice().sort(function (a, b) {
+      var sorted = props.teams.slice().sort(function (a, b) {
         return _time2.default.sort(a.results.longRace.timeResult, b.results.longRace.timeResult);
       });
 
@@ -19854,7 +19917,7 @@ var LongRaceTable = function (_Component) {
       var _iteratorError2 = undefined;
 
       try {
-        for (var _iterator2 = _store2.default.teams[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+        for (var _iterator2 = props.teams[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var _team = _step2.value;
 
           _loop(_team);
@@ -19882,8 +19945,7 @@ var LongRaceTable = function (_Component) {
   _createClass(LongRaceTable, [{
     key: 'render',
     value: function render() {
-      // TODO: sort teams by place in slalom!
-      var teams = _store2.default.teams.slice().sort(function (a, b) {
+      var teams = this.props.teams.slice().sort(function (a, b) {
         return b.results.slalom.points - a.results.slalom.points;
       });;
       var settings = _store2.default.settings.longRace;
@@ -19956,7 +20018,7 @@ var LongRaceTable = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'categoryWrapper' },
+        { className: 'eventWrapper' },
         _react2.default.createElement(
           'div',
           { className: 'categoryTitle' },
@@ -19973,7 +20035,7 @@ var LongRaceTable = function (_Component) {
 }(_react.Component);
 
 exports.default = LongRaceTable;
-},{"react":6,"../components/Table/Table":24,"../store":19,"../time":23}],17:[function(require,module,exports) {
+},{"react":6,"../components/Table/Table":25,"../store":19,"../time":24}],17:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20009,10 +20071,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var SlalomTable = function (_Component) {
   _inherits(SlalomTable, _Component);
 
-  function SlalomTable() {
+  function SlalomTable(props) {
     _classCallCheck(this, SlalomTable);
 
-    var _this = _possibleConstructorReturn(this, (SlalomTable.__proto__ || Object.getPrototypeOf(SlalomTable)).call(this));
+    var _this = _possibleConstructorReturn(this, (SlalomTable.__proto__ || Object.getPrototypeOf(SlalomTable)).call(this, props));
 
     _store2.default.subscribe(function () {
       var _iteratorNormalCompletion = true;
@@ -20020,7 +20082,7 @@ var SlalomTable = function (_Component) {
       var _iteratorError = undefined;
 
       try {
-        for (var _iterator = _store2.default.teams[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        for (var _iterator = props.teams[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var team = _step.value;
 
           if (!team.results.slalom) {
@@ -20065,7 +20127,7 @@ var SlalomTable = function (_Component) {
         }
       }
 
-      var sorted = _store2.default.teams.slice().sort(function (a, b) {
+      var sorted = props.teams.slice().sort(function (a, b) {
         return _time2.default.sort(a.results.slalom.bestResult, b.results.slalom.bestResult);
       });
 
@@ -20083,7 +20145,7 @@ var SlalomTable = function (_Component) {
       var _iteratorError2 = undefined;
 
       try {
-        for (var _iterator2 = _store2.default.teams[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+        for (var _iterator2 = props.teams[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var _team = _step2.value;
 
           _loop(_team);
@@ -20111,7 +20173,7 @@ var SlalomTable = function (_Component) {
   _createClass(SlalomTable, [{
     key: 'render',
     value: function render() {
-      var teams = _store2.default.teams.slice().sort(function (a, b) {
+      var teams = this.props.teams.slice().sort(function (a, b) {
         return b.results.sprint.points - a.results.sprint.points;
       });
       var settings = _store2.default.settings.slalom;
@@ -20255,7 +20317,7 @@ var SlalomTable = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'categoryWrapper' },
+        { className: 'eventWrapper' },
         _react2.default.createElement(
           'div',
           { className: 'categoryTitle' },
@@ -20272,7 +20334,7 @@ var SlalomTable = function (_Component) {
 }(_react.Component);
 
 exports.default = SlalomTable;
-},{"react":6,"../components/Table/Table":24,"../store":19,"../time":23}],18:[function(require,module,exports) {
+},{"react":6,"../components/Table/Table":25,"../store":19,"../time":24}],18:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20317,7 +20379,7 @@ var TotalTable = function (_Component) {
   _createClass(TotalTable, [{
     key: 'render',
     value: function render() {
-      var teams = _store2.default.teams;
+      var teams = this.props.teams;
 
       var titleRow = [{
         value: '№',
@@ -20418,7 +20480,7 @@ var TotalTable = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'categoryWrapper' },
+        { className: 'eventWrapper' },
         _react2.default.createElement(
           'div',
           { className: 'categoryTitle' },
@@ -20435,7 +20497,7 @@ var TotalTable = function (_Component) {
 }(_react.Component);
 
 exports.default = TotalTable;
-},{"react":6,"../components/Table/Table":24,"../store":19,"../time":23}],4:[function(require,module,exports) {
+},{"react":6,"../components/Table/Table":25,"../store":19,"../time":24}],4:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20497,26 +20559,96 @@ var SHOW_SLALOM = 3;
 var SHOW_LONG_RACE = 4;
 var SHOW_RESULTS = 5;
 
-var App = function (_Component) {
-  _inherits(App, _Component);
+var CategoryWrapper = function (_Component) {
+  _inherits(CategoryWrapper, _Component);
+
+  function CategoryWrapper(props) {
+    _classCallCheck(this, CategoryWrapper);
+
+    return _possibleConstructorReturn(this, (CategoryWrapper.__proto__ || Object.getPrototypeOf(CategoryWrapper)).call(this, props));
+  }
+
+  _createClass(CategoryWrapper, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      if (!_store2.default.currentCategory) {
+        if (!_store2.default.categories.length) {
+          return 'Добавьте хотя бы одну категорию';
+        }
+      }
+
+      var category = _store2.default.categories[_store2.default.currentCategory];
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'allCategories' },
+        _react2.default.createElement(
+          'div',
+          { className: 'categorySelect' },
+          _store2.default.categories.map(function (category, index) {
+            var disabled = category.teams.length < 2;
+
+            return _react2.default.createElement(
+              _Button2.default,
+              {
+                className: 'categoryButton',
+                disabled: disabled,
+                selected: _store2.default.currentCategory === index,
+                onClick: function onClick() {
+                  _store2.default.currentCategory = index;
+                  _store2.default.update();
+                }
+              },
+              category.title
+            );
+          })
+        ),
+        _store2.default.categories.map(function (category, index) {
+          var table = null;
+
+          if (category.teams.length < 2) {
+            return null;
+          }
+
+          switch (_this2.props.show) {
+            case SHOW_QUALIFIERS:
+              table = _react2.default.createElement(_QualifiersTable2.default, { teams: category.teams });break;
+            case SHOW_SPRINT:
+              table = _react2.default.createElement(_SprintTable2.default, { teams: category.teams });break;
+            case SHOW_SLALOM:
+              table = _react2.default.createElement(_Slalom2.default, { teams: category.teams });break;
+            case SHOW_LONG_RACE:
+              table = _react2.default.createElement(_LongRace2.default, { teams: category.teams });break;
+            case SHOW_RESULTS:
+              table = _react2.default.createElement(_TotalTable2.default, { teams: category.teams });break;
+          }
+
+          if (index === _store2.default.currentCategory) {
+            return table;
+          }
+        })
+      );
+    }
+  }]);
+
+  return CategoryWrapper;
+}(_react.Component);
+
+var App = function (_Component2) {
+  _inherits(App, _Component2);
 
   function App(props) {
     _classCallCheck(this, App);
 
-    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
-
-    _this.state = {
-      show: SHOW_SETTINGS
-    };
-    return _this;
+    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
   }
 
   _createClass(App, [{
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
-      var atLeastTwoTeams = _store2.default.teams.length >= 2;
+      var atLeastOneCategory = _store2.default.categories.length > 0;
 
       return _react2.default.createElement(
         'div',
@@ -20526,18 +20658,23 @@ var App = function (_Component) {
           { className: 'menu' },
           _react2.default.createElement(
             _Button2.default,
-            { className: 'menuButton', onClick: function onClick() {
-                return _this2.setState({ show: SHOW_SETTINGS });
-              } },
+            {
+              selected: _store2.default.currentEvent === SHOW_SETTINGS,
+              className: 'menuButton',
+              onClick: function onClick() {
+                _store2.default.currentEvent = SHOW_SETTINGS;_store2.default.update();
+              }
+            },
             '\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438'
           ),
           _react2.default.createElement(
             _Button2.default,
             {
-              disabled: !atLeastTwoTeams,
+              selected: _store2.default.currentEvent === SHOW_QUALIFIERS,
+              disabled: !atLeastOneCategory,
               className: 'menuButton',
               onClick: function onClick() {
-                return _this2.setState({ show: SHOW_QUALIFIERS });
+                _store2.default.currentEvent = SHOW_QUALIFIERS;_store2.default.update();
               }
             },
             '\u041A\u0432\u0430\u043B\u0438\u0444\u0438\u043A\u0430\u0446\u0438\u044F'
@@ -20545,10 +20682,11 @@ var App = function (_Component) {
           _react2.default.createElement(
             _Button2.default,
             {
-              disabled: !atLeastTwoTeams,
+              selected: _store2.default.currentEvent === SHOW_SPRINT,
+              disabled: !atLeastOneCategory,
               className: 'menuButton',
               onClick: function onClick() {
-                return _this2.setState({ show: SHOW_SPRINT });
+                _store2.default.currentEvent = SHOW_SPRINT;_store2.default.update();
               }
             },
             'H2H'
@@ -20556,10 +20694,11 @@ var App = function (_Component) {
           _react2.default.createElement(
             _Button2.default,
             {
-              disabled: !atLeastTwoTeams,
+              selected: _store2.default.currentEvent === SHOW_SLALOM,
+              disabled: !atLeastOneCategory,
               className: 'menuButton',
               onClick: function onClick() {
-                return _this2.setState({ show: SHOW_SLALOM });
+                _store2.default.currentEvent = SHOW_SLALOM;_store2.default.update();
               }
             },
             '\u0421\u043B\u0430\u043B\u043E\u043C'
@@ -20567,10 +20706,11 @@ var App = function (_Component) {
           _react2.default.createElement(
             _Button2.default,
             {
-              disabled: !atLeastTwoTeams,
+              selected: _store2.default.currentEvent === SHOW_LONG_RACE,
+              disabled: !atLeastOneCategory,
               className: 'menuButton',
               onClick: function onClick() {
-                return _this2.setState({ show: SHOW_LONG_RACE });
+                _store2.default.currentEvent = SHOW_LONG_RACE;_store2.default.update();
               }
             },
             '\u0414\u043B\u0438\u043D\u043D\u0430\u044F \u0433\u043E\u043D\u043A\u0430'
@@ -20578,21 +20718,17 @@ var App = function (_Component) {
           _react2.default.createElement(
             _Button2.default,
             {
-              disabled: !atLeastTwoTeams,
+              selected: _store2.default.currentEvent === SHOW_RESULTS,
+              disabled: !atLeastOneCategory,
               className: 'menuButton',
               onClick: function onClick() {
-                return _this2.setState({ show: SHOW_RESULTS });
+                _store2.default.currentEvent = SHOW_RESULTS;_store2.default.update();
               }
             },
             '\u0418\u0442\u043E\u0433\u0438'
           )
         ),
-        this.state.show === SHOW_SETTINGS && _react2.default.createElement(_Settings2.default, null),
-        this.state.show === SHOW_QUALIFIERS && _react2.default.createElement(_QualifiersTable2.default, null),
-        this.state.show === SHOW_SPRINT && _react2.default.createElement(_SprintTable2.default, null),
-        this.state.show === SHOW_SLALOM && _react2.default.createElement(_Slalom2.default, null),
-        this.state.show === SHOW_LONG_RACE && _react2.default.createElement(_LongRace2.default, null),
-        this.state.show === SHOW_RESULTS && _react2.default.createElement(_TotalTable2.default, null)
+        _store2.default.currentEvent === SHOW_SETTINGS ? _react2.default.createElement(_Settings2.default, null) : _react2.default.createElement(CategoryWrapper, { show: _store2.default.currentEvent })
       );
     }
   }]);
@@ -20601,7 +20737,7 @@ var App = function (_Component) {
 }(_react.Component);
 
 exports.default = (0, _store.wrap)(App);
-},{"react":6,"./App.css":8,"../Settings/Settings":13,"../Tables/QualifiersTable":14,"../Tables/SprintTable":15,"../Tables/LongRace":16,"../Tables/Slalom":17,"../Tables/TotalTable":18,"../components/Button/Button":20,"../store":19}],2:[function(require,module,exports) {
+},{"react":6,"./App.css":12,"../Settings/Settings":13,"../Tables/QualifiersTable":14,"../Tables/SprintTable":15,"../Tables/LongRace":16,"../Tables/Slalom":17,"../Tables/TotalTable":18,"../components/Button/Button":20,"../store":19}],2:[function(require,module,exports) {
 'use strict';
 
 var _react = require('react');
@@ -20624,7 +20760,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById('root'));
 // registerServiceWorker();
-},{"react":6,"react-dom":5,"./index.css":3,"./App/App":4}],50:[function(require,module,exports) {
+},{"react":6,"react-dom":5,"./index.css":3,"./App/App":4}],49:[function(require,module,exports) {
 
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -20751,5 +20887,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[50,2])
+},{}]},{},[49,2])
 //# sourceMappingURL=/src.1b0c83bb.map
