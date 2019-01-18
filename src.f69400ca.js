@@ -24771,56 +24771,7 @@ var LOCAL_STORAGE_ITEM_NAME = 'beelineEditorStoredState';
 exports.globalState = {
   editorNodes: [],
   editorRoot: null,
-  content: {
-    cupsOfCoffee: 3432,
-    mappingTest: {
-      str: 'testString',
-      num: 123,
-      arr: ['lel', 'lol', 'lal'],
-      bool: true,
-      choice: 'bar',
-      func: {
-        $func: 'sendQuickRequest'
-      },
-      node: {
-        $node: 0
-      },
-      pathTest: {
-        $path: ['content', 'cupsOfCoffee']
-      }
-    },
-    collectionTest: [{
-      str: 'testString',
-      num: 123,
-      arr: ['lel', 'lol', 'lal'],
-      bool: true,
-      choice: 'bar',
-      func: {
-        $func: 'sendQuickRequest'
-      },
-      node: {
-        $node: 0
-      },
-      pathTest: {
-        $path: ['content', 'cupsOfCoffee']
-      }
-    }, {
-      str: 'fsdjk',
-      num: 12343,
-      arr: ['lel'],
-      bool: false,
-      choice: 'foo',
-      func: {
-        $func: 'doNothing'
-      },
-      node: {
-        $node: 0
-      },
-      pathTest: {
-        $path: ['content', 'cupsOfCoffee']
-      }
-    }]
-  },
+  content: {},
   transient: {},
   backend: {},
   inspectedNode: null,
@@ -25131,6 +25082,8 @@ function getWidgetByIndex(index) {
   return result;
 }
 
+exports.getWidgetByIndex = getWidgetByIndex;
+
 function getWidgetByName(name) {
   var result = exports.globalState.widgets.find(function (w) {
     return w.name === name;
@@ -25199,6 +25152,8 @@ function mapPropJsonToEditor(prop, type, node) {
   };
   return result;
 }
+
+exports.mapPropJsonToEditor = mapPropJsonToEditor;
 
 function mapPropReactToEditor(prop, type) {
   var value = null;
@@ -27471,22 +27426,118 @@ creates as many instances of widget as elements in array
 */
 
 if (everything_1.loadGlobalState()) {} else {
-  var card = everything_1.instantiateWidget(TariffCard_1.widgetTariffCardId, {
-    params: [// {
-      //   value: 100,
-      //   unit: 'P'
-      // },
-      // {
-      //   value: 200,
-      //   unit: 'RR'
-      // }
-    ]
-  });
-  var pageContainer = everything_1.instantiateWidget(PageContainer_1.widgetPageContainerId, {}, [card]); // globalState.store.editorRootId = instantiateWidget(widgetMenuId, { title: 'main menu' }, [button1, button2, button3, card1]);
-
+  var card0 = everything_1.instantiateWidget(TariffCard_1.widgetTariffCardId, {});
+  var cardWidget = everything_1.getWidgetByIndex(TariffCard_1.widgetTariffCardId);
+  card0.props.value = everything_1.mapPropJsonToEditor({
+    title: 'Test no-mapping',
+    description: 'параметры этого виджета задаются на правой панели редактора',
+    params: [{
+      value: 100,
+      unit: 'P за подключение'
+    }, {
+      value: 200,
+      unit: 'P/мин'
+    }],
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Circle-icons-camera.svg/1024px-Circle-icons-camera.svg.png',
+    url: 'https://google.com'
+  }, cardWidget.propTypes, card0).value;
+  var card1 = everything_1.instantiateWidget(TariffCard_1.widgetTariffCardId, {});
+  card1.props.isJsonPath = true;
+  card1.props.path = ['content', 'tariffs', 0];
+  var card2 = everything_1.instantiateWidget(TariffCard_1.widgetTariffCardId, {});
+  card2.props.isJsonPath = true;
+  card2.props.path = ['content', 'tariffs', 1];
+  var pageContainer = everything_1.instantiateWidget(PageContainer_1.widgetPageContainerId, {}, [card0, card1, card2]);
   everything_1.globalState.editorRoot = pageContainer;
   everything_1.globalState.editorRoot.treeExpandedInEditor = true;
-  everything_1.globalState.inspectedNode = card;
+  everything_1.globalState.inspectedNode = card0;
+  everything_1.globalState.content = {
+    cupsOfCoffee: 3432,
+    tariffs: [{
+      title: 'Test 100',
+      description: 'параметры этого виджета берутся из модели из поля content.tariffs[0]',
+      params: [{
+        value: 100,
+        unit: 'P за подключение'
+      }, {
+        value: 200,
+        unit: 'P/мин'
+      }],
+      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Circle-icons-camera.svg/1024px-Circle-icons-camera.svg.png',
+      url: 'https://google.com'
+    }, {
+      title: 'Test 200',
+      description: 'параметры этого виджета берутся из модели из поля content.tariffs[1]',
+      params: [{
+        value: 200,
+        unit: 'P за подключение'
+      }, {
+        value: 400,
+        unit: 'P/мин'
+      }],
+      image: 'http://icons.iconarchive.com/icons/danieledesantis/playstation-flat/256/playstation-circle-icon.png',
+      url: 'https://wikipedia.org'
+    }, {
+      title: 'Test 300',
+      description: 'параметры этого виджета берутся из модели из поля content.tariffs[2]',
+      params: [{
+        value: 300,
+        unit: 'P за подключение'
+      }, {
+        value: 9000,
+        unit: 'P/мин'
+      }],
+      image: 'http://www.iconarchive.com/download/i75815/martz90/circle/chrome.ico',
+      url: 'https://yandex.ru'
+    }],
+    mappingTest: {
+      str: 'testString',
+      num: 123,
+      arr: ['lel', 'lol', 'lal'],
+      bool: true,
+      choice: 'bar',
+      func: {
+        $func: 'sendQuickRequest'
+      },
+      node: {
+        $node: 0
+      },
+      pathTest: {
+        $path: ['content', 'cupsOfCoffee']
+      }
+    },
+    collectionTest: [{
+      str: 'testString',
+      num: 123,
+      arr: ['lel', 'lol', 'lal'],
+      bool: true,
+      choice: 'bar',
+      func: {
+        $func: 'sendQuickRequest'
+      },
+      node: {
+        $node: 0
+      },
+      pathTest: {
+        $path: ['content', 'cupsOfCoffee']
+      }
+    }, {
+      str: 'fsdjk',
+      num: 12343,
+      arr: ['lel'],
+      bool: false,
+      choice: 'foo',
+      func: {
+        $func: 'doNothing'
+      },
+      node: {
+        $node: 0
+      },
+      pathTest: {
+        $path: ['content', 'cupsOfCoffee']
+      }
+    }]
+  };
 }
 
 function renderWorkspace() {
