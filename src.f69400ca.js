@@ -24484,31 +24484,33 @@ if ("development" === 'production') {
 }
 },{"./cjs/react-dom.development.js":"../node_modules/react-dom/cjs/react-dom.development.js"}],"styles.pcss":[function(require,module,exports) {
 module.exports = {
-  "page": "_page_8o8d9_15",
-  "workspace": "_workspace_8o8d9_21",
-  "panel": "_panel_8o8d9_26",
-  "treeWrapper": "_treeWrapper_8o8d9_35",
-  "treeChildren": "_treeChildren_8o8d9_39",
-  "treeHeader": "_treeHeader_8o8d9_43",
-  "title": "_title_8o8d9_53",
-  "inspected": "_inspected_8o8d9_59",
-  "expandTriangle": "_expandTriangle_8o8d9_63",
-  "treeViewCompound": "_treeViewCompound_8o8d9_74",
-  "treeViewRight": "_treeViewRight_8o8d9_82",
-  "treeViewValue": "_treeViewValue_8o8d9_86",
-  "treeViewName": "_treeViewName_8o8d9_90",
-  "jsonTreeViewHeader": "_jsonTreeViewHeader_8o8d9_95",
-  "invalid": "_invalid_8o8d9_99",
-  "highlighted": "_highlighted_8o8d9_104",
-  "inspectorProp": "_inspectorProp_8o8d9_108",
-  "inspectorPropName": "_inspectorPropName_8o8d9_112",
-  "inspectorPropPath": "_inspectorPropPath_8o8d9_118",
-  "inspectorCollectionMode": "_inspectorCollectionMode_8o8d9_122",
-  "inspectorAddArrayElementButton": "_inspectorAddArrayElementButton_8o8d9_128",
-  "checkButton": "_checkButton_8o8d9_132",
-  "checked": "_checked_8o8d9_145"
+  "page": "_page_1bfvr_29",
+  "workspace": "_workspace_1bfvr_35",
+  "panel": "_panel_1bfvr_40",
+  "treeWrapper": "_treeWrapper_1bfvr_49",
+  "treeChildren": "_treeChildren_1bfvr_53",
+  "treeHeader": "_treeHeader_1bfvr_57",
+  "title": "_title_1bfvr_67",
+  "inspected": "_inspected_1bfvr_73",
+  "expandTriangle": "_expandTriangle_1bfvr_77",
+  "treeViewCompound": "_treeViewCompound_1bfvr_88",
+  "treeViewRight": "_treeViewRight_1bfvr_96",
+  "treeViewValue": "_treeViewValue_1bfvr_100",
+  "treeViewName": "_treeViewName_1bfvr_104",
+  "jsonTreeViewHeader": "_jsonTreeViewHeader_1bfvr_109",
+  "invalid": "_invalid_1bfvr_113",
+  "highlighted": "_highlighted_1bfvr_118",
+  "inspectorProp": "_inspectorProp_1bfvr_122",
+  "inspectorPropName": "_inspectorPropName_1bfvr_126",
+  "inspectorPropPath": "_inspectorPropPath_1bfvr_132",
+  "inspectorCollectionMode": "_inspectorCollectionMode_1bfvr_136",
+  "inspectorAddArrayElementButton": "_inspectorAddArrayElementButton_1bfvr_142",
+  "checkButton": "_checkButton_1bfvr_146",
+  "checked": "_checked_1bfvr_159",
+  "contextMenu": "_contextMenu_1bfvr_167",
+  "contextMenuItem": "_contextMenuItem_1bfvr_176"
 };
-},{}],"utils.ts":[function(require,module,exports) {
+},{"./fonts\\officina-serif-book.woff":[["officina-serif-book.8667f08b.woff","fonts/officina-serif-book.woff"],"fonts/officina-serif-book.woff"],"./fonts\\officina-serif-bold.woff":[["officina-serif-bold.381507f4.woff","fonts/officina-serif-bold.woff"],"fonts/officina-serif-bold.woff"]}],"utils.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -24618,6 +24620,40 @@ function endTimer(name) {
 }
 
 exports.endTimer = endTimer;
+
+function removeWhitespace(s) {
+  var result = '';
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = s[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var char = _step.value;
+
+      if (char === ' ' || char === '\n' || char === '\t') {} else {
+        result += char;
+      }
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return != null) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
+  return result;
+}
+
+exports.removeWhitespace = removeWhitespace;
 },{}],"propTypes.ts":[function(require,module,exports) {
 "use strict";
 
@@ -24767,16 +24803,34 @@ var ReactDOM = __importStar(require("react-dom"));
 
 var cx = utils.bindStyles(styles);
 var EDITOR_ID_ATTRIB_NAME = 'editor-id';
-var LOCAL_STORAGE_ITEM_NAME = 'beelineEditorStoredState';
+exports.LOCAL_STORAGE_ITEM_NAME = 'beelineEditorStoredState';
+var CopyBufferType;
+
+(function (CopyBufferType) {
+  CopyBufferType[CopyBufferType["COPY"] = 0] = "COPY";
+  CopyBufferType[CopyBufferType["CUT"] = 1] = "CUT";
+})(CopyBufferType || (CopyBufferType = {}));
+
 exports.globalState = {
   editorNodes: [],
   editorRoot: null,
-  content: {},
-  transient: {},
-  backend: {},
+  model: {
+    content: {},
+    transient: {},
+    backend: {}
+  },
   inspectedNode: null,
   widgets: [],
-  funcs: []
+  funcs: [],
+  contextMenu: null,
+  mouseX: 0,
+  mouseY: 0,
+  copyBuffer: {
+    node: null,
+    type: CopyBufferType.COPY
+  },
+  baseNodes: [],
+  baseRoot: null
 };
 
 function storeGlobalState() {
@@ -24797,7 +24851,8 @@ function storeGlobalState() {
         }),
         props: node.props,
         editorName: node.editorName,
-        widgetName: node.widget && node.widget.name
+        widgetName: node.widget && node.widget.name,
+        exists: node.exists
       };
       storedNodes.push(storedNode);
     }
@@ -24819,32 +24874,42 @@ function storeGlobalState() {
   var storedState = {
     storedNodes: storedNodes,
     editorRootIndex: exports.globalState.editorRoot.index,
-    content: exports.globalState.content
+    content: exports.globalState.model.content
   };
   var storedString = JSON.stringify(storedState);
-  localStorage.setItem(LOCAL_STORAGE_ITEM_NAME, storedString);
+  localStorage.setItem(exports.LOCAL_STORAGE_ITEM_NAME, storedString);
 }
 
-function editorNodeAttachChildrenRecursively(node, allNodes, storedNode, allStoredNodes) {
-  for (var childArrayIndex = 0; childArrayIndex < storedNode.childIndices.length; childArrayIndex++) {
-    var childIndex = storedNode.childIndices[childArrayIndex];
+function attachChildrenToLoadedStoredNodesRecursively(node, allNodes, storedNode, allStoredNodes) {
+  for (var siblingIndex = 0; siblingIndex < storedNode.childIndices.length; siblingIndex++) {
+    var childIndex = storedNode.childIndices[siblingIndex];
     var child = allNodes[childIndex];
     var storedChild = allStoredNodes[childIndex];
     child.parent = node;
-    editorNodeAttachChildrenRecursively(child, allNodes, storedChild, allStoredNodes);
+    attachChildrenToLoadedStoredNodesRecursively(child, allNodes, storedChild, allStoredNodes);
     node.children.push(child);
   }
 }
 
-function loadGlobalState() {
-  var storedString = localStorage.getItem(LOCAL_STORAGE_ITEM_NAME);
-
+function loadGlobalState(storedString) {
   if (storedString) {
     var storedState = JSON.parse(storedString);
     exports.globalState.editorNodes = [];
 
     for (var nodeIndex = 0; nodeIndex < storedState.storedNodes.length; nodeIndex++) {
       var storedNode = storedState.storedNodes[nodeIndex];
+      var widget = getWidgetByName(storedNode.widgetName);
+
+      if (storedNode.exists && nodeIndex) {
+        if (!widget) {
+          widget = getWidgetByLegacyName(storedNode.widgetName);
+
+          if (!widget) {
+            console.error("Cannot find widget '".concat(storedNode.widgetName, "' by default and legacy name"));
+          }
+        }
+      }
+
       var node = {
         index: storedNode.index,
         isCollection: storedNode.isCollection,
@@ -24854,8 +24919,8 @@ function loadGlobalState() {
         children: [],
         props: storedNode.props,
         editorName: storedNode.editorName,
-        widget: getWidgetByName(storedNode.widgetName),
-        exists: true
+        widget: widget,
+        exists: storedNode.exists
       };
       exports.globalState.editorNodes.push(node);
 
@@ -24864,9 +24929,9 @@ function loadGlobalState() {
       }
     }
 
-    exports.globalState.content = storedState.content;
+    exports.globalState.model.content = storedState.content;
     exports.globalState.editorRoot = exports.globalState.editorNodes[storedState.editorRootIndex];
-    editorNodeAttachChildrenRecursively(exports.globalState.editorRoot, exports.globalState.editorNodes, storedState.storedNodes[storedState.editorRootIndex], storedState.storedNodes);
+    attachChildrenToLoadedStoredNodesRecursively(exports.globalState.editorRoot, exports.globalState.editorNodes, storedState.storedNodes[storedState.editorRootIndex], storedState.storedNodes);
     return true;
   }
 
@@ -24874,7 +24939,7 @@ function loadGlobalState() {
 }
 
 exports.loadGlobalState = loadGlobalState;
-addEditorNode(null, null, 'You should not be using this node anywhere'); //NOTE: add filler node to fill node index 0
+addEditorNode(exports.globalState.editorNodes, null, null, 'You should not be using this node anywhere'); //NOTE: add filler node to fill node index 0
 
 function editorNodeInsertChildAtIndex(parent, child, childIndex) {
   var result = false;
@@ -24924,13 +24989,13 @@ function editorNodeGetByIndex(index) {
 
 exports.editorNodeGetByIndex = editorNodeGetByIndex;
 
-function editorNodeGetSelfChildIndex(target) {
+function editorNodeGetSiblingIndex(target) {
   console.assert(!!target.parent, 'This node has no parent. Should this be an error? Maybe you just want to know if a node has a parent');
   var targetIndex = target.parent.children.indexOf(target);
   return targetIndex;
 }
 
-exports.editorNodeGetSelfChildIndex = editorNodeGetSelfChildIndex;
+exports.editorNodeGetSiblingIndex = editorNodeGetSiblingIndex;
 
 function editorNodeRemoveChild(parent, child) {
   var childIndex = parent.children.indexOf(child);
@@ -24948,7 +25013,7 @@ function editorNodeAppendChild(parent, child) {
 exports.editorNodeAppendChild = editorNodeAppendChild;
 
 function editorNodeInsertAfter(target, child) {
-  var targetIndex = editorNodeGetSelfChildIndex(target);
+  var targetIndex = editorNodeGetSiblingIndex(target);
   var result = editorNodeInsertChildAtIndex(target.parent, child, targetIndex + 1);
   return result;
 }
@@ -24956,7 +25021,7 @@ function editorNodeInsertAfter(target, child) {
 exports.editorNodeInsertAfter = editorNodeInsertAfter;
 
 function editorNodeInsertBefore(target, child) {
-  var targetIndex = editorNodeGetSelfChildIndex(target);
+  var targetIndex = editorNodeGetSiblingIndex(target);
   var result = editorNodeInsertChildAtIndex(target.parent, child, targetIndex);
   return result;
 }
@@ -24964,7 +25029,7 @@ function editorNodeInsertBefore(target, child) {
 exports.editorNodeInsertBefore = editorNodeInsertBefore;
 
 function editorNodeGetNextSibling(target) {
-  var targetIndex = editorNodeGetSelfChildIndex(target);
+  var targetIndex = editorNodeGetSiblingIndex(target);
   console.assert(targetIndex < target.parent.children.length - 1);
   var result = target.parent.children[targetIndex + 1];
   return result;
@@ -24973,7 +25038,7 @@ function editorNodeGetNextSibling(target) {
 exports.editorNodeGetNextSibling = editorNodeGetNextSibling;
 
 function editorNodeGetPreviousSibling(target) {
-  var targetIndex = editorNodeGetSelfChildIndex(target);
+  var targetIndex = editorNodeGetSiblingIndex(target);
   console.assert(targetIndex > 0);
   var result = target.parent.children[targetIndex - 1];
   return result;
@@ -24981,12 +25046,16 @@ function editorNodeGetPreviousSibling(target) {
 
 exports.editorNodeGetPreviousSibling = editorNodeGetPreviousSibling;
 
-function addEditorNode(widget, props, editorName) {
-  var children = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
-  var freeSlot = exports.globalState.editorNodes.length;
+function addEditorNode(nodes, widget, props, editorName) {
+  var children = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : [];
+  var nodeWithSameName = nodes.find(function (n) {
+    return n.editorName === editorName;
+  });
+  console.assert(!nodeWithSameName, "A node with name '".concat(editorName, " already exists'"));
+  var freeSlot = nodes.length;
 
-  for (var nodeId = 0; nodeId < exports.globalState.editorNodes.length; nodeId++) {
-    var _node = exports.globalState.editorNodes[nodeId];
+  for (var nodeId = 0; nodeId < nodes.length; nodeId++) {
+    var _node = nodes[nodeId];
 
     if (!_node.exists) {
       freeSlot = nodeId;
@@ -25005,7 +25074,7 @@ function addEditorNode(widget, props, editorName) {
     widget: widget,
     collectionPath: []
   };
-  exports.globalState.editorNodes[freeSlot] = node;
+  nodes[freeSlot] = node;
   var _iteratorNormalCompletion2 = true;
   var _didIteratorError2 = false;
   var _iteratorError2 = undefined;
@@ -25047,6 +25116,7 @@ function removeEditorNode(node) {
 exports.removeEditorNode = removeEditorNode;
 
 function registerWidget(name, component, propTypes, tags) {
+  var legacyName = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
   var widgetWithSameName = exports.globalState.widgets.find(function (w) {
     return w.name === name;
   });
@@ -25068,10 +25138,11 @@ function registerWidget(name, component, propTypes, tags) {
     name: name,
     instanceCount: 0,
     defaultProps: defaultProps,
-    tags: tags
+    tags: tags,
+    legacyName: legacyName
   };
   exports.globalState.widgets.push(w);
-  return index;
+  return w;
 }
 
 exports.registerWidget = registerWidget;
@@ -25087,6 +25158,13 @@ exports.getWidgetByIndex = getWidgetByIndex;
 function getWidgetByName(name) {
   var result = exports.globalState.widgets.find(function (w) {
     return w.name === name;
+  });
+  return result;
+}
+
+function getWidgetByLegacyName(name) {
+  var result = exports.globalState.widgets.find(function (w) {
+    return w.legacyName === name;
   });
   return result;
 }
@@ -25230,9 +25308,13 @@ function mapPropEditorToReact(prop, type, node) {
 
     case PropTypes.Kind.ARRAY:
       {
-        result = prop.value.map(function (item) {
-          return mapPropEditorToReact(item, type.itemType, node);
-        });
+        if (Array.isArray(prop.value)) {
+          result = prop.value.map(function (item) {
+            return mapPropEditorToReact(item, type.itemType, node);
+          });
+        } else {
+          result = [];
+        }
       }
       break;
 
@@ -25240,7 +25322,11 @@ function mapPropEditorToReact(prop, type, node) {
       {
         result = {};
 
-        for (var key in prop.value) {
+        for (var key in type.shape) {
+          if (!prop.value[key]) {
+            prop.value[key] = makeDefaultPropOfPropType(type.shape[key]);
+          }
+
           result[key] = mapPropEditorToReact(prop.value[key], type.shape[key], node);
         }
       }
@@ -25268,11 +25354,10 @@ function mapPropEditorToReact(prop, type, node) {
   return result;
 }
 
-function instantiateWidget(widgetIndex, props) {
+function instantiateWidget(widget, props) {
   var children = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-  var widget = getWidgetByIndex(widgetIndex);
   var totalProps = mapPropReactToEditor(Object.assign({}, widget.defaultProps, props), widget.propTypes);
-  var result = addEditorNode(widget, totalProps, "".concat(widget.name, "_").concat(widget.instanceCount.toString()), children);
+  var result = addEditorNode(exports.globalState.editorNodes, widget, totalProps, "".concat(widget.name, "_").concat(widget.instanceCount.toString()), children);
   widget.instanceCount++;
   return result;
 }
@@ -25435,11 +25520,7 @@ function propTypeMatches(v, propType) {
 exports.propTypeMatches = propTypeMatches;
 
 function getAllMappableData() {
-  var allMappableData = {
-    content: exports.globalState.content,
-    backend: exports.globalState.backend,
-    transient: exports.globalState.transient
-  };
+  var allMappableData = exports.globalState.model;
   return allMappableData;
 }
 
@@ -25469,7 +25550,7 @@ function renderEditorNode(node) {
     var _reactProps = mapPropEditorToReact(node.props, widget.propTypes, node);
 
     var _mappedProps = Object.assign({
-      key: node.editorName
+      key: node.index
     }, _reactProps);
 
     var _children = node.children.map(renderEditorNode);
@@ -25494,11 +25575,27 @@ function (_React$Component) {
   }
 
   _createClass(EditorPanel, [{
+    key: "getZoom",
+    value: function getZoom() {
+      var zoom = 1.1 / (window.outerWidth / window.document.documentElement.clientWidth);
+      return zoom;
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this = this;
+
+      window.addEventListener('resize', function () {
+        return _this.forceUpdate();
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement("div", {
         style: {
-          width: "".concat(this.props.width, "px")
+          width: "".concat(this.props.width, "px"),
+          zoom: 1
         },
         className: cx('panel')
       }, React.createElement("div", {
@@ -25526,6 +25623,11 @@ function setGlobalUpdateListener(fn) {
 
 exports.setGlobalUpdateListener = setGlobalUpdateListener;
 
+function editorNodeClone(node) {
+  var result = instantiateWidget(node.widget, mapPropEditorToReact(node.props, node.widget.propTypes, node), node.children);
+  return result;
+}
+
 var NodeTreeView =
 /*#__PURE__*/
 function (_React$Component2) {
@@ -25546,7 +25648,63 @@ function (_React$Component2) {
         "editor-id": this.props.editorNode.index,
         className: cx('title', {
           inspected: inspected
-        })
+        }),
+        onContextMenu: function onContextMenu() {
+          openContextMenu(['copy', 'cut', 'paste', 'delete'], function (option) {
+            switch (option) {
+              case 'copy':
+                {
+                  exports.globalState.copyBuffer.node = node;
+                  exports.globalState.copyBuffer.type = CopyBufferType.COPY;
+                }
+                break;
+
+              case 'cut':
+                {
+                  exports.globalState.copyBuffer.node = node;
+                  exports.globalState.copyBuffer.type = CopyBufferType.CUT;
+                  editorNodeRemoveChild(node.parent, node);
+                  updatePage();
+                }
+                break;
+
+              case 'paste':
+                {
+                  if (exports.globalState.copyBuffer.node) {
+                    var pastedNode = editorNodeClone(exports.globalState.copyBuffer.node);
+
+                    switch (exports.globalState.copyBuffer.type) {
+                      case CopyBufferType.COPY:
+                        break;
+
+                      case CopyBufferType.CUT:
+                        pastedNode.editorName = exports.globalState.copyBuffer.node.editorName;
+                        break;
+
+                      default:
+                        console.assert(false);
+                    }
+
+                    insertNode({
+                      target: exports.globalState.inspectedNode,
+                      dragged: pastedNode,
+                      type: InsertType.APPEND,
+                      hintDomNode: null,
+                      shadowDomNode: null
+                    });
+                    updatePage();
+                  }
+                }
+                break;
+
+              case 'delete':
+                {
+                  removeEditorNode(node);
+                }
+                break;
+            }
+          });
+        }
       }, node.editorName);
       return React.createElement(TreeView, {
         header: header
@@ -25570,27 +25728,32 @@ function (_React$Component3) {
   _inherits(TreeView, _React$Component3);
 
   function TreeView() {
-    var _this;
+    var _this2;
 
     _classCallCheck(this, TreeView);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(TreeView).apply(this, arguments));
-    _this.state = {
-      expanded: _this.props.expanded
+    _this2 = _possibleConstructorReturn(this, _getPrototypeOf(TreeView).apply(this, arguments));
+    _this2.state = {
+      expanded: _this2.props.expanded
     };
-    return _this;
+    return _this2;
   }
 
   _createClass(TreeView, [{
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       var _this$props = this.props,
           header = _this$props.header,
           children = _this$props.children,
           noHiding = _this$props.noHiding;
       var expanded = this.state.expanded;
+
+      if (noHiding) {
+        expanded = true;
+      }
+
       return React.createElement("div", {
         className: cx('treeViewCompound')
       }, Boolean(children && React.Children.count(children) && !noHiding) && React.createElement("div", {
@@ -25599,7 +25762,7 @@ function (_React$Component3) {
         },
         className: cx('expandTriangle'),
         onClick: function onClick() {
-          return _this2.setState({
+          return _this3.setState({
             expanded: !expanded
           });
         }
@@ -25643,7 +25806,7 @@ function (_React$Component4) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var _this$props2 = this.props,
           json = _this$props2.json,
@@ -25682,7 +25845,7 @@ function (_React$Component4) {
         var header = React.createElement("div", {
           className: classNames,
           onClick: function onClick() {
-            return _this3.handleClick(path, invalid);
+            return _this4.handleClick(path, invalid);
           }
         }, name, ":");
         result = React.createElement(TreeView, {
@@ -25690,37 +25853,51 @@ function (_React$Component4) {
           header: header
         }, items);
       } else if (_typeof(json) === 'object') {
-        var _items = [];
+        if (json.$path) {
+          result = React.createElement("div", {
+            className: classNames
+          }, name, ": ", jsonPathToString(json.$path));
+        } else if (json.$func) {
+          result = React.createElement("div", {
+            className: classNames
+          }, name, ": ", json.$func, "()");
+        } else if (json.$node) {
+          result = React.createElement("div", {
+            className: classNames
+          }, name, ": child #", json.$node);
+        } else {
+          var _items = [];
 
-        for (var key in json) {
-          _items.push(React.createElement(JsonTreeView, {
-            validType: validType,
-            path: [].concat(_toConsumableArray(path), [key]),
-            onClick: onClick,
-            key: key,
-            json: json[key],
-            highlightedPath: highlightedPath
-          }));
-        }
-
-        var _header = React.createElement("div", {
-          className: classNames,
-          onClick: function onClick() {
-            return _this3.handleClick(path, invalid);
+          for (var key in json) {
+            _items.push(React.createElement(JsonTreeView, {
+              validType: validType,
+              path: [].concat(_toConsumableArray(path), [key]),
+              onClick: onClick,
+              key: key,
+              json: json[key],
+              highlightedPath: highlightedPath
+            }));
           }
-        }, name, ":");
 
-        result = React.createElement(TreeView, {
-          expanded: expanded,
-          header: _header
-        }, _items);
+          var _header = React.createElement("div", {
+            className: classNames,
+            onClick: function onClick() {
+              return _this4.handleClick(path, invalid);
+            }
+          }, name, ":");
+
+          result = React.createElement(TreeView, {
+            expanded: expanded,
+            header: _header
+          }, _items);
+        }
       } else {
         var textValue = typeof json === 'string' ? "\"".concat(json, "\"") : json.toString();
 
         var _header2 = React.createElement("div", {
           className: classNames,
           onClick: function onClick() {
-            return _this3.handleClick(path, invalid);
+            return _this4.handleClick(path, invalid);
           }
         }, name, ": ", textValue);
 
@@ -25807,7 +25984,7 @@ function jsonPathToString(path) {
     }
   }
 
-  return result;
+  return '{' + result + '}';
 }
 
 exports.jsonPathToString = jsonPathToString;
@@ -25826,12 +26003,12 @@ function (_React$Component5) {
   _createClass(CheckButton, [{
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
       return React.createElement("div", {
         onClick: function onClick() {
-          if (_this4.props.onChange) {
-            _this4.props.onChange(!_this4.props.value);
+          if (_this5.props.onChange) {
+            _this5.props.onChange(!_this5.props.value);
           }
         },
         className: cx('checkButton', {
@@ -25858,12 +26035,12 @@ function (_React$Component6) {
   _createClass(RegularButton, [{
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this6 = this;
 
       return React.createElement("div", {
         onClick: function onClick() {
-          if (_this5.props.onChange) {
-            _this5.props.onChange();
+          if (_this6.props.onChange) {
+            _this6.props.onChange();
           }
         },
         className: cx('checkButton', this.props.className)
@@ -25888,16 +26065,16 @@ function (_React$Component7) {
   _createClass(MultiSelect, [{
     key: "render",
     value: function render() {
-      var _this6 = this;
+      var _this7 = this;
 
       var selectedIndex = this.props.options.findIndex(function (item) {
-        return item.value === _this6.props.value;
+        return item.value === _this7.props.value;
       });
       return React.createElement("select", {
         onChange: function onChange(e) {
-          var value = _this6.props.options[e.target.selectedIndex - 1].value;
+          var value = _this7.props.options[e.target.selectedIndex - 1].value;
 
-          _this6.props.onChange(value);
+          _this7.props.onChange(value);
         },
         value: selectedIndex
       }, React.createElement("option", {
@@ -25922,6 +26099,25 @@ var FontAwesome = function FontAwesome(_ref) {
     className: 'fas fa-' + icon
   });
 };
+
+function openContextMenu(options, onClick) {
+  exports.globalState.contextMenu = {
+    items: options,
+    onClick: onClick,
+    x: exports.globalState.mouseX,
+    y: exports.globalState.mouseY
+  };
+  updatePage();
+}
+
+exports.openContextMenu = openContextMenu;
+
+function closeContextMenu() {
+  exports.globalState.contextMenu = null;
+  updatePage();
+}
+
+exports.closeContextMenu = closeContextMenu;
 
 var Inspector =
 /*#__PURE__*/
@@ -25954,7 +26150,7 @@ function (_React$Component8) {
   }, {
     key: "mapProp",
     value: function mapProp(name, prop, type, node) {
-      var _this7 = this;
+      var _this8 = this;
 
       var removeButton = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
       var input = null;
@@ -25978,7 +26174,6 @@ function (_React$Component8) {
                 prop.value = e.target.value;
                 updatePage();
               },
-              placeholder: name,
               value: prop.value || ''
             });
           }
@@ -25986,8 +26181,13 @@ function (_React$Component8) {
 
         case PropTypes.Kind.ARRAY:
           {
+            if (!Array.isArray(prop.value)) {
+              prop.value = [];
+            }
+
             var childInputs = prop.value.map(function (item, itemIndex) {
               var removeButton = React.createElement(RegularButton, {
+                className: cx('inspectorRemoveArrayElementButton'),
                 onChange: function onChange() {
                   prop.value.splice(itemIndex, 1);
                   updatePage();
@@ -25996,7 +26196,7 @@ function (_React$Component8) {
                 icon: "trash"
               }));
 
-              var result = _this7.mapProp(itemIndex.toString(), item, type.itemType, node, removeButton);
+              var result = _this8.mapProp(itemIndex.toString(), item, type.itemType, node, removeButton);
 
               return result;
             });
@@ -26027,7 +26227,6 @@ function (_React$Component8) {
                 prop.value = parseFloat(e.target.value) || '';
                 updatePage();
               },
-              placeholder: name,
               value: value
             });
           }
@@ -26052,6 +26251,10 @@ function (_React$Component8) {
             var _childInputs = [];
 
             for (var key in type.shape) {
+              if (!prop.value[key]) {
+                prop.value[key] = makeDefaultPropOfPropType(type.shape[key]);
+              }
+
               _childInputs.push(this.mapProp(key, prop.value[key], type.shape[key], node));
             }
 
@@ -26142,6 +26345,10 @@ function (_React$Component8) {
       var childInputs = [];
 
       for (var key in widget.propTypes.shape) {
+        if (!node.props.value[key]) {
+          node.props.value[key] = makeDefaultPropOfPropType(widget.propTypes.shape[key]);
+        }
+
         childInputs.push(this.mapProp(key, node.props.value[key], widget.propTypes.shape[key], node));
       }
 
@@ -26173,7 +26380,13 @@ function (_React$Component8) {
         className: cx('inspectorWrapper')
       }, React.createElement("div", {
         className: cx('inspectorPropName')
-      }, node.editorName, React.createElement("div", null, React.createElement(CheckButton, {
+      }, React.createElement("input", {
+        value: node.editorName,
+        onChange: function onChange(e) {
+          node.editorName = e.target.value;
+          updatePage();
+        }
+      }), React.createElement("div", null, React.createElement(CheckButton, {
         value: node.isCollection,
         onChange: function onChange(value) {
           node.isCollection = value;
@@ -26301,6 +26514,9 @@ window.onmousedown = function (e) {
 };
 
 window.onmousemove = function (e) {
+  exports.globalState.mouseX = e.clientX;
+  exports.globalState.mouseY = e.clientY;
+
   if (exports.globalInsertInfo.dragged) {
     var _getElementUnderCurso2 = getElementUnderCursorThatHasEditorId(e),
         element = _getElementUnderCurso2.element,
@@ -26338,50 +26554,54 @@ window.onmousemove = function (e) {
   }
 };
 
+function insertNode(info) {
+  var success = false;
+  var dragged = info.dragged;
+  var target = info.target;
+  var oldChildIndex = dragged.parent ? editorNodeGetSiblingIndex(dragged) : 0;
+  var oldParent = dragged.parent;
+
+  if (dragged.parent) {
+    editorNodeRemoveChild(dragged.parent, dragged);
+  }
+
+  switch (info.type) {
+    case InsertType.BEFORE:
+      success = editorNodeInsertBefore(target, dragged);
+      break;
+
+    case InsertType.AFTER:
+      success = editorNodeInsertAfter(target, dragged);
+      break;
+
+    case InsertType.APPEND:
+      {
+        success = editorNodeAppendChild(target, dragged);
+        target.treeExpandedInEditor = true;
+      }
+      break;
+
+    default:
+      console.assert(false, 'Something went very wrong here');
+  }
+
+  if (!success) {
+    if (oldParent) {
+      editorNodeInsertChildAtIndex(oldParent, dragged, oldChildIndex);
+    } else {
+      removeEditorNode(dragged);
+    }
+  } else {
+    exports.globalState.inspectedNode = dragged;
+  }
+}
+
 window.onmouseup = function (e) {
   var dragged = exports.globalInsertInfo.dragged;
   var target = exports.globalInsertInfo.target;
 
   if (dragged && target) {
-    var success = false;
-    var oldChildIndex = dragged.parent ? editorNodeGetSelfChildIndex(dragged) : 0;
-    var oldParent = dragged.parent;
-
-    if (dragged.parent) {
-      editorNodeRemoveChild(dragged.parent, dragged);
-    }
-
-    switch (exports.globalInsertInfo.type) {
-      case InsertType.BEFORE:
-        success = editorNodeInsertBefore(target, dragged);
-        break;
-
-      case InsertType.AFTER:
-        success = editorNodeInsertAfter(target, dragged);
-        break;
-
-      case InsertType.APPEND:
-        {
-          success = editorNodeAppendChild(target, dragged);
-          target.treeExpandedInEditor = true;
-        }
-        break;
-
-      default:
-        console.assert(false, 'Something went very wrong here');
-    }
-
-    if (!success) {
-      if (oldParent) {
-        editorNodeInsertChildAtIndex(oldParent, dragged, oldChildIndex);
-      } else {
-        removeEditorNode(dragged);
-      }
-    } else {
-      exports.globalState.inspectedNode = dragged;
-    }
-
-    updatePage();
+    insertNode(exports.globalInsertInfo);
   }
 
   document.body.style.cursor = '';
@@ -26392,6 +26612,18 @@ window.onmouseup = function (e) {
   if (exports.globalInsertInfo.hintDomNode.parentElement) {
     exports.globalInsertInfo.hintDomNode.parentElement.removeChild(exports.globalInsertInfo.hintDomNode);
   }
+
+  if (dragged && target) {
+    updatePage();
+  }
+
+  if (exports.globalState.contextMenu) {
+    closeContextMenu();
+  }
+};
+
+window.oncontextmenu = function (e) {
+  e.preventDefault();
 };
 
 function registerFunc(name, fn, signature) {
@@ -26452,15 +26684,75 @@ var KeyCode;
 
 (function (KeyCode) {
   KeyCode[KeyCode["DELETE"] = 46] = "DELETE";
+  KeyCode[KeyCode["C"] = 67] = "C";
+  KeyCode[KeyCode["V"] = 86] = "V";
+  KeyCode[KeyCode["X"] = 88] = "X";
 })(KeyCode || (KeyCode = {}));
 
-window.onkeydown = function (e) {
-  if (e.keyCode === KeyCode.DELETE) {
-    if (exports.globalState.inspectedNode) {
-      removeEditorNode(exports.globalState.inspectedNode);
-      exports.globalState.inspectedNode = exports.globalState.editorRoot;
-      updatePage();
-    }
+window.onkeyup = function (e) {
+  if (document.activeElement && document.activeElement.localName === 'input') {
+    return;
+  }
+
+  switch (e.keyCode) {
+    case KeyCode.DELETE:
+      {
+        if (exports.globalState.inspectedNode) {
+          removeEditorNode(exports.globalState.inspectedNode);
+          exports.globalState.inspectedNode = exports.globalState.editorRoot;
+          updatePage();
+        }
+      }
+      break;
+
+    case KeyCode.C:
+      {
+        if (e.ctrlKey) {
+          exports.globalState.copyBuffer.node = exports.globalState.inspectedNode;
+          exports.globalState.copyBuffer.type = CopyBufferType.COPY;
+        }
+      }
+      break;
+
+    case KeyCode.X:
+      {
+        if (e.ctrlKey) {
+          exports.globalState.copyBuffer.node = exports.globalState.inspectedNode;
+          exports.globalState.copyBuffer.type = CopyBufferType.CUT;
+          editorNodeRemoveChild(exports.globalState.inspectedNode.parent, exports.globalState.inspectedNode);
+          updatePage();
+        }
+      }
+      break;
+
+    case KeyCode.V:
+      {
+        if (e.ctrlKey && exports.globalState.copyBuffer.node) {
+          var pastedNode = editorNodeClone(exports.globalState.copyBuffer.node);
+
+          switch (exports.globalState.copyBuffer.type) {
+            case CopyBufferType.COPY:
+              break;
+
+            case CopyBufferType.CUT:
+              pastedNode.editorName = exports.globalState.copyBuffer.node.editorName;
+              break;
+
+            default:
+              console.assert(false);
+          }
+
+          insertNode({
+            target: exports.globalState.inspectedNode,
+            dragged: pastedNode,
+            type: InsertType.APPEND,
+            hintDomNode: null,
+            shadowDomNode: null
+          });
+          updatePage();
+        }
+      }
+      break;
   }
 };
 
@@ -26521,11 +26813,93 @@ function makeDefaultPropOfPropType(propType) {
 
   return result;
 }
+
+var ContextMenu =
+/*#__PURE__*/
+function (_React$Component9) {
+  _inherits(ContextMenu, _React$Component9);
+
+  function ContextMenu() {
+    _classCallCheck(this, ContextMenu);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(ContextMenu).apply(this, arguments));
+  }
+
+  _createClass(ContextMenu, [{
+    key: "render",
+    value: function render() {
+      var _this9 = this;
+
+      return React.createElement("div", {
+        style: {
+          left: this.props.x + 'px',
+          top: this.props.y + 'px'
+        },
+        className: cx('contextMenu')
+      }, this.props.items.map(function (item, itemIndex) {
+        return React.createElement("div", {
+          key: itemIndex,
+          className: cx('contextMenuItem'),
+          onMouseDown: function onMouseDown(e) {
+            e.preventDefault();
+            e.stopPropagation();
+          },
+          onMouseUp: function onMouseUp(e) {
+            e.preventDefault();
+            e.stopPropagation();
+          },
+          onClick: function onClick(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            _this9.props.onClick(item);
+
+            closeContextMenu();
+          }
+        }, item);
+      }));
+    }
+  }]);
+
+  return ContextMenu;
+}(React.Component);
+
+exports.ContextMenu = ContextMenu;
 },{"react":"../node_modules/react/index.js","./utils":"utils.ts","./styles.pcss":"styles.pcss","./propTypes":"propTypes.ts","react-dom":"../node_modules/react-dom/index.js"}],"components/Link/styles.pcss":[function(require,module,exports) {
 module.exports = {
-  "link": "_link_1vq9u_1"
+  "link": "_link_1thh4_1",
+  "phoneSvg": "_phoneSvg_1thh4_12",
+  "wrapper": "_wrapper_1thh4_17"
 };
-},{}],"components/Link/index.tsx":[function(require,module,exports) {
+},{}],"components/Link/phone.svg":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+var SvgComponent = function SvgComponent(props) {
+  return _react.default.createElement("svg", _extends({
+    width: 18,
+    height: 18,
+    viewBox: "0 4 18 18",
+    className: "logo PhoneLink_linkLight_2bZj"
+  }, props), _react.default.createElement("path", {
+    d: "M5.682 11.192c1.145-1.133 2.863-2.265.572-4.53-2.29-2.266-2.863-2.1-4.581-.201-1.718 1.899-.188 6.429 3.436 10.392 3.624 3.964 9.162 5.096 10.308 3.964 1.145-1.133 3.436-1.699.573-4.53-2.864-2.831-4.582.566-4.582.566s-2.863 0-5.726-5.661z",
+    fill: "none"
+  }));
+};
+
+var _default = SvgComponent;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js"}],"components/Link/index.tsx":[function(require,module,exports) {
 "use strict";
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -26556,6 +26930,12 @@ var __importStar = this && this.__importStar || function (mod) {
   return result;
 };
 
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -26570,12 +26950,17 @@ var utils_1 = require("../../utils");
 
 var everything_1 = require("../../everything");
 
+var phone_svg_1 = __importDefault(require("./phone.svg"));
+
 exports.cx = utils_1.bindStyles(styles);
+console.log(phone_svg_1.default);
 var textLinkProps = {
-  text: PropTypes.string,
-  url: PropTypes.string,
-  fontSize: PropTypes.string,
-  className: PropTypes.string
+  text: PropTypes.optional(PropTypes.string),
+  url: PropTypes.optional(PropTypes.string),
+  fontSize: PropTypes.optional(PropTypes.string),
+  className: PropTypes.optional(PropTypes.string),
+  phoneLink: PropTypes.optional(PropTypes.boolean),
+  margin: PropTypes.optional(PropTypes.string)
 };
 
 var TextLink =
@@ -26590,16 +26975,37 @@ function (_React$Component) {
   }
 
   _createClass(TextLink, [{
+    key: "getHref",
+    value: function getHref() {
+      var result = '';
+
+      if (this.props.phoneLink) {
+        var phoneWithoutWhitespace = utils_1.removeWhitespace(this.props.url);
+        console.assert(phoneWithoutWhitespace.startsWith('8'));
+        var phoneWithPlusSeven = '+7' + phoneWithoutWhitespace.slice(1);
+        result = 'tel:' + phoneWithPlusSeven;
+      } else {
+        result = this.props.url;
+      }
+
+      return result;
+    }
+  }, {
     key: "render",
     value: function render() {
       var Tag = this.props.url ? 'a' : 'span';
       return React.createElement(Tag, {
-        className: exports.cx('link', this.props.className),
-        href: this.props.url,
+        href: this.getHref(),
         style: {
-          fontSize: this.props.fontSize
-        }
-      }, this.props.text);
+          fontSize: this.props.fontSize,
+          margin: this.props.margin
+        },
+        className: exports.cx('wrapper')
+      }, this.props.phoneLink && React.createElement(phone_svg_1.default, {
+        className: exports.cx('phoneSvg')
+      }), React.createElement("span", {
+        className: exports.cx('link', this.props.className)
+      }, this.props.text));
     }
   }]);
 
@@ -26607,8 +27013,8 @@ function (_React$Component) {
 }(React.Component);
 
 exports.default = TextLink;
-exports.widgetLinkId = everything_1.registerWidget('Link', TextLink, textLinkProps, ['link', 'text', 'url', 'http']);
-},{"react":"../node_modules/react/index.js","../../propTypes":"propTypes.ts","./styles.pcss":"components/Link/styles.pcss","../../utils":"utils.ts","../../everything":"everything.tsx"}],"components/TariffCard/index.tsx":[function(require,module,exports) {
+exports.widgetTextLink = everything_1.registerWidget('TextLink', TextLink, textLinkProps, ['link', 'text', 'url', 'http'], 'Link');
+},{"react":"../node_modules/react/index.js","../../propTypes":"propTypes.ts","./styles.pcss":"components/Link/styles.pcss","../../utils":"utils.ts","../../everything":"everything.tsx","./phone.svg":"components/Link/phone.svg"}],"components/TariffCard/index.tsx":[function(require,module,exports) {
 "use strict";
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -26716,10 +27122,10 @@ var tariffCardPropTypes = {
   image: PropTypes.string,
   url: PropTypes.string
 };
-exports.widgetTariffCardId = everything_1.registerWidget('TariffCard', TariffCard, tariffCardPropTypes, ['tariffs', 'cards', 'image', 'params', 'url']);
+exports.widgetTariffCard = everything_1.registerWidget('TariffCard', TariffCard, tariffCardPropTypes, ['tariffs', 'cards', 'image', 'params', 'url']);
 },{"react":"../node_modules/react/index.js","../../propTypes":"propTypes.ts","./styles.pcss":"components/TariffCard/styles.pcss","../../utils":"utils.ts","../../everything":"everything.tsx","../Link":"components/Link/index.tsx"}],"components/ContentWrapper/styles.pcss":[function(require,module,exports) {
 module.exports = {
-  "wrapper": "_wrapper_1cyzc_1"
+  "wrapper": "_wrapper_11je1_1"
 };
 },{}],"components/ContentWrapper/index.tsx":[function(require,module,exports) {
 "use strict";
@@ -26784,10 +27190,12 @@ function (_React$Component) {
     value: function render() {
       return React.createElement("div", {
         style: {
+          width: '100%',
           backgroundColor: this.props.color
-        },
-        className: cx('wrapper')
-      }, this.props.children);
+        }
+      }, React.createElement("div", {
+        className: cx('wrapper', this.props.className)
+      }, this.props.children));
     }
   }]);
 
@@ -26799,12 +27207,214 @@ ContentWrapper.defaultProps = {
 };
 exports.default = ContentWrapper;
 var tariffCardPropTypes = {
-  color: PropTypes.optional(PropTypes.string)
+  color: PropTypes.optional(PropTypes.string),
+  className: PropTypes.optional(PropTypes.string)
 };
-exports.widgetContentWrapperId = everything_1.registerWidget('ContentWrapper', ContentWrapper, tariffCardPropTypes, ['content', 'wrapper', 'background', 'color', 'container']);
-},{"react":"../node_modules/react/index.js","../../propTypes":"propTypes.ts","./styles.pcss":"components/ContentWrapper/styles.pcss","../../utils":"utils.ts","../../everything":"everything.tsx"}],"components/Button/styles.pcss":[function(require,module,exports) {
+exports.widgetContentWrapper = everything_1.registerWidget('ContentWrapper', ContentWrapper, tariffCardPropTypes, ['content', 'wrapper', 'background', 'color', 'container']);
+},{"react":"../node_modules/react/index.js","../../propTypes":"propTypes.ts","./styles.pcss":"components/ContentWrapper/styles.pcss","../../utils":"utils.ts","../../everything":"everything.tsx"}],"components/SectionHeader/styles.pcss":[function(require,module,exports) {
 module.exports = {
-  "button": "_button_1e0ek_1"
+  "header": "_header_92wag_1",
+  "paragraph": "_paragraph_92wag_8"
+};
+},{}],"components/SectionHeader/index.tsx":[function(require,module,exports) {
+"use strict";
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+  }
+  result["default"] = mod;
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var React = __importStar(require("react"));
+
+var PropTypes = __importStar(require("../../propTypes"));
+
+var styles = __importStar(require("./styles.pcss"));
+
+var utils_1 = require("../../utils");
+
+var everything_1 = require("../../everything");
+
+exports.cx = utils_1.bindStyles(styles);
+
+var Section = function Section(_ref) {
+  var children = _ref.children,
+      padding = _ref.padding;
+  return React.createElement("div", {
+    style: {
+      padding: padding,
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column'
+    }
+  }, children);
+};
+
+exports.widgetSection = everything_1.registerWidget('Section', Section, {
+  padding: PropTypes.optional(PropTypes.string)
+}, ['section']);
+
+var Section_Header = function Section_Header(_ref2) {
+  var text = _ref2.text,
+      margin = _ref2.margin;
+  return React.createElement("div", {
+    style: {
+      margin: margin
+    },
+    className: exports.cx('header')
+  }, text);
+};
+
+var sectionHeaderPropTypes = {
+  text: PropTypes.string,
+  margin: PropTypes.string
+};
+exports.widgetSectionHeader = everything_1.registerWidget('Section_Header', Section_Header, sectionHeaderPropTypes, ['section', '<h1>', 'header']);
+
+var Section_Paragraph = function Section_Paragraph(_ref3) {
+  var text = _ref3.text;
+  return React.createElement("div", {
+    className: exports.cx('paragraph')
+  }, text);
+};
+
+var sectionParagraphPropTypes = {
+  text: PropTypes.string
+};
+exports.widgetSectionParagraph = everything_1.registerWidget('Section_Paragraph', Section_Paragraph, sectionParagraphPropTypes, ['section', '<p>', 'paragraph']);
+},{"react":"../node_modules/react/index.js","../../propTypes":"propTypes.ts","./styles.pcss":"components/SectionHeader/styles.pcss","../../utils":"utils.ts","../../everything":"everything.tsx"}],"components/Banner/styles.pcss":[function(require,module,exports) {
+module.exports = {
+  "wrapper": "_wrapper_8clzc_1",
+  "contentWrapper": "_contentWrapper_8clzc_7",
+  "title": "_title_8clzc_15",
+  "description": "_description_8clzc_20"
+};
+},{}],"components/Banner/index.tsx":[function(require,module,exports) {
+"use strict";
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+  }
+  result["default"] = mod;
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var React = __importStar(require("react"));
+
+var PropTypes = __importStar(require("../../propTypes"));
+
+var styles = __importStar(require("./styles.pcss"));
+
+var utils_1 = require("../../utils");
+
+var everything_1 = require("../../everything");
+
+var ContentWrapper_1 = __importDefault(require("../ContentWrapper"));
+
+exports.cx = utils_1.bindStyles(styles);
+var bannerPropTypes = {
+  contentSlots: PropTypes.optional(PropTypes.array(PropTypes.editorNode)),
+  background: PropTypes.optional(PropTypes.editorNode),
+  textColor: PropTypes.optional(PropTypes.string)
+};
+
+var Banner =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Banner, _React$Component);
+
+  function Banner() {
+    _classCallCheck(this, Banner);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Banner).apply(this, arguments));
+  }
+
+  _createClass(Banner, [{
+    key: "render",
+    value: function render() {
+      return React.createElement("div", {
+        className: exports.cx('wrapper'),
+        style: {
+          color: this.props.textColor
+        }
+      }, this.props.background, React.createElement(ContentWrapper_1.default, {
+        color: 'transparent',
+        className: exports.cx('contentWrapper')
+      }, this.props.contentSlots));
+    }
+  }]);
+
+  return Banner;
+}(React.Component);
+
+exports.default = Banner;
+
+var Banner_Title = function Banner_Title(_ref) {
+  var text = _ref.text;
+  return React.createElement("div", {
+    className: exports.cx('title')
+  }, text);
+};
+
+var bannerTitlePropTypes = {
+  text: PropTypes.string
+};
+exports.widgetBannerTitle = everything_1.registerWidget('Banner_Title', Banner_Title, bannerTitlePropTypes, ['title', 'text']);
+
+var Banner_Description = function Banner_Description(_ref2) {
+  var text = _ref2.text;
+  return React.createElement("div", {
+    className: exports.cx('description')
+  }, text);
+};
+
+var bannerDescriptionPropTypes = {
+  text: PropTypes.string
+};
+exports.widgetBannerDescription = everything_1.registerWidget('Banner_Description', Banner_Description, bannerDescriptionPropTypes, ['title', 'text']);
+exports.widgetBanner = everything_1.registerWidget('Banner', Banner, bannerPropTypes, ['titleBlock', 'video', 'background', 'button']);
+},{"react":"../node_modules/react/index.js","../../propTypes":"propTypes.ts","./styles.pcss":"components/Banner/styles.pcss","../../utils":"utils.ts","../../everything":"everything.tsx","../ContentWrapper":"components/ContentWrapper/index.tsx"}],"components/Button/styles.pcss":[function(require,module,exports) {
+module.exports = {
+  "button": "_button_lrai3_1"
 };
 },{}],"components/Button/index.tsx":[function(require,module,exports) {
 "use strict";
@@ -26895,7 +27505,7 @@ function (_React$Component) {
 }(React.Component);
 
 exports.default = Button;
-exports.widgetButtonId = everything_1.registerWidget('Button', Button, buttonPropTypes, ['onClick']);
+exports.widgetButton = everything_1.registerWidget('Button', Button, buttonPropTypes, ['onClick']);
 },{"react":"../node_modules/react/index.js","../../propTypes":"propTypes.ts","./styles.pcss":"components/Button/styles.pcss","../../utils":"utils.ts","../../everything":"everything.tsx"}],"components/PageContainer/styles.pcss":[function(require,module,exports) {
 module.exports = {
   "wrapper": "_wrapper_1k4bf_1"
@@ -26970,8 +27580,99 @@ function (_React$Component) {
 
 exports.default = PageContainer;
 var pageContainerProps = {};
-exports.widgetPageContainerId = everything_1.registerWidget('PageContainer', PageContainer, pageContainerProps, ['wrapper', 'background', 'color', 'container', 'page']);
-},{"react":"../node_modules/react/index.js","./styles.pcss":"components/PageContainer/styles.pcss","../../utils":"utils.ts","../../everything":"everything.tsx"}],"components/Test/index.tsx":[function(require,module,exports) {
+exports.widgetPageContainer = everything_1.registerWidget('PageContainer', PageContainer, pageContainerProps, ['wrapper', 'background', 'color', 'container', 'page']);
+},{"react":"../node_modules/react/index.js","./styles.pcss":"components/PageContainer/styles.pcss","../../utils":"utils.ts","../../everything":"everything.tsx"}],"components/VideoBackground/styles.pcss":[function(require,module,exports) {
+module.exports = {
+  "wrapper": "_wrapper_1nyuo_1",
+  "video": "_video_1nyuo_8"
+};
+},{}],"components/VideoBackground/index.tsx":[function(require,module,exports) {
+"use strict";
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+  }
+  result["default"] = mod;
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var React = __importStar(require("react"));
+
+var PropTypes = __importStar(require("../../propTypes"));
+
+var styles = __importStar(require("./styles.pcss"));
+
+var utils_1 = require("../../utils");
+
+var everything_1 = require("../../everything");
+
+exports.cx = utils_1.bindStyles(styles);
+var propTypes = {
+  url: PropTypes.string,
+  mobileImageUrl: PropTypes.string
+};
+
+var VideoBackground =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(VideoBackground, _React$Component);
+
+  function VideoBackground() {
+    _classCallCheck(this, VideoBackground);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(VideoBackground).apply(this, arguments));
+  }
+
+  _createClass(VideoBackground, [{
+    key: "render",
+    value: function render() {
+      return React.createElement("div", {
+        className: exports.cx('wrapper')
+      }, React.createElement("video", {
+        src: this.props.url,
+        className: exports.cx('video'),
+        autoPlay: true,
+        loop: true,
+        muted: true
+      }));
+    }
+  }]);
+
+  return VideoBackground;
+}(React.Component);
+
+exports.default = VideoBackground;
+exports.widgetVideoBackground = everything_1.registerWidget('VideoBackground', VideoBackground, propTypes, ['video', 'background', 'image']);
+},{"react":"../node_modules/react/index.js","../../propTypes":"propTypes.ts","./styles.pcss":"components/VideoBackground/styles.pcss","../../utils":"utils.ts","../../everything":"everything.tsx"}],"components/Test/styles.pcss":[function(require,module,exports) {
+module.exports = {
+  "button": "_button_1e0ek_1"
+};
+},{}],"components/Test/index.tsx":[function(require,module,exports) {
 "use strict";
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -27060,8 +27761,351 @@ function (_React$Component) {
 }(React.Component);
 
 exports.default = Test;
-exports.widgetTestId = everything_1.registerWidget('Test', Test, testPropTypes, ['test']);
-},{"react":"../node_modules/react/index.js","../../propTypes":"propTypes.ts","./styles.pcss":"components/Button/styles.pcss","../../utils":"utils.ts","../../everything":"everything.tsx"}],"editorComponents/WidgetFinder/styles.pcss":[function(require,module,exports) {
+exports.widgetTest = everything_1.registerWidget('Test', Test, testPropTypes, ['test']);
+},{"react":"../node_modules/react/index.js","../../propTypes":"propTypes.ts","./styles.pcss":"components/Test/styles.pcss","../../utils":"utils.ts","../../everything":"everything.tsx"}],"components/Benefit/styles.pcss":[function(require,module,exports) {
+module.exports = {
+  "wrapper": "_wrapper_axkb2_1",
+  "image": "_image_axkb2_7",
+  "title": "_title_axkb2_11",
+  "description": "_description_axkb2_17"
+};
+},{}],"components/Benefit/index.tsx":[function(require,module,exports) {
+"use strict";
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+  }
+  result["default"] = mod;
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var React = __importStar(require("react"));
+
+var PropTypes = __importStar(require("../../propTypes"));
+
+var styles = __importStar(require("./styles.pcss"));
+
+var utils_1 = require("../../utils");
+
+var everything_1 = require("../../everything");
+
+exports.cx = utils_1.bindStyles(styles);
+
+var Benefit = function Benefit(_ref) {
+  var title = _ref.title,
+      description = _ref.description,
+      image = _ref.image;
+  return React.createElement("div", {
+    className: exports.cx('wrapper')
+  }, React.createElement("img", {
+    src: image,
+    className: exports.cx('image')
+  }), React.createElement("div", null, React.createElement("div", {
+    className: exports.cx('title')
+  }, title), React.createElement("div", {
+    className: exports.cx('description')
+  }, description)));
+};
+
+exports.widgetBenefit = everything_1.registerWidget('Benefit', Benefit, {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  image: PropTypes.string
+}, ['benefits', 'icon']);
+
+var ItemWrapper = function ItemWrapper(_ref2) {
+  var children = _ref2.children,
+      direction = _ref2.direction,
+      align = _ref2.align;
+  return React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: direction === 'horizontal' ? 'row' : 'column',
+      alignItems: align,
+      width: '100%'
+    }
+  }, children);
+};
+
+exports.widgetHorizontalWrapper = everything_1.registerWidget('ItemWrapper', ItemWrapper, {
+  direction: PropTypes.choice('horizontal', 'vertical'),
+  align: PropTypes.choice('flex-start', 'flex-end', 'center')
+}, ['wrapper', 'horizontal', 'flex'], 'HorizontalWrapper');
+},{"react":"../node_modules/react/index.js","../../propTypes":"propTypes.ts","./styles.pcss":"components/Benefit/styles.pcss","../../utils":"utils.ts","../../everything":"everything.tsx"}],"components/Breadcrumbs/styles.pcss":[function(require,module,exports) {
+module.exports = {
+  "wrapper": "_wrapper_bsqez_1",
+  "itemWrapper": "_itemWrapper_bsqez_5",
+  "item": "_item_bsqez_5",
+  "link": "_link_bsqez_24"
+};
+},{}],"components/Breadcrumbs/index.tsx":[function(require,module,exports) {
+"use strict";
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+  }
+  result["default"] = mod;
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var React = __importStar(require("react"));
+
+var PropTypes = __importStar(require("../../propTypes"));
+
+var styles = __importStar(require("./styles.pcss"));
+
+var utils_1 = require("../../utils");
+
+var everything_1 = require("../../everything");
+
+exports.cx = utils_1.bindStyles(styles);
+var propTypes = {
+  path: PropTypes.array(PropTypes.object({
+    name: PropTypes.string,
+    url: PropTypes.string
+  })),
+  textColor: PropTypes.string
+};
+
+var Breadcrumbs =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Breadcrumbs, _React$Component);
+
+  function Breadcrumbs() {
+    _classCallCheck(this, Breadcrumbs);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Breadcrumbs).apply(this, arguments));
+  }
+
+  _createClass(Breadcrumbs, [{
+    key: "render",
+    value: function render() {
+      return React.createElement("div", {
+        style: {
+          color: this.props.textColor
+        },
+        className: exports.cx('wrapper')
+      }, this.props.path.map(function (item) {
+        return React.createElement("span", {
+          className: exports.cx('itemWrapper'),
+          key: item.name
+        }, React.createElement("a", {
+          className: exports.cx('item', {
+            link: Boolean(item.url)
+          }),
+          href: item.url
+        }, item.name));
+      }));
+    }
+  }]);
+
+  return Breadcrumbs;
+}(React.Component);
+
+exports.default = Breadcrumbs;
+exports.widgetBreadcrumbs = everything_1.registerWidget('Breadcrumbs', Breadcrumbs, propTypes, ['links', 'path', 'page']);
+},{"react":"../node_modules/react/index.js","../../propTypes":"propTypes.ts","./styles.pcss":"components/Breadcrumbs/styles.pcss","../../utils":"utils.ts","../../everything":"everything.tsx"}],"components/ProductParam/styles.pcss":[function(require,module,exports) {
+module.exports = {
+  "param": "_param_1ies7_1",
+  "name": "_name_1ies7_9",
+  "value": "_value_1ies7_13"
+};
+},{}],"components/ProductParam/index.tsx":[function(require,module,exports) {
+"use strict";
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+  }
+  result["default"] = mod;
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var React = __importStar(require("react"));
+
+var PropTypes = __importStar(require("../../propTypes"));
+
+var styles = __importStar(require("./styles.pcss"));
+
+var utils_1 = require("../../utils");
+
+var everything_1 = require("../../everything");
+
+exports.cx = utils_1.bindStyles(styles);
+
+var ProductParam = function ProductParam(_ref) {
+  var name = _ref.name,
+      value = _ref.value,
+      unit = _ref.unit,
+      prefix = _ref.prefix,
+      textValue = _ref.textValue;
+  var printedValue = null;
+
+  if (textValue) {
+    printedValue = textValue;
+  } else if (value !== null && value !== undefined) {
+    printedValue = "".concat(prefix || '', " ").concat(value, " ").concat(unit || '');
+  }
+
+  return React.createElement("div", {
+    className: exports.cx('param')
+  }, React.createElement("div", {
+    className: exports.cx('name')
+  }, name), printedValue && React.createElement("div", {
+    className: exports.cx('value')
+  }, printedValue));
+};
+
+exports.widgetProductParam = everything_1.registerWidget('ProductParam', ProductParam, {
+  name: PropTypes.string,
+  value: PropTypes.optional(PropTypes.number),
+  unit: PropTypes.optional(PropTypes.string),
+  prefix: PropTypes.optional(PropTypes.string),
+  textValue: PropTypes.optional(PropTypes.string)
+}, ['benefits', 'icon']);
+},{"react":"../node_modules/react/index.js","../../propTypes":"propTypes.ts","./styles.pcss":"components/ProductParam/styles.pcss","../../utils":"utils.ts","../../everything":"everything.tsx"}],"components/ProductDescription/styles.pcss":[function(require,module,exports) {
+module.exports = {
+  "wrapper": "_wrapper_1qyqr_1",
+  "left": "_left_1qyqr_6",
+  "category": "_category_1qyqr_11",
+  "selected": "_selected_1qyqr_15"
+};
+},{}],"components/ProductDescription/index.tsx":[function(require,module,exports) {
+"use strict";
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+  }
+  result["default"] = mod;
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var React = __importStar(require("react"));
+
+var PropTypes = __importStar(require("../../propTypes"));
+
+var styles = __importStar(require("./styles.pcss"));
+
+var utils_1 = require("../../utils");
+
+var everything_1 = require("../../everything");
+
+exports.cx = utils_1.bindStyles(styles);
+
+var ProductDescription =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(ProductDescription, _React$Component);
+
+  function ProductDescription() {
+    var _this;
+
+    _classCallCheck(this, ProductDescription);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ProductDescription).apply(this, arguments));
+    _this.state = {
+      selectedCategoryIndex: 0
+    };
+    return _this;
+  }
+
+  _createClass(ProductDescription, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var selectedCategory = this.props.categories[this.state.selectedCategoryIndex];
+      return React.createElement("div", {
+        className: exports.cx('wrapper')
+      }, React.createElement("div", {
+        className: exports.cx('left')
+      }, this.props.categories.map(function (cat, catIndex) {
+        return React.createElement("div", {
+          key: catIndex,
+          className: exports.cx('category', {
+            selected: catIndex === _this2.state.selectedCategoryIndex
+          })
+        }, React.createElement("span", null, cat.name));
+      })), React.createElement("div", {
+        className: exports.cx('right')
+      }, selectedCategory && selectedCategory.contentSlots));
+    }
+  }]);
+
+  return ProductDescription;
+}(React.Component);
+
+exports.widgetProductDescription = everything_1.registerWidget('ProductDescription', ProductDescription, {
+  categories: PropTypes.array(PropTypes.object({
+    name: PropTypes.string,
+    contentSlots: PropTypes.array(PropTypes.editorNode)
+  }))
+}, ['benefits', 'icon']);
+},{"react":"../node_modules/react/index.js","../../propTypes":"propTypes.ts","./styles.pcss":"components/ProductDescription/styles.pcss","../../utils":"utils.ts","../../everything":"everything.tsx"}],"editorComponents/WidgetFinder/styles.pcss":[function(require,module,exports) {
 module.exports = {
   "wrapper": "_wrapper_3teal_1",
   "list": "_list_3teal_5",
@@ -27134,7 +28178,7 @@ function (_React$Component) {
         className: cx('widget'),
         key: widgetIndex,
         onMouseDown: function onMouseDown() {
-          everything_1.globalInsertInfo.dragged = everything_1.instantiateWidget(widget.index, {}, []);
+          everything_1.globalInsertInfo.dragged = everything_1.instantiateWidget(widget, {}, []);
           _this.tempDraggedNode = everything_1.globalInsertInfo.dragged;
           everything_1.globalInsertInfo.shadowDomNode.style.display = 'block';
         }
@@ -27142,7 +28186,11 @@ function (_React$Component) {
     };
 
     _this.findWidgets = function () {
-      return everything_1.globalState.widgets.slice(1).filter(function (w) {
+      return everything_1.globalState.widgets.filter(function (w) {
+        if (w.index === 0) {
+          return false;
+        }
+
         var nameMatch = utils_1.stringIncludesToLowerCase(w.name, _this.state.searchString);
         var tagsMatch = false;
         var _iteratorNormalCompletion = true;
@@ -27294,7 +28342,14 @@ function openPopup(title) {
 
 exports.openPopup = openPopup;
 everything_1.registerFunc('openPopup', openPopup, PropTypes.func([PropTypes.string], PropTypes.any));
-},{"./everything":"everything.tsx","./analytics":"analytics.ts","./propTypes":"propTypes.ts"}],"index.tsx":[function(require,module,exports) {
+},{"./everything":"everything.tsx","./analytics":"analytics.ts","./propTypes":"propTypes.ts"}],"defaultStore.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultStoreString = "{\n  \"storedNodes\": [\n    {\n      \"index\": 0,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [],\n      \"props\": null,\n      \"editorName\": \"You should not be using this node anywhere\",\n      \"exists\": true\n    },\n    {\n      \"index\": 1,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"text\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\u041F\u0440\u0435\u0438\u043C\u0443\u0449\u0435\u0441\u0442\u0432\u0430\"\n          },\n          \"margin\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\"\n          }\n        }\n      },\n      \"editorName\": \"header\",\n      \"widgetName\": \"Section_Header\",\n      \"exists\": true\n    },\n    {\n      \"index\": 2,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [\n        1,\n        14\n      ],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"padding\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\"\n          }\n        }\n      },\n      \"editorName\": \"section_benefits\",\n      \"widgetName\": \"Section\",\n      \"exists\": true\n    },\n    {\n      \"index\": 3,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [\n        12,\n        13\n      ],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"padding\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\"\n          }\n        }\n      },\n      \"editorName\": \"section_about\",\n      \"widgetName\": \"Section\",\n      \"exists\": true\n    },\n    {\n      \"index\": 4,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [\n        5,\n        11,\n        29\n      ],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {}\n      },\n      \"editorName\": \"page_container\",\n      \"widgetName\": \"PageContainer\",\n      \"exists\": true\n    },\n    {\n      \"index\": 5,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [\n        8,\n        9,\n        10,\n        6,\n        7\n      ],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"title\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\u0410\u0432\u0442\u043E\u043E\u0442\u0432\u0435\u0442\u0447\u0438\u043A\"\n          },\n          \"description\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\u0411\u0443\u0434\u044C \u0432 \u043A\u0443\u0440\u0441\u0435 \u0432\u0441\u0435\u0445 \u0432\u0445\u043E\u0434\u044F\u0449\u0438\u0445 \u0434\u0430\u0436\u0435 \u0441 \u0432\u044B\u043A\u043B\u044E\u0447\u0435\u043D\u043D\u044B\u043C \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u043E\u043C \u0438\u043B\u0438 \u043D\u0430\u0445\u043E\u0434\u044F\u0441\u044C \u0432\u043D\u0435 \u0437\u043E\u043D\u044B \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u044F \u0441\u0435\u0442\u0438\"\n          },\n          \"topSlot\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": null\n          },\n          \"bottomSlot\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": 6\n          },\n          \"background\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": 7\n          },\n          \"textColor\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"#fff\"\n          },\n          \"topSlots\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": [\n              {\n                \"isJsonPath\": false,\n                \"path\": [],\n                \"value\": 8\n              }\n            ]\n          },\n          \"contentSlots\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": [\n              {\n                \"isJsonPath\": false,\n                \"path\": [],\n                \"value\": 8\n              },\n              {\n                \"isJsonPath\": false,\n                \"path\": [],\n                \"value\": 9\n              },\n              {\n                \"isJsonPath\": false,\n                \"path\": [],\n                \"value\": 10\n              },\n              {\n                \"isJsonPath\": false,\n                \"path\": [],\n                \"value\": 6\n              }\n            ]\n          }\n        }\n      },\n      \"editorName\": \"banner\",\n      \"widgetName\": \"Banner\",\n      \"exists\": true\n    },\n    {\n      \"index\": 6,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"text\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u203A\"\n          },\n          \"margin\": {\n            \"isJsonPath\": false,\n            \"path\": []\n          },\n          \"width\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"240px\"\n          },\n          \"onClick\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": null\n          },\n          \"className\": {\n            \"isJsonPath\": false,\n            \"path\": []\n          }\n        }\n      },\n      \"editorName\": \"button\",\n      \"widgetName\": \"Button\",\n      \"exists\": true\n    },\n    {\n      \"index\": 7,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"url\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"//static.beeline.ru/upload/dpcupload/contents/342/Vse_dlya_bisnesa_v_st.mp4\"\n          },\n          \"mobileImageUrl\": {\n            \"isJsonPath\": false,\n            \"path\": []\n          }\n        }\n      },\n      \"editorName\": \"video_bg\",\n      \"widgetName\": \"VideoBackground\",\n      \"exists\": true\n    },\n    {\n      \"index\": 8,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"path\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": [\n              {\n                \"isJsonPath\": false,\n                \"path\": [],\n                \"value\": {\n                  \"name\": {\n                    \"isJsonPath\": false,\n                    \"path\": [],\n                    \"value\": \"\u0411\u0438\u0437\u043D\u0435\u0441\u0443\"\n                  },\n                  \"url\": {\n                    \"isJsonPath\": false,\n                    \"path\": [],\n                    \"value\": \"https://google.com\"\n                  }\n                }\n              },\n              {\n                \"isJsonPath\": false,\n                \"path\": [],\n                \"value\": {\n                  \"name\": {\n                    \"isJsonPath\": false,\n                    \"path\": [],\n                    \"value\": \"\u041C\u043E\u0431\u0438\u043B\u044C\u043D\u0430\u044F \u0441\u0432\u044F\u0437\u044C\"\n                  },\n                  \"url\": {\n                    \"isJsonPath\": false,\n                    \"path\": [],\n                    \"value\": \"fjdsk\"\n                  }\n                }\n              },\n              {\n                \"isJsonPath\": false,\n                \"path\": [],\n                \"value\": {\n                  \"name\": {\n                    \"isJsonPath\": false,\n                    \"path\": [],\n                    \"value\": \"\u0423\u0441\u043B\u0443\u0433\u0438\"\n                  },\n                  \"url\": {\n                    \"isJsonPath\": false,\n                    \"path\": [],\n                    \"value\": \"fjadks\"\n                  }\n                }\n              },\n              {\n                \"isJsonPath\": false,\n                \"path\": [],\n                \"value\": {\n                  \"name\": {\n                    \"isJsonPath\": false,\n                    \"path\": [],\n                    \"value\": \"\u0410\u0432\u0442\u043E\u043E\u0442\u0432\u0435\u0442\u0447\u0438\u043A\"\n                  },\n                  \"url\": {\n                    \"isJsonPath\": false,\n                    \"path\": [],\n                    \"value\": \"\"\n                  }\n                }\n              }\n            ]\n          },\n          \"textColor\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"#fff\"\n          }\n        }\n      },\n      \"editorName\": \"breadcrumbs\",\n      \"widgetName\": \"Breadcrumbs\",\n      \"exists\": true\n    },\n    {\n      \"index\": 9,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"text\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\u0410\u0432\u0442\u043E\u043E\u0442\u0432\u0435\u0442\u0447\u0438\u043A\"\n          }\n        }\n      },\n      \"editorName\": \"title\",\n      \"widgetName\": \"Banner_Title\",\n      \"exists\": true\n    },\n    {\n      \"index\": 10,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"text\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\u0411\u0443\u0434\u044C \u0432 \u043A\u0443\u0440\u0441\u0435 \u0432\u0441\u0435\u0445 \u0432\u0445\u043E\u0434\u044F\u0449\u0438\u0445 \u0434\u0430\u0436\u0435 \u0441 \u0432\u044B\u043A\u043B\u044E\u0447\u0435\u043D\u043D\u044B\u043C \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u043E\u043C \u0438\u043B\u0438 \u043D\u0430\u0445\u043E\u0434\u044F\u0441\u044C \u0432\u043D\u0435 \u0437\u043E\u043D\u044B \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u044F \u0441\u0435\u0442\u0438\"\n          }\n        }\n      },\n      \"editorName\": \"description\",\n      \"widgetName\": \"Banner_Description\",\n      \"exists\": true\n    },\n    {\n      \"index\": 11,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [\n        3,\n        2,\n        23\n      ],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"color\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"white\"\n          },\n          \"className\": {\n            \"isJsonPath\": false,\n            \"path\": []\n          }\n        }\n      },\n      \"editorName\": \"content\",\n      \"widgetName\": \"ContentWrapper\",\n      \"exists\": true\n    },\n    {\n      \"index\": 12,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"text\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\u041E\u0431 \u0443\u0441\u043B\u0443\u0433\u0435\"\n          },\n          \"margin\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\"\n          }\n        }\n      },\n      \"editorName\": \"header\",\n      \"widgetName\": \"Section_Header\",\n      \"exists\": true\n    },\n    {\n      \"index\": 13,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"text\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0438\u0442\u0435 \xAB\u0410\u0432\u0442\u043E\u043E\u0442\u0432\u0435\u0442\u0447\u0438\u043A\xBB, \u0447\u0442\u043E\u0431\u044B \u043D\u0435 \u043F\u0440\u043E\u043F\u0443\u0441\u0442\u0438\u0442\u044C \u0437\u0432\u043E\u043D\u043A\u0438 \u043E\u0442 \u043A\u043B\u0438\u0435\u043D\u0442\u043E\u0432, \u043A\u043E\u043B\u043B\u0435\u0433 \u0438 \u043F\u0430\u0440\u0442\u043D\u0435\u0440\u043E\u0432. \u0415\u0441\u043B\u0438 \u0443 \u0432\u0430\u0441 \u043D\u0435 \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u0441\u044F \u043E\u0442\u0432\u0435\u0442\u0438\u0442\u044C \u043D\u0430 \u0432\u0445\u043E\u0434\u044F\u0449\u0438\u0439 \u0432\u044B\u0437\u043E\u0432, \u043F\u0440\u0438\u0434\u0435\u0442 \u0433\u043E\u043B\u043E\u0441\u043E\u0432\u043E\u0435 \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435 \u0438\u043B\u0438 SMS \u0441 \u043D\u043E\u043C\u0435\u0440\u043E\u043C \u0437\u0432\u043E\u043D\u0438\u0432\u0448\u0435\u0433\u043E. \u0410\u0432\u0442\u043E\u043E\u0442\u0432\u0435\u0442\u0447\u0438\u043A \u0441\u043C\u043E\u0436\u0435\u0442 \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u0434\u043E 50 \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0439, \u0430 \u0432\u044B \u2014 \u043F\u0440\u043E\u0441\u043B\u0443\u0448\u0430\u0442\u044C \u0432\u0430\u0436\u043D\u0443\u044E \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E \u043D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u043E \u0440\u0430\u0437.\"\n          }\n        }\n      },\n      \"editorName\": \"text\",\n      \"widgetName\": \"Section_Paragraph\",\n      \"exists\": true\n    },\n    {\n      \"index\": 14,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [\n        17,\n        18,\n        19\n      ],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"direction\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"horizontal\"\n          },\n          \"align\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": null\n          }\n        }\n      },\n      \"editorName\": \"benefits\",\n      \"widgetName\": \"ItemWrapper\",\n      \"exists\": true\n    },\n    {\n      \"index\": 15,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {}\n      },\n      \"editorName\": \"DELETED_NODE\",\n      \"exists\": true\n    },\n    {\n      \"index\": 16,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"title\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\u0420\u0430\u0431\u043E\u0442\u0430\u0435\u0442 \u0432\u0441\u0435\u0433\u0434\u0430 \u0438 \u0432\u0435\u0437\u0434\u0435\"\n          },\n          \"description\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\u0412\u0430\u043C \u043D\u0435 \u043D\u0443\u0436\u043D\u043E \u0432\u043A\u043B\u044E\u0447\u0430\u0442\u044C \u0430\u0432\u0442\u043E\u043E\u0442\u0432\u0435\u0442\u0447\u0438\u043A \u043F\u0435\u0440\u0435\u0434 \u043A\u0430\u0436\u0434\u044B\u043C \u0441\u043E\u0432\u0435\u0449\u0430\u043D\u0438\u0435\u043C \u0438\u043B\u0438 \u0434\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u043C \u043F\u0435\u0440\u0435\u043B\u0435\u0442\u043E\u043C. \u0415\u0441\u043B\u0438 \u0432\u044B \u043D\u0435 \u043E\u0442\u0432\u0435\u0447\u0430\u0435\u0442\u0435 30 \u0441\u0435\u043A\u0443\u043D\u0434 \u2014 \u043E\u043D \u0437\u0430\u043F\u0443\u0441\u0442\u0438\u0442\u0441\u044F \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438.\"\n          },\n          \"image\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"https://static.beeline.ru/upload/images/business/icons/rabotaet-vsegda-i-vezde.svg\"\n          }\n        }\n      },\n      \"editorName\": \"benefit0\",\n      \"widgetName\": \"Benefit\",\n      \"exists\": true\n    },\n    {\n      \"index\": 17,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"title\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\u0420\u0430\u0431\u043E\u0442\u0430\u0435\u0442 \u0432\u0441\u0435\u0433\u0434\u0430 \u0438 \u0432\u0435\u0437\u0434\u0435\"\n          },\n          \"description\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\u0412\u0430\u043C \u043D\u0435 \u043D\u0443\u0436\u043D\u043E \u0432\u043A\u043B\u044E\u0447\u0430\u0442\u044C \u0430\u0432\u0442\u043E\u043E\u0442\u0432\u0435\u0442\u0447\u0438\u043A \u043F\u0435\u0440\u0435\u0434 \u043A\u0430\u0436\u0434\u044B\u043C \u0441\u043E\u0432\u0435\u0449\u0430\u043D\u0438\u0435\u043C \u0438\u043B\u0438 \u0434\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u043C \u043F\u0435\u0440\u0435\u043B\u0435\u0442\u043E\u043C. \u0415\u0441\u043B\u0438 \u0432\u044B \u043D\u0435 \u043E\u0442\u0432\u0435\u0447\u0430\u0435\u0442\u0435 30 \u0441\u0435\u043A\u0443\u043D\u0434 \u2014 \u043E\u043D \u0437\u0430\u043F\u0443\u0441\u0442\u0438\u0442\u0441\u044F \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438.\"\n          },\n          \"image\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"https://static.beeline.ru/upload/images/business/icons/rabotaet-vsegda-i-vezde.svg\"\n          }\n        }\n      },\n      \"editorName\": \"benefit_0\",\n      \"widgetName\": \"Benefit\",\n      \"exists\": true\n    },\n    {\n      \"index\": 18,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"title\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\u041F\u0440\u043E\u0441\u0442\u043E\u0435 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435\"\n          },\n          \"description\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\u0421\u043E\u0445\u0440\u0430\u043D\u044F\u0439\u0442\u0435 \u0432\u0430\u0436\u043D\u044B\u0435 \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F \u043E\u0442 \u043A\u043B\u0438\u0435\u043D\u0442\u043E\u0432, \u043A\u043E\u043B\u043B\u0435\u0433 \u0438 \u043F\u0430\u0440\u0442\u043D\u0435\u0440\u043E\u0432, \u0443\u0434\u0430\u043B\u044F\u0439\u0442\u0435 \u043D\u0435\u043D\u0443\u0436\u043D\u044B\u0435. \u041F\u043E\u043B\u0443\u0447\u0430\u0439\u0442\u0435 SMS \u0441 \u043D\u043E\u043C\u0435\u0440\u0430\u043C\u0438 \u0437\u0432\u043E\u043D\u0438\u0432\u0448\u0438\u0445 \u0432\u0430\u043C \u043B\u044E\u0434\u0435\u0439.\"\n          },\n          \"image\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"https://static.beeline.ru/upload/images/business/icons/prostoe-upravlenie.svg\"\n          }\n        }\n      },\n      \"editorName\": \"benefit_1\",\n      \"widgetName\": \"Benefit\",\n      \"exists\": true\n    },\n    {\n      \"index\": 19,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"title\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\u041B\u0435\u0433\u043A\u0438\u0439 \u0434\u043E\u0441\u0442\u0443\u043F\"\n          },\n          \"description\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\u041F\u0440\u043E\u0441\u043B\u0443\u0448\u0438\u0432\u0430\u0439\u0442\u0435 \u043D\u043E\u0432\u044B\u0435 \u0438 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u043D\u044B\u0435 \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F, \u043A\u043E\u0433\u0434\u0430 \u0432\u0430\u043C \u0443\u0434\u043E\u0431\u043D\u043E. \u0410\u0432\u0442\u043E\u043E\u0442\u0432\u0435\u0442\u0447\u0438\u043A \u0441\u043C\u043E\u0436\u0435\u0442 \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C 50 \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0439 \u0434\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C\u044E 120 \u0441\u0435\u043A\u0443\u043D\u0434.\"\n          },\n          \"image\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"https://static.beeline.ru/upload/images/business/icons/legkii-dostup.svg\"\n          }\n        }\n      },\n      \"editorName\": \"benefit_2\",\n      \"widgetName\": \"Benefit\",\n      \"exists\": true\n    },\n    {\n      \"index\": 20,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"text\": {\n            \"isJsonPath\": false,\n            \"path\": []\n          }\n        }\n      },\n      \"editorName\": \"DELETED_NODE\",\n      \"exists\": true\n    },\n    {\n      \"index\": 21,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {}\n      },\n      \"editorName\": \"DELETED_NODE\",\n      \"exists\": true\n    },\n    {\n      \"index\": 22,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"text\": {\n            \"isJsonPath\": false,\n            \"path\": []\n          }\n        }\n      },\n      \"editorName\": \"header\",\n      \"widgetName\": \"Section_Header\",\n      \"exists\": true\n    },\n    {\n      \"index\": 23,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [\n        24,\n        25,\n        27,\n        28\n      ],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"padding\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\"\n          }\n        }\n      },\n      \"editorName\": \"section_price\",\n      \"widgetName\": \"Section\",\n      \"exists\": true\n    },\n    {\n      \"index\": 24,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"text\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C\"\n          },\n          \"margin\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\"\n          }\n        }\n      },\n      \"editorName\": \"header\",\n      \"widgetName\": \"Section_Header\",\n      \"exists\": true\n    },\n    {\n      \"index\": 25,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [\n        26\n      ],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"direction\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"vertical\"\n          },\n          \"align\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"center\"\n          }\n        }\n      },\n      \"editorName\": \"params\",\n      \"widgetName\": \"ItemWrapper\",\n      \"exists\": true\n    },\n    {\n      \"index\": 26,\n      \"isCollection\": true,\n      \"collectionPath\": [\n        \"content\",\n        \"serviceParams\"\n      ],\n      \"childIndices\": [],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"title\": {\n            \"isJsonPath\": false,\n            \"path\": []\n          },\n          \"description\": {\n            \"isJsonPath\": false,\n            \"path\": []\n          },\n          \"image\": {\n            \"isJsonPath\": false,\n            \"path\": []\n          },\n          \"name\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\"\n          },\n          \"value\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": 0\n          },\n          \"unit\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\"\n          },\n          \"prefix\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\"\n          },\n          \"textValue\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\"\n          }\n        }\n      },\n      \"editorName\": \"params_items\",\n      \"widgetName\": \"ProductParam\",\n      \"exists\": true\n    },\n    {\n      \"index\": 27,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"text\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\u041F\u043E\u0434\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u203A\"\n          },\n          \"margin\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"20px auto\"\n          },\n          \"width\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"240px\"\n          },\n          \"onClick\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": null\n          },\n          \"className\": {\n            \"isJsonPath\": false,\n            \"path\": []\n          }\n        }\n      },\n      \"editorName\": \"button\",\n      \"widgetName\": \"Button\",\n      \"exists\": true\n    },\n    {\n      \"index\": 28,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"text\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"8 800 770 00 08\"\n          },\n          \"url\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"8 800 770 00 08\"\n          },\n          \"fontSize\": {\n            \"isJsonPath\": false,\n            \"path\": []\n          },\n          \"className\": {\n            \"isJsonPath\": false,\n            \"path\": []\n          },\n          \"phoneLink\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": true\n          },\n          \"margin\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"0px auto 30px\"\n          }\n        }\n      },\n      \"editorName\": \"phone_link\",\n      \"widgetName\": \"TextLink\",\n      \"exists\": true\n    },\n    {\n      \"index\": 29,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [\n        30\n      ],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"color\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"#f0f0f0\"\n          },\n          \"className\": {\n            \"isJsonPath\": false,\n            \"path\": []\n          }\n        }\n      },\n      \"editorName\": \"legal\",\n      \"widgetName\": \"ContentWrapper\",\n      \"exists\": true\n    },\n    {\n      \"index\": 30,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [\n        32\n      ],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"padding\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"55px 0\"\n          }\n        }\n      },\n      \"editorName\": \"description\",\n      \"widgetName\": \"Section\",\n      \"exists\": true\n    },\n    {\n      \"index\": 31,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"categories\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": []\n          }\n        }\n      },\n      \"editorName\": \"ProductDescription_0\",\n      \"widgetName\": \"ProductDescription\",\n      \"exists\": true\n    },\n    {\n      \"index\": 32,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [\n        33\n      ],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"categories\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": [\n              {\n                \"isJsonPath\": false,\n                \"path\": [],\n                \"value\": {\n                  \"name\": {\n                    \"isJsonPath\": false,\n                    \"path\": [],\n                    \"value\": \"\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0443\u0441\u043B\u0443\u0433\u043E\u0439\"\n                  },\n                  \"contentSlots\": {\n                    \"isJsonPath\": false,\n                    \"path\": [],\n                    \"value\": [\n                      {\n                        \"isJsonPath\": false,\n                        \"path\": [],\n                        \"value\": 33\n                      }\n                    ]\n                  }\n                }\n              },\n              {\n                \"isJsonPath\": false,\n                \"path\": [],\n                \"value\": {\n                  \"name\": {\n                    \"isJsonPath\": false,\n                    \"path\": [],\n                    \"value\": \"\u0422\u0435\u0445\u043D\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0445\u0430\u0440\u0430\u043A\u0442\u0435\u0440\u0438\u0441\u0442\u0438\u043A\u0438\"\n                  },\n                  \"contentSlots\": {\n                    \"isJsonPath\": false,\n                    \"path\": [],\n                    \"value\": []\n                  }\n                }\n              },\n              {\n                \"isJsonPath\": false,\n                \"path\": [],\n                \"value\": {\n                  \"name\": {\n                    \"isJsonPath\": false,\n                    \"path\": [],\n                    \"value\": \"\u041A\u0430\u043A \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0438\u0442\u044C\"\n                  },\n                  \"contentSlots\": {\n                    \"isJsonPath\": false,\n                    \"path\": [],\n                    \"value\": []\n                  }\n                }\n              }\n            ]\n          }\n        }\n      },\n      \"editorName\": \"product_description\",\n      \"widgetName\": \"ProductDescription\",\n      \"exists\": true\n    },\n    {\n      \"index\": 33,\n      \"isCollection\": false,\n      \"collectionPath\": [],\n      \"childIndices\": [],\n      \"props\": {\n        \"isJsonPath\": false,\n        \"path\": [],\n        \"value\": {\n          \"text\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0443\u0441\u043B\u0443\u0433\u043E\u0439\"\n          },\n          \"margin\": {\n            \"isJsonPath\": false,\n            \"path\": [],\n            \"value\": \"0px\"\n          }\n        }\n      },\n      \"editorName\": \"header\",\n      \"widgetName\": \"Section_Header\",\n      \"exists\": true\n    }\n  ],\n  \"editorRootIndex\": 4,\n  \"content\": {\n    \"cupsOfCoffee\": 3432,\n    \"tariffs\": [\n      {\n        \"title\": \"Test 100\",\n        \"description\": \"\u043F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u044B \u044D\u0442\u043E\u0433\u043E \u0432\u0438\u0434\u0436\u0435\u0442\u0430 \u0431\u0435\u0440\u0443\u0442\u0441\u044F \u0438\u0437 \u043C\u043E\u0434\u0435\u043B\u0438 \u0438\u0437 \u043F\u043E\u043B\u044F content.tariffs[0]\",\n        \"params\": [\n          {\n            \"value\": 100,\n            \"unit\": \"P \u0437\u0430 \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0435\"\n          },\n          {\n            \"value\": 200,\n            \"unit\": \"P/\u043C\u0438\u043D\"\n          }\n        ],\n        \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Circle-icons-camera.svg/1024px-Circle-icons-camera.svg.png\",\n        \"url\": \"https://google.com\"\n      },\n      {\n        \"title\": \"Test 200\",\n        \"description\": \"\u043F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u044B \u044D\u0442\u043E\u0433\u043E \u0432\u0438\u0434\u0436\u0435\u0442\u0430 \u0431\u0435\u0440\u0443\u0442\u0441\u044F \u0438\u0437 \u043C\u043E\u0434\u0435\u043B\u0438 \u0438\u0437 \u043F\u043E\u043B\u044F content.tariffs[1]\",\n        \"params\": [\n          {\n            \"value\": 200,\n            \"unit\": \"P \u0437\u0430 \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0435\"\n          },\n          {\n            \"value\": 400,\n            \"unit\": \"P/\u043C\u0438\u043D\"\n          }\n        ],\n        \"image\": \"http://icons.iconarchive.com/icons/danieledesantis/playstation-flat/256/playstation-circle-icon.png\",\n        \"url\": \"https://wikipedia.org\"\n      },\n      {\n        \"title\": \"Test 300\",\n        \"description\": \"\u043F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u044B \u044D\u0442\u043E\u0433\u043E \u0432\u0438\u0434\u0436\u0435\u0442\u0430 \u0431\u0435\u0440\u0443\u0442\u0441\u044F \u0438\u0437 \u043C\u043E\u0434\u0435\u043B\u0438 \u0438\u0437 \u043F\u043E\u043B\u044F content.tariffs[2]\",\n        \"params\": [\n          {\n            \"value\": 300,\n            \"unit\": \"P \u0437\u0430 \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0435\"\n          },\n          {\n            \"value\": 9000,\n            \"unit\": \"P/\u043C\u0438\u043D\"\n          }\n        ],\n        \"image\": \"http://www.iconarchive.com/download/i75815/martz90/circle/chrome.ico\",\n        \"url\": \"https://yandex.ru\"\n      }\n    ],\n    \"mappingTest\": {\n      \"str\": \"testString\",\n      \"num\": 123,\n      \"arr\": [\n        \"lel\",\n        \"lol\",\n        \"lal\"\n      ],\n      \"bool\": true,\n      \"choice\": \"bar\",\n      \"func\": {\n        \"$func\": \"sendQuickRequest\"\n      },\n      \"node\": {\n        \"$node\": 0\n      },\n      \"pathTest\": {\n        \"$path\": [\n          \"content\",\n          \"cupsOfCoffee\"\n        ]\n      }\n    },\n    \"collectionTest\": [\n      {\n        \"str\": \"testString\",\n        \"num\": 123,\n        \"arr\": [\n          \"lel\",\n          \"lol\",\n          \"lal\"\n        ],\n        \"bool\": true,\n        \"choice\": \"bar\",\n        \"func\": {\n          \"$func\": \"sendQuickRequest\"\n        },\n        \"node\": {\n          \"$node\": 0\n        },\n        \"pathTest\": {\n          \"$path\": [\n            \"content\",\n            \"cupsOfCoffee\"\n          ]\n        }\n      },\n      {\n        \"str\": \"fsdjk\",\n        \"num\": 12343,\n        \"arr\": [\n          \"lel\"\n        ],\n        \"bool\": false,\n        \"choice\": \"foo\",\n        \"func\": {\n          \"$func\": \"doNothing\"\n        },\n        \"node\": {\n          \"$node\": 0\n        },\n        \"pathTest\": {\n          \"$path\": [\n            \"content\",\n            \"cupsOfCoffee\"\n          ]\n        }\n      }\n    ],\n    \"serviceParams\": [\n      {\n        \"name\": \"\u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u044F\",\n        \"value\": 0,\n        \"unit\": \"\u20BD \u0437\u0430 \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0435\"\n      },\n      {\n        \"name\": \"\u0410\u0431\u043E\u043D\u0435\u043D\u0442\u0441\u043A\u0430\u044F \u043F\u043B\u0430\u0442\u0430\",\n        \"value\": 21,\n        \"unit\": \"\u20BD/\u043C\u0435\u0441\"\n      }\n    ]\n  }\n}";
+},{}],"index.tsx":[function(require,module,exports) {
 "use strict";
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -27347,6 +28402,10 @@ var TariffCard_1 = require("./components/TariffCard");
 
 var ContentWrapper_1 = require("./components/ContentWrapper");
 
+var SectionHeader_1 = require("./components/SectionHeader");
+
+var Banner_1 = require("./components/Banner");
+
 var everything_1 = require("./everything");
 
 var Button_1 = require("./components/Button");
@@ -27355,39 +28414,69 @@ var PageContainer_1 = require("./components/PageContainer");
 
 var Link_1 = require("./components/Link");
 
+var VideoBackground_1 = require("./components/VideoBackground");
+
 var Test_1 = require("./components/Test");
+
+var Benefit_1 = require("./components/Benefit");
+
+var Breadcrumbs_1 = require("./components/Breadcrumbs");
+
+var ProductParam_1 = require("./components/ProductParam");
+
+var ProductDescription_1 = require("./components/ProductDescription");
 
 var WidgetFinder_1 = __importDefault(require("./editorComponents/WidgetFinder"));
 
 var funcs = __importStar(require("./funcs"));
 
-console.log(funcs, TariffCard_1.widgetTariffCardId, Link_1.widgetLinkId, ContentWrapper_1.widgetContentWrapperId, Button_1.widgetButtonId, Test_1.widgetTestId);
+var defaultStore_1 = require("./defaultStore");
+
+console.log(funcs, TariffCard_1.widgetTariffCard, Link_1.widgetTextLink, ContentWrapper_1.widgetContentWrapper, Button_1.widgetButton, Test_1.widgetTest, Banner_1.widgetBanner, VideoBackground_1.widgetVideoBackground, Breadcrumbs_1.widgetBreadcrumbs, Banner_1.widgetBannerDescription, Banner_1.widgetBannerTitle, SectionHeader_1.widgetSectionHeader, SectionHeader_1.widgetSectionParagraph, Benefit_1.widgetBenefit, Benefit_1.widgetHorizontalWrapper, ProductParam_1.widgetProductParam, ProductDescription_1.widgetProductDescription);
 var cx = utils.bindStyles(styles);
 /* TODOS:
 
-[ ] copy/paste/cut in node tree
-[ ] jsonTreeView should be better at showing paths, funcs and nodes
+
+
+[ ] think about different regions. we can use the same base page with different 'inherited' pages
+    or it can be done on widget-per-widget basis
+
+[ ] we need a procedure for converting props for localStorage, because right now
+    they use too much space. maybe a custom format???
+[ ] when changing component prop types, old legacy ones should be erased, not stored in localStorage
 [ ] add default options (defined in widget default props) for funcs and editor nodes <MultiSelect>
-[ ] right-click context menu
 [ ] make a json editor for editing content
 [ ] mobile, desktop breakpoints. what do we do with that?
 
 [ ] bug: when dragging nodes in left panel when it is scrolled (preview in wrong place)
 [ ] bug: when removing a node from another node's children,
     it stays mapped in props
+[ ] bug: when changing widget prop types in code, the editor should not crash when reloading
+[ ] bug: copying a node with children does not copy children
 
 quality of life:
 [ ] expand on choice propType (right now it only takes strings)
-[ ] add a possibility to select react components (which map to widget types)
+replace choice with enum propType???
 [ ] hovering tooltips
 [?] when selecting a func, maybe parameters should be input fields (also mappable lol)
 [ ] generate widget instance count at startup
-[ ] a meta-program that automatically adds widgets and funcs??
 [ ] undo/redo
+[ ] a meta-program that automatically adds widgets and funcs??
 [ ] drag&drop in the preview window
 [ ] AB-tests
+[?] add a possibility to select react components (which map to widget types)
+[ ] drag array items in inspector to change order
 
 
+
+
+[x] added lots of widgets
+[x] when zooming in browser, panels should stay the same size
+[x] editor name should be editable in inspector
+[x] hotkeys for copy/paste/cut
+[x] copy/paste/cut in node tree
+[x] right-click context menu
+[x] jsonTreeView should be better at showing paths, funcs and nodes
 [x] when loading nodes from localStorage, calculate widget instanceCount
 [x] saving to localStorage
 [x] when storing nodes to localStorage, save widget and func string names as ids
@@ -27405,10 +28494,10 @@ quality of life:
 [x] json requires a new format
 [x] store node childIds as numbers, but pass them to react components as objects
 [x] mapping arrays
-add a switch 'array mapping mode' in inspector
-you can only select arrays of corresponding propType (of same length?)
-creates as many instances of widget as elements in array
-(in tree shown as single item(collection))
+    add a switch 'array mapping mode' in inspector
+    you can only select arrays of corresponding propType (of same length?)
+    creates as many instances of widget as elements in array
+    (in tree shown as single item(collection))
 [x] sending quickrequests (functions should be mappable and selectable from widget props)
 [x] add PCSS bullshit somehow
 [x] map whole props to one object
@@ -27425,37 +28514,13 @@ creates as many instances of widget as elements in array
 
 */
 
-if (everything_1.loadGlobalState()) {} else {
-  var card0 = everything_1.instantiateWidget(TariffCard_1.widgetTariffCardId, {});
-  var cardWidget = everything_1.getWidgetByIndex(TariffCard_1.widgetTariffCardId);
-  card0.props.value = everything_1.mapPropJsonToEditor({
-    title: 'Test no-mapping',
-    description: 'параметры этого виджета задаются на правой панели редактора',
-    params: [{
-      value: 100,
-      unit: 'P за подключение'
-    }, {
-      value: 200,
-      unit: 'P/мин'
-    }],
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Circle-icons-camera.svg/1024px-Circle-icons-camera.svg.png',
-    url: 'https://google.com'
-  }, cardWidget.propTypes, card0).value;
-  var card1 = everything_1.instantiateWidget(TariffCard_1.widgetTariffCardId, {});
-  card1.props.isJsonPath = true;
-  card1.props.path = ['content', 'tariffs', 0];
-  var card2 = everything_1.instantiateWidget(TariffCard_1.widgetTariffCardId, {});
-  card2.props.isJsonPath = true;
-  card2.props.path = ['content', 'tariffs', 1];
-  var pageContainer = everything_1.instantiateWidget(PageContainer_1.widgetPageContainerId, {}, [card0, card1, card2]);
-  everything_1.globalState.editorRoot = pageContainer;
-  everything_1.globalState.editorRoot.treeExpandedInEditor = true;
-  everything_1.globalState.inspectedNode = card0;
-  everything_1.globalState.content = {
-    cupsOfCoffee: 3432,
-    tariffs: [{
-      title: 'Test 100',
-      description: 'параметры этого виджета берутся из модели из поля content.tariffs[0]',
+if (everything_1.loadGlobalState(localStorage.getItem(everything_1.LOCAL_STORAGE_ITEM_NAME))) {} else {
+  if (false) {
+    //#region test
+    var card0 = everything_1.instantiateWidget(TariffCard_1.widgetTariffCard, {});
+    card0.props.value = everything_1.mapPropJsonToEditor({
+      title: 'Test no-mapping',
+      description: 'параметры этого виджета задаются на правой панели редактора',
       params: [{
         value: 100,
         unit: 'P за подключение'
@@ -27465,79 +28530,117 @@ if (everything_1.loadGlobalState()) {} else {
       }],
       image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Circle-icons-camera.svg/1024px-Circle-icons-camera.svg.png',
       url: 'https://google.com'
-    }, {
-      title: 'Test 200',
-      description: 'параметры этого виджета берутся из модели из поля content.tariffs[1]',
-      params: [{
-        value: 200,
-        unit: 'P за подключение'
+    }, TariffCard_1.widgetTariffCard.propTypes, card0).value;
+    var card1 = everything_1.instantiateWidget(TariffCard_1.widgetTariffCard, {});
+    card1.props.isJsonPath = true;
+    card1.props.path = ['content', 'tariffs', 0];
+    var card2 = everything_1.instantiateWidget(TariffCard_1.widgetTariffCard, {});
+    card2.props.isJsonPath = true;
+    card2.props.path = ['content', 'tariffs', 1];
+    var pageContainer = everything_1.instantiateWidget(PageContainer_1.widgetPageContainer, {}, [card0, card1, card2]);
+    everything_1.globalState.editorRoot = pageContainer;
+    everything_1.globalState.editorRoot.treeExpandedInEditor = true;
+    everything_1.globalState.inspectedNode = card0;
+    everything_1.globalState.model.content = {
+      serviceParams: [{
+        name: 'Стоимость подключения',
+        value: 0,
+        unit: '₽ за подключение'
       }, {
-        value: 400,
-        unit: 'P/мин'
+        name: 'Абонентская плата',
+        value: 21,
+        unit: '₽/мес'
       }],
-      image: 'http://icons.iconarchive.com/icons/danieledesantis/playstation-flat/256/playstation-circle-icon.png',
-      url: 'https://wikipedia.org'
-    }, {
-      title: 'Test 300',
-      description: 'параметры этого виджета берутся из модели из поля content.tariffs[2]',
-      params: [{
-        value: 300,
-        unit: 'P за подключение'
+      serviceDescription: {},
+      cupsOfCoffee: 3432,
+      tariffs: [{
+        title: 'Test 100',
+        description: 'параметры этого виджета берутся из модели из поля content.tariffs[0]',
+        params: [{
+          value: 100,
+          unit: 'P за подключение'
+        }, {
+          value: 200,
+          unit: 'P/мин'
+        }],
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Circle-icons-camera.svg/1024px-Circle-icons-camera.svg.png',
+        url: 'https://google.com'
       }, {
-        value: 9000,
-        unit: 'P/мин'
+        title: 'Test 200',
+        description: 'параметры этого виджета берутся из модели из поля content.tariffs[1]',
+        params: [{
+          value: 200,
+          unit: 'P за подключение'
+        }, {
+          value: 400,
+          unit: 'P/мин'
+        }],
+        image: 'http://icons.iconarchive.com/icons/danieledesantis/playstation-flat/256/playstation-circle-icon.png',
+        url: 'https://wikipedia.org'
+      }, {
+        title: 'Test 300',
+        description: 'параметры этого виджета берутся из модели из поля content.tariffs[2]',
+        params: [{
+          value: 300,
+          unit: 'P за подключение'
+        }, {
+          value: 9000,
+          unit: 'P/мин'
+        }],
+        image: 'http://www.iconarchive.com/download/i75815/martz90/circle/chrome.ico',
+        url: 'https://yandex.ru'
       }],
-      image: 'http://www.iconarchive.com/download/i75815/martz90/circle/chrome.ico',
-      url: 'https://yandex.ru'
-    }],
-    mappingTest: {
-      str: 'testString',
-      num: 123,
-      arr: ['lel', 'lol', 'lal'],
-      bool: true,
-      choice: 'bar',
-      func: {
-        $func: 'sendQuickRequest'
+      mappingTest: {
+        str: 'testString',
+        num: 123,
+        arr: ['lel', 'lol', 'lal'],
+        bool: true,
+        choice: 'bar',
+        func: {
+          $func: 'sendQuickRequest'
+        },
+        node: {
+          $node: 0
+        },
+        pathTest: {
+          $path: ['content', 'cupsOfCoffee']
+        }
       },
-      node: {
-        $node: 0
-      },
-      pathTest: {
-        $path: ['content', 'cupsOfCoffee']
-      }
-    },
-    collectionTest: [{
-      str: 'testString',
-      num: 123,
-      arr: ['lel', 'lol', 'lal'],
-      bool: true,
-      choice: 'bar',
-      func: {
-        $func: 'sendQuickRequest'
-      },
-      node: {
-        $node: 0
-      },
-      pathTest: {
-        $path: ['content', 'cupsOfCoffee']
-      }
-    }, {
-      str: 'fsdjk',
-      num: 12343,
-      arr: ['lel'],
-      bool: false,
-      choice: 'foo',
-      func: {
-        $func: 'doNothing'
-      },
-      node: {
-        $node: 0
-      },
-      pathTest: {
-        $path: ['content', 'cupsOfCoffee']
-      }
-    }]
-  };
+      collectionTest: [{
+        str: 'testString',
+        num: 123,
+        arr: ['lel', 'lol', 'lal'],
+        bool: true,
+        choice: 'bar',
+        func: {
+          $func: 'sendQuickRequest'
+        },
+        node: {
+          $node: 0
+        },
+        pathTest: {
+          $path: ['content', 'cupsOfCoffee']
+        }
+      }, {
+        str: 'fsdjk',
+        num: 12343,
+        arr: ['lel'],
+        bool: false,
+        choice: 'foo',
+        func: {
+          $func: 'doNothing'
+        },
+        node: {
+          $node: 0
+        },
+        pathTest: {
+          $path: ['content', 'cupsOfCoffee']
+        }
+      }]
+    }; //#endregion
+  }
+
+  everything_1.loadGlobalState(defaultStore_1.defaultStoreString);
 }
 
 function renderWorkspace() {
@@ -27567,7 +28670,7 @@ function (_React$Component) {
   _createClass(App, [{
     key: "render",
     value: function render() {
-      return React.createElement(React.Fragment, null, React.createElement("div", {
+      return React.createElement(React.Fragment, null, everything_1.globalState.contextMenu && React.createElement(everything_1.ContextMenu, Object.assign({}, everything_1.globalState.contextMenu)), React.createElement("div", {
         className: cx('page')
       }, React.createElement(everything_1.EditorPanel, {
         width: 200,
@@ -27588,5 +28691,5 @@ function (_React$Component) {
 }(React.Component);
 
 ReactDOM.render(React.createElement(App, null), document.getElementById("example"));
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./styles.pcss":"styles.pcss","./utils":"utils.ts","./components/TariffCard":"components/TariffCard/index.tsx","./components/ContentWrapper":"components/ContentWrapper/index.tsx","./everything":"everything.tsx","./components/Button":"components/Button/index.tsx","./components/PageContainer":"components/PageContainer/index.tsx","./components/Link":"components/Link/index.tsx","./components/Test":"components/Test/index.tsx","./editorComponents/WidgetFinder":"editorComponents/WidgetFinder/index.tsx","./funcs":"funcs.tsx"}]},{},["index.tsx"], null)
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./styles.pcss":"styles.pcss","./utils":"utils.ts","./components/TariffCard":"components/TariffCard/index.tsx","./components/ContentWrapper":"components/ContentWrapper/index.tsx","./components/SectionHeader":"components/SectionHeader/index.tsx","./components/Banner":"components/Banner/index.tsx","./everything":"everything.tsx","./components/Button":"components/Button/index.tsx","./components/PageContainer":"components/PageContainer/index.tsx","./components/Link":"components/Link/index.tsx","./components/VideoBackground":"components/VideoBackground/index.tsx","./components/Test":"components/Test/index.tsx","./components/Benefit":"components/Benefit/index.tsx","./components/Breadcrumbs":"components/Breadcrumbs/index.tsx","./components/ProductParam":"components/ProductParam/index.tsx","./components/ProductDescription":"components/ProductDescription/index.tsx","./editorComponents/WidgetFinder":"editorComponents/WidgetFinder/index.tsx","./funcs":"funcs.tsx","./defaultStore":"defaultStore.ts"}]},{},["index.tsx"], null)
 //# sourceMappingURL=/src.f69400ca.map
