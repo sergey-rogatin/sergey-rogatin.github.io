@@ -1,1 +1,207 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name="theme-color" content="#000000"><link rel="manifest" href="/manifest.json"><link rel="shortcut icon" href="/favicon.ico"><title>React App</title><link href="/static/css/main.9a8c961f.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div><script type="text/javascript" src="/static/js/main.fd060f72.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style
+      data-href="https://fonts.googleapis.com/css?family=Cairo:300,400,600,700&amp;display=swap&amp;subset=arabic"
+    >
+      @font-face {
+        font-family: "Cairo";
+        font-style: normal;
+        font-weight: 300;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/cairo/v20/SLXVc1nY6HkvangtZmpcWmhzfH5lB2gcQyyU.woff)
+          format("woff");
+      }
+      @font-face {
+        font-family: "Cairo";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/cairo/v20/SLXVc1nY6HkvangtZmpcWmhzfH5lWWgcQyyU.woff)
+          format("woff");
+      }
+      @font-face {
+        font-family: "Cairo";
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/cairo/v20/SLXVc1nY6HkvangtZmpcWmhzfH5lh28cQyyU.woff)
+          format("woff");
+      }
+      @font-face {
+        font-family: "Cairo";
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/cairo/v20/SLXVc1nY6HkvangtZmpcWmhzfH5lvm8cQyyU.woff)
+          format("woff");
+      }
+      @font-face {
+        font-family: "Cairo";
+        font-style: normal;
+        font-weight: 300;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/cairo/v20/SLXGc1nY6HkvalIkTpumxdt0UX8.woff2)
+          format("woff2");
+        unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41,
+          U+FB50-FDFF, U+FE80-FEFC;
+      }
+      @font-face {
+        font-family: "Cairo";
+        font-style: normal;
+        font-weight: 300;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/cairo/v20/SLXGc1nY6HkvalIvTpumxdt0UX8.woff2)
+          format("woff2");
+        unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+          U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      @font-face {
+        font-family: "Cairo";
+        font-style: normal;
+        font-weight: 300;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/cairo/v20/SLXGc1nY6HkvalIhTpumxdt0.woff2)
+          format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+          U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+          U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Cairo";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/cairo/v20/SLXGc1nY6HkvalIkTpumxdt0UX8.woff2)
+          format("woff2");
+        unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41,
+          U+FB50-FDFF, U+FE80-FEFC;
+      }
+      @font-face {
+        font-family: "Cairo";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/cairo/v20/SLXGc1nY6HkvalIvTpumxdt0UX8.woff2)
+          format("woff2");
+        unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+          U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      @font-face {
+        font-family: "Cairo";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/cairo/v20/SLXGc1nY6HkvalIhTpumxdt0.woff2)
+          format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+          U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+          U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Cairo";
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/cairo/v20/SLXGc1nY6HkvalIkTpumxdt0UX8.woff2)
+          format("woff2");
+        unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41,
+          U+FB50-FDFF, U+FE80-FEFC;
+      }
+      @font-face {
+        font-family: "Cairo";
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/cairo/v20/SLXGc1nY6HkvalIvTpumxdt0UX8.woff2)
+          format("woff2");
+        unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+          U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      @font-face {
+        font-family: "Cairo";
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/cairo/v20/SLXGc1nY6HkvalIhTpumxdt0.woff2)
+          format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+          U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+          U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Cairo";
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/cairo/v20/SLXGc1nY6HkvalIkTpumxdt0UX8.woff2)
+          format("woff2");
+        unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41,
+          U+FB50-FDFF, U+FE80-FEFC;
+      }
+      @font-face {
+        font-family: "Cairo";
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/cairo/v20/SLXGc1nY6HkvalIvTpumxdt0UX8.woff2)
+          format("woff2");
+        unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+          U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      @font-face {
+        font-family: "Cairo";
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/cairo/v20/SLXGc1nY6HkvalIhTpumxdt0.woff2)
+          format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+          U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+          U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+    </style>
+
+    <link rel="stylesheet" href="base.css" />
+
+    <style>
+      main {
+        background: black;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      h1 {
+        font-size: 35px;
+        line-height: 60px;
+        font-weight: 700;
+        margin-bottom: 40px;
+      }
+
+      a {
+        color: #2072e0;
+        background-color: white;
+        border-radius: 30px;
+        padding: 8px 16px;
+        font-size: 20px;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <div class="content">
+        <h1>سر بغير حياتك الدراسية</h1>
+        <a href="cat.html" id="secretButton">افتح السر</a>
+      </div>
+    </main>
+  </body>
+</html>
